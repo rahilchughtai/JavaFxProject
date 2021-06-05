@@ -1,6 +1,6 @@
 # JavaFxProject
 
-Datenbank Projekt für Vorlesung Java von Sebastian Damm
+JavaFx+Datenbank Projekt für Vorlesung Java von Sebastian Damm
 
 
 **Gruppe:**
