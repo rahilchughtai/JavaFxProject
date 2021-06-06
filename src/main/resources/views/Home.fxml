@@ -26,7 +26,7 @@
     <center>
         <HBox alignment="CENTER" prefHeight="100.0" prefWidth="0.0" style="-fx-background-color: none;" BorderPane.alignment="CENTER">
             <children>
-                <Button maxHeight="100.0" maxWidth="150.0" minHeight="0.0" minWidth="100.0" mnemonicParsing="false" prefHeight="100.0" prefWidth="300.0" text="Student">
+                <Button maxHeight="100.0" maxWidth="150.0" minHeight="0.0" minWidth="100.0" mnemonicParsing="false" prefHeight="100.0" prefWidth="300.0" text="Update">
                     <HBox.margin>
                         <Insets left="15.0" right="15.0" />
                     </HBox.margin>
@@ -34,7 +34,7 @@
                         <Font name="System Bold" size="24.0" />
                     </font>
                 </Button>
-                <Button maxHeight="100.0" maxWidth="150.0" minHeight="0.0" minWidth="100.0" mnemonicParsing="false" prefHeight="100.0" prefWidth="300.0" text="Student">
+                <Button maxHeight="100.0" maxWidth="150.0" minHeight="0.0" minWidth="100.0" mnemonicParsing="false" prefHeight="100.0" prefWidth="300.0" text="Students">
                     <HBox.margin>
                         <Insets left="15.0" right="15.0" />
                     </HBox.margin>
@@ -42,7 +42,7 @@
                         <Font name="System Bold" size="24.0" />
                     </font>
                 </Button>
-                <Button maxHeight="100.0" maxWidth="150.0" minHeight="0.0" minWidth="100.0" mnemonicParsing="false" prefHeight="100.0" prefWidth="300.0" text="Student">
+                <Button maxHeight="100.0" maxWidth="150.0" minHeight="0.0" minWidth="100.0" mnemonicParsing="false" prefHeight="100.0" prefWidth="300.0" text="Courses">
                     <HBox.margin>
                         <Insets left="15.0" right="15.0" />
                     </HBox.margin>
