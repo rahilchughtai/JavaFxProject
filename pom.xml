@@ -20,8 +20,13 @@
             <artifactId>javafx-controls</artifactId>
             <version>16</version>
         </dependency>
-    </dependencies>
 
+        <dependency>
+            <groupId>org.openjfx</groupId>
+            <artifactId>javafx-fxml</artifactId>
+            <version>11.0.1</version>
+        </dependency>
+    </dependencies>
 
     <build>
         <plugins>
@@ -30,13 +35,9 @@
                 <artifactId>javafx-maven-plugin</artifactId>
                 <version>0.0.5</version>
                 <configuration>
-                    <mainClass>dhbw.application</mainClass>
+                    <mainClass>application</mainClass>
                 </configuration>
             </plugin>
         </plugins>
     </build>
-
-
-
-
 </project>
