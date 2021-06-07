@@ -5,6 +5,7 @@
 <?import javafx.scene.image.*?>
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
+<?import org.kordamp.ikonli.javafx.*?>
 
 <BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="720.0" prefWidth="1080.0" xmlns="http://javafx.com/javafx/11.0.2" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.HomeController">
     <top>
@@ -26,7 +27,11 @@
     <center>
         <HBox alignment="CENTER" prefHeight="100.0" prefWidth="0.0" style="-fx-background-color: none;" BorderPane.alignment="CENTER">
             <children>
-                <Button onAction="#handleButtonClick" maxHeight="100.0" maxWidth="150.0" minHeight="0.0" minWidth="100.0" mnemonicParsing="false" prefHeight="100.0" prefWidth="300.0" text="Update">
+                <Button maxHeight="100.0" maxWidth="150.0" minHeight="0.0" minWidth="100.0" mnemonicParsing="false" onAction="#handleButtonClick" prefHeight="100.0" prefWidth="300.0" text="Update">
+                    <graphic>
+                        <FontIcon iconColor="#189fe8" iconLiteral="mdi-cloud-sync" />
+                    </graphic>
+
                     <HBox.margin>
                         <Insets left="15.0" right="15.0" />
                     </HBox.margin>
@@ -34,21 +39,28 @@
                         <Font name="System Bold" size="24.0" />
                     </font>
                 </Button>
-                <Button fx:id="btnStudents" onAction="#handleButtonClick" maxHeight="100.0" maxWidth="150.0" minHeight="0.0" minWidth="100.0" mnemonicParsing="false" prefHeight="100.0" prefWidth="300.0" text="Students">
+                <Button fx:id="btnStudents" maxHeight="100.0" maxWidth="150.0" minHeight="0.0" minWidth="100.0" mnemonicParsing="false" onAction="#handleButtonClick" prefHeight="100.0" prefWidth="300.0" text="Students">
                     <HBox.margin>
                         <Insets left="15.0" right="15.0" />
                     </HBox.margin>
                     <font>
                         <Font name="System Bold" size="24.0" />
                     </font>
+                    <graphic>
+                        <FontIcon iconColor="#189fe8" iconLiteral="mdi-account-multiple" />
+                    </graphic>
                 </Button>
-                <Button fx:id="btnCourses" onAction="#handleButtonClick" maxHeight="100.0" maxWidth="150.0" minHeight="0.0" minWidth="100.0" mnemonicParsing="false" prefHeight="100.0" prefWidth="300.0" text="Courses">
+                <Button fx:id="btnCourses" maxHeight="100.0" maxWidth="150.0" minHeight="0.0" minWidth="100.0" mnemonicParsing="false" onAction="#handleButtonClick" prefHeight="100.0" prefWidth="300.0" text="Courses">
                     <HBox.margin>
                         <Insets left="15.0" right="15.0" />
                     </HBox.margin>
                     <font>
                         <Font name="System Bold" size="24.0" />
                     </font>
+
+                    <graphic>
+                        <FontIcon iconColor="#189fe8" iconLiteral="mdi-table" />
+                    </graphic>
                 </Button>
             </children>
         </HBox>

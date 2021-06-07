@@ -19,6 +19,5 @@ public class application extends Application {
         stage.setTitle("DHBW Studenten System");
         stage.setScene(new Scene(root));
         stage.show();
-
     }
 }

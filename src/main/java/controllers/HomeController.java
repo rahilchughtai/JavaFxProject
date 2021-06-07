@@ -18,18 +18,14 @@ import java.util.Objects;
 import java.util.ResourceBundle;
 
 public class HomeController implements Initializable {
-
     @FXML
     private Button btnStudents;
     @FXML
     private Button btnCourses;
-
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        //Add event listeners for the buttons
+
     }
-
-
     private void switchToScene(String fxml, Window clickedWindow) throws IOException {
         Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getClassLoader().getResource(fxml)));
         Scene scene = new Scene(root);
