@@ -1,14 +1,16 @@
 package controllers;
 
+import javafx.event.ActionEvent;
 import javafx.event.Event;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
-import javafx.scene.image.Image;
 import javafx.stage.Stage;
+import javafx.stage.Window;
 
 import java.io.IOException;
 import java.net.URL;
@@ -16,9 +18,6 @@ import java.util.Objects;
 import java.util.ResourceBundle;
 
 public class HomeController implements Initializable {
-
-
-    //Declaration of buttons
 
     @FXML
     private Button btnStudents;
@@ -31,43 +30,28 @@ public class HomeController implements Initializable {
     }
 
 
-    private void loadStage(String fxml, Event eventSource) {
-
-
-    }
-    private void loadStage(String fxml) {
-        try {
-            Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getClassLoader().getResource(fxml)));
-            Stage stage = new Stage();
-            stage.setScene(new Scene(root));
-            stage.show();
-
-        } catch (IOException e) {
-            System.out.println("Something went wrong with loading the fxml!");
-        }
+    private void switchToScene(String fxml, Window clickedWindow) throws IOException {
+        Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getClassLoader().getResource(fxml)));
+        Scene scene = new Scene(root);
+        Stage appStage = (Stage) clickedWindow;
+        appStage.setScene(scene);
+        appStage.show();
     }
 
     @FXML
-    private void handleButtonClick(javafx.event.ActionEvent mouseEvent) {
-        Object clickSource=mouseEvent.getSource();
+    private void handleButtonClick(javafx.event.ActionEvent mouseEvent) throws IOException {
+        Button clickSource= (Button) mouseEvent.getSource();
+        Window clickedWindow = clickSource.getScene().getWindow();
 
         if(clickSource==btnCourses){
             System.out.println("Courses!");
-            loadStage("views/Courses.fxml");
+            switchToScene("views/Courses.fxml", clickedWindow);
         }
         else if (clickSource==btnStudents){
             System.out.println("Students!!!");
-            loadStage("views/Students.fxml");
-
+            switchToScene("views/Students.fxml",clickedWindow);
         }
-        /*
-        if (mouseEvent.getSource() == btnDashboard) {
-            loadStage("/home/fxml/Dashboard.fxml");
-        } else if (mouseEvent.getSource() == btnStudents) {
-            loadStage("/home/fxml/Students.fxml");
-        } else if (mouseEvent.getSource() == btn_Timetable) {
-            loadStage("/home/fxml/Timetable.fxml");
-        }*/
+
     }
 
 
