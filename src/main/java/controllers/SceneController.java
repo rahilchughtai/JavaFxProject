@@ -14,6 +14,12 @@ import java.util.ResourceBundle;
 
 public class SceneController implements Initializable {
 
+    enum MyScene {
+        HOME,
+        COURSES,
+        STUDENTS
+    }
+
     void FxmlPathToScene(String fxml, Window clickedWindow) throws IOException {
         Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getClassLoader().getResource(fxml)));
         Scene scene = new Scene(root);
@@ -40,9 +46,5 @@ public class SceneController implements Initializable {
     public void initialize(URL location, ResourceBundle resources) {
     }
 
-    enum MyScene {
-        HOME,
-        COURSES,
-        STUDENTS
-    }
+
 }

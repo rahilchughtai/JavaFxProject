@@ -8,6 +8,7 @@
    <bottom>
 
    </bottom>
+   <!-- Man könnte diese Top Bar als seperate Komponente auslagern -->
    <top>
 
       <HBox alignment="CENTER" spacing="500">
@@ -19,6 +20,7 @@
       </HBox>
 
    </top>
+
    <center>
       <Label text="COURSES" BorderPane.alignment="CENTER">
          <font>
