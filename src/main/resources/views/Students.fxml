@@ -1,12 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.control.Button?>
-<?import javafx.scene.control.TableColumn?>
-<?import javafx.scene.control.TableView?>
-<?import javafx.scene.layout.BorderPane?>
-<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
 
-<BorderPane styleClass="bg-dark" stylesheets="@../css/style.css" fx:controller="controllers.StudentsController" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="720.0" prefWidth="1080.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1">
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="720.0" prefWidth="1080.0" styleClass="bg-dark" stylesheets="@../css/style.css" xmlns="http://javafx.com/javafx/11.0.2" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.StudentsController">
     <bottom>
         <TableView fx:id="tableUser" fixedCellSize="4.0" prefHeight="463.0" prefWidth="1077.0" BorderPane.alignment="CENTER">
             <columns>
@@ -19,16 +16,11 @@
         </TableView>
     </bottom>
     <top>
-
-        <HBox spacing="500" alignment="CENTER">
-
-            <Button styleClass="btn-primary" fx:id="btnHome"  onAction="#handleButtonClick"  mnemonicParsing="false" text="Home">
+        <HBox alignment="CENTER" spacing="500">
+            <Button fx:id="btnHome" mnemonicParsing="false" onAction="#btnSwitchToHome" styleClass="btn-primary" text="Home">
             </Button>
-
-            <Button styleClass="btn-primary" fx:id="btnCourses"  onAction="#handleButtonClick"  mnemonicParsing="false" text="Courses">
+            <Button fx:id="btnCourses" mnemonicParsing="false" onAction="#btnSwitchToCourse" styleClass="btn-primary" text="Courses">
             </Button>
         </HBox>
-
-
     </top>
 </BorderPane>

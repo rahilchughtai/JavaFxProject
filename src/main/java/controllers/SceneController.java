@@ -1,23 +1,31 @@
 package controllers;
 
+import javafx.event.ActionEvent;
+import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Button;
 import javafx.stage.Stage;
 import javafx.stage.Window;
-
 import java.io.IOException;
 import java.net.URL;
 import java.util.Objects;
 import java.util.ResourceBundle;
 
 public class SceneController implements Initializable {
-
     enum MyScene {
         HOME,
         COURSES,
         STUDENTS
+    }
+    @Override
+    public void initialize(URL location, ResourceBundle resources) {
+    }
+
+    private Window eventToWindow(ActionEvent mouseEvent){
+        return ((Button) mouseEvent.getSource()).getScene().getWindow();
     }
 
     void FxmlPathToScene(String fxml, Window clickedWindow) throws IOException {
@@ -42,9 +50,17 @@ public class SceneController implements Initializable {
         FxmlPathToScene(path, clickedWindow);
     }
 
-    @Override
-    public void initialize(URL location, ResourceBundle resources) {
+    @FXML
+    private void btnSwitchToCourse(javafx.event.ActionEvent mouseEvent) throws IOException {
+        switchToScene(MyScene.COURSES,this.eventToWindow(mouseEvent));
     }
-
+    @FXML
+    private void btnSwitchToHome(javafx.event.ActionEvent mouseEvent) throws IOException {
+        switchToScene(MyScene.HOME,eventToWindow(mouseEvent));
+    }
+    @FXML
+    private void btnSwitchToStudents(javafx.event.ActionEvent mouseEvent) throws IOException {
+        switchToScene(MyScene.STUDENTS,eventToWindow(mouseEvent));
+    }
 
 }
