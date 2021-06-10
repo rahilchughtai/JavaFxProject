@@ -30,7 +30,6 @@ public class StudentsController extends SceneController{
         Button clickSource= (Button) mouseEvent.getSource();
         Window clickedWindow = clickSource.getScene().getWindow();
         if(clickSource==btnCourses){
-            System.out.println("Courses!");
             switchToScene(MyScene.COURSES,clickedWindow);
         }
         else if (clickSource==btnHome){

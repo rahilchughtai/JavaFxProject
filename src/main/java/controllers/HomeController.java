@@ -29,11 +29,9 @@ public class HomeController extends SceneController {
         Window clickedWindow = clickSource.getScene().getWindow();
 
         if(clickSource==btnCourses){
-            System.out.println("Courses!");
             switchToScene(MyScene.COURSES,clickedWindow);
         }
         else if (clickSource==btnStudents){
-            System.out.println("Students!!!");
             switchToScene(MyScene.STUDENTS,clickedWindow);
         }
     }

@@ -3,38 +3,34 @@
     -fx-dark: #212529;
     -fx-info: #0DCAF0;
     -fx-red: #B02A37;
-
 }
 
 .icon{
     -fx-icon-color:-fx-red;
-
-
 }
+
 .btn-primary {
     -fx-background-color: -fx-primary;
     -fx-font-size: 24.0;
     -fx-text-fill: white;
 }
-
 .btn-primary:hover{
     -fx-background-color: Black;
-}
-
-
-.homePane{
-    -fx-background-color: -fx-dark;
+    -fx-text-fill: -fx-info;
 }
 
 .homeHeadline{
     -fx-font-size: 35;
     -fx-font-weight: bold;
-    -fx-text-fill: -fx-dark;
+    -fx-text-fill: -fx-info;
     -fx-font-family: Helvetica Neue;
 
 }
 
 .homeHeader{
-
     -fx-background-color: -fx-info;
+}
+
+.bg-dark {
+    -fx-background-color: -fx-dark;
 }
