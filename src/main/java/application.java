@@ -6,7 +6,6 @@ import javafx.scene.Parent;
 import java.io.IOException;
 import java.util.Objects;
 
-
 public class application extends Application {
 
     public static void main(String[] args) {
@@ -16,8 +15,9 @@ public class application extends Application {
     @Override
     public void start(Stage stage) throws IOException {
         Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getClassLoader().getResource("views/Home.fxml")));
-        stage.setTitle("DHBW Studenten System");
+        stage.setTitle("DHBW Studenten Management System");
         stage.setScene(new Scene(root));
         stage.show();
+
     }
 }
