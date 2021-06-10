@@ -1,8 +1,8 @@
 * {
     -fx-primary: #007BFF;
     -fx-dark: #212529;
-    -fx-info: #0DCAF0;
-    -fx-red: #B02A37;
+    -fx-info: #B0B3B8;
+    -fx-red: #1CB2F5;
 }
 
 .icon{
@@ -26,6 +26,9 @@
     -fx-font-weight: bold;
     -fx-text-fill: -fx-info;
     -fx-font-family: Helvetica Neue;
+    -fx-padding: 1em;
+    -fx-border-insets: 1em;
+    -fx-background-insets: 1em;
 
 }
 
@@ -36,3 +39,4 @@
 .bg-dark {
     -fx-background-color: -fx-dark;
 }
+
