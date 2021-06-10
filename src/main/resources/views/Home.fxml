@@ -43,7 +43,7 @@
                         <Insets left="15.0" right="15.0" />
                     </HBox.margin>
                     <graphic>
-                        <FontIcon styleClass="icon"  iconLiteral="mdi-account-multiple" />
+                        <FontIcon styleClass="icon" iconLiteral="fa-graduation-cap"  />
                     </graphic>
                 </Button>
                 <Button styleClass="btn-primary" fx:id="btnCourses" maxHeight="100.0" maxWidth="250.0" minHeight="0.0" minWidth="100.0" mnemonicParsing="false" onAction="#handleButtonClick" prefHeight="100.0" prefWidth="300.0" text="Courses">
