@@ -1,18 +1,20 @@
 * {
     -fx-primary: #007BFF;
     -fx-dark: #212529;
-    -fx-info: #B0B3B8;
-    -fx-red: #1CB2F5;
+    -fx-info: #0DCAF0;
+    -fx-red: #B02A37;
+    -fx-grey: #B0B3B8;
 }
 
 .icon{
-    -fx-icon-color:-fx-info;
+    -fx-icon-color:-fx-grey;
 }
 
 .btn-primary {
     -fx-background-color: -fx-primary;
     -fx-font-size: 24.0;
     -fx-text-fill: white;
+    -fx-cursor: HAND;
 }
 
 
@@ -24,16 +26,11 @@
 .homeHeadline{
     -fx-font-size: 35;
     -fx-font-weight: bold;
-    -fx-text-fill: -fx-info;
+    -fx-text-fill: -fx-grey;
     -fx-font-family: Helvetica Neue;
     -fx-padding: 1em;
     -fx-border-insets: 1em;
     -fx-background-insets: 1em;
-
-}
-
-.homeHeader{
-    -fx-background-color: -fx-info;
 }
 
 .bg-dark {
