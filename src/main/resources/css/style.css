@@ -9,6 +9,7 @@
     -fx-grey: #B0B3B8;
 }
 
+/*Reusables*/
 .icon{
     -fx-icon-color:-fx-grey;
 }
@@ -20,11 +21,17 @@
     -fx-cursor: HAND;
 }
 
-
 .btn-primary:hover{
     -fx-background-color: Black;
     -fx-text-fill: -fx-info;
 }
+
+.bg-dark {
+    -fx-background-color: -fx-dark;
+}
+
+
+/*Specifics*/
 
 .homeHeadline{
     -fx-font-size: 35;
@@ -36,7 +43,4 @@
     -fx-background-insets: 1em;
 }
 
-.bg-dark {
-    -fx-background-color: -fx-dark;
-}
 
