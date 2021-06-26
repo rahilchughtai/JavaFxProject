@@ -20,9 +20,7 @@ public class SceneController implements Initializable {
         HOME("Home.fxml"),
         COURSES("Courses.fxml"),
         STUDENTS("Students.fxml");
-
         public final String path;
-
         //This converts the enum to the file path
         private MyScene(String path){
             this.path="views/"+path;
@@ -35,11 +33,12 @@ public class SceneController implements Initializable {
 
     }
 
-
+    /**
+     * Takes Button Click event and returns the window
+     */
     private Window eventToWindow(ActionEvent mouseEvent){
         return ((Button) mouseEvent.getSource()).getScene().getWindow();
     }
-
     /**
      * This method switches the scene
      * based on given fxml path string
@@ -57,7 +56,7 @@ public class SceneController implements Initializable {
 
     @FXML
     private void btnSwitchToCourse(javafx.event.ActionEvent mouseEvent) throws IOException {
-        FxmlPathToScene(MyScene.COURSES.path,this.eventToWindow(mouseEvent));
+        FxmlPathToScene(MyScene.COURSES.path,eventToWindow(mouseEvent));
     }
     @FXML
     private void btnSwitchToHome(javafx.event.ActionEvent mouseEvent) throws IOException {

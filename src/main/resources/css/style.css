@@ -43,4 +43,12 @@
     -fx-background-insets: 1em;
 }
 
+.h1{
+    -fx-font-size: 35;
+    -fx-font-weight: bold;
+    -fx-font-family: Helvetica Neue;
+    -fx-text-fill: -fx-grey;
+
+}
+
 
