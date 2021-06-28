@@ -51,7 +51,7 @@ class EmbeddedH2DatabaseConnection implements DatabaseConnection {
                 """;
 
         final var createStudentCourseTableSql = """
-                CREATE TABLE STUDENT_COURSE
+                CREATE TABLE IF NOT EXISTS STUDENT_COURSE
                 (STUDENT_ID INT NOT NULL,
                 COURSE_ID INT NOT NULL,
                 FOREIGN KEY (STUDENT_ID) REFERENCES STUDENT(ID),
