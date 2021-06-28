@@ -1,5 +1,7 @@
 package database.models;
 
+import java.util.Objects;
+
 public class Student {
     private Integer id;
     private String matriculationNumber;
@@ -54,5 +56,30 @@ public class Student {
 
     public void setCorporation(Corporation corporation) {
         this.corporation = corporation;
+    }
+
+    @Override
+    public String toString() {
+        return "Student{" +
+                "id=" + id +
+                ", matriculationNumber='" + matriculationNumber + '\'' +
+                ", firstName='" + firstName + '\'' +
+                ", lastName='" + lastName + '\'' +
+                ", javaSkillRating=" + javaSkillRating +
+                ", corporation=" + corporation +
+                '}';
+    }
+
+    @Override
+    public boolean equals(final Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Student student = (Student) o;
+        return Objects.equals(id, student.id) && Objects.equals(matriculationNumber, student.matriculationNumber) && Objects.equals(firstName, student.firstName) && Objects.equals(lastName, student.lastName) && javaSkillRating == student.javaSkillRating && Objects.equals(corporation, student.corporation);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id, matriculationNumber, firstName, lastName, javaSkillRating, corporation);
     }
 }
