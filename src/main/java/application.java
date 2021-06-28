@@ -1,4 +1,3 @@
-import database.DatabaseConnection;
 import database.DatabaseConnectionManager;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
@@ -24,7 +23,7 @@ public class application extends Application {
     }
 
     private void initializeDatabaseConnectionManager() throws ClassNotFoundException, IllegalStateException, SQLException {
-        DatabaseConnectionManager.initializeConnection();
+        DatabaseConnectionManager.initializeDatabase();
     }
 
     private void initializeUI(final Stage stage) throws IOException {

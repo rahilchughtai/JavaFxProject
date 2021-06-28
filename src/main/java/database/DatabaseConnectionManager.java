@@ -13,12 +13,13 @@ public class DatabaseConnectionManager {
         return databaseConnection;
     }
 
-    public static void initializeConnection() throws ClassNotFoundException, IllegalStateException, SQLException {
+    public static void initializeDatabase() throws ClassNotFoundException, IllegalStateException, SQLException {
         if (databaseConnection != null)
             throw new IllegalStateException("Database connection was already been established!");
 
         var databaseConnection = new EmbeddedH2DatabaseConnection();
         databaseConnection.initializeConnection();
+        databaseConnection.createDefaultDatabaseSchemeIfNotExists();
     }
 
 }
