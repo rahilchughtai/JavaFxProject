@@ -30,3 +30,8 @@ JavaFx+Datenbank Projekt für Vorlesung Java von Sebastian Damm
 - [x] Landingpage
 - [ ] Buttons und Dialoge für Hinzufügen/Ändern/Löschen
 - [x] Scenes für verschiedene Ansichten
+
+
+### DB Scheme
+![](./src/main/java/database/SMS.png)
+[Link](https://dbdiagram.io/d/60bf650fb29a09603d187c14)

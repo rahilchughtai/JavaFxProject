@@ -26,15 +26,17 @@ class EmbeddedH2DatabaseConnection implements DatabaseConnection {
 
         final var createRoomTableSql = """
                 CREATE TABLE IF NOT EXISTS ROOM
-                (id INTEGER NOT NULL,
-                name VARCHAR(255),
-                PRIMARY KEY (id))
+                (ID INT,
+                NAME VARCHAR(255),
+                PRIMARY KEY (ID))
                 """;
         final var createCourseTableSql = """
                 CREATE TABLE IF NOT EXISTS COURSE
-                (id INTEGER NOT NULL,
-                name VARCHAR(255),
-                PRIMARY KEY (id))
+                (ID INT,
+                NAME VARCHAR(255),
+                ROOM_ID INT,
+                FOREIGN KEY (ROOM_ID) REFERENCES ROOM(ID),
+                PRIMARY KEY (ID))
                 """;
 
         final var statement = databaseConnection.createStatement();
