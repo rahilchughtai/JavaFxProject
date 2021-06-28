@@ -34,4 +34,15 @@
             </TableView>
 
     </center>
+
+    <bottom>
+        <HBox spacing="10" alignment="center" GridPane.columnIndex="0" GridPane.rowIndex="2">
+            <TextField fx:id="matrikelNumberField" id="matrikelNumberField" promptText="Matrikel-Nr." prefWidth="90" onAction="#addNewStudent"/>
+            <TextField fx:id="firstNameField" id="firstNameField" promptText="Vorname" prefWidth="140"/>
+            <TextField fx:id="lastNameField" id="lastNameField" promptText="Nachname" prefWidth="140"/>
+            <TextField fx:id="companyField" id="companyField" promptText="Firma" prefWidth="140"/>
+            <TextField fx:id="javaSkillsField" id="javaSkillsField" promptText="Java Kenntnisse" prefWidth="140"/>
+            <Button text="Hinzufügen" onAction="#addNewStudent"/>
+        </HBox>
+    </bottom>
 </BorderPane>
