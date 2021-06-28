@@ -7,6 +7,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.image.Image;
 import javafx.stage.Stage;
 import javafx.stage.Window;
 import java.io.IOException;
@@ -48,8 +49,11 @@ public class SceneController implements Initializable {
      */
     void FxmlPathToScene(String fxml, Window clickedWindow) throws IOException {
         Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getClassLoader().getResource(fxml)));
+
         Scene scene = new Scene(root);
         Stage appStage = (Stage) clickedWindow;
+        Image icon = new Image(getClass().getResourceAsStream("/images/dhbwicon.png"));
+        appStage.getIcons().add(icon);
         appStage.setScene(scene);
         appStage.show();
     }
