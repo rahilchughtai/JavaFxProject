@@ -27,17 +27,6 @@
     <center>
         <HBox alignment="CENTER" prefHeight="100.0" prefWidth="0.0"  BorderPane.alignment="CENTER">
             <children>
-                <Button styleClass="btn-primary" maxHeight="100.0" maxWidth="250.0" minHeight="0.0" minWidth="100.0" mnemonicParsing="false"  prefHeight="100.0" prefWidth="300.0" text="Update">
-                    <graphic>
-                        <FontIcon styleClass="icon" iconLiteral="mdi-cloud-sync" />
-                    </graphic>
-
-                    <HBox.margin>
-                        <Insets left="15.0" right="15.0" />
-                    </HBox.margin>
-
-                </Button>
-
                 <Button styleClass="btn-primary" fx:id="btnStudents" maxHeight="100.0" maxWidth="250.0" minHeight="0.0" minWidth="100.0" mnemonicParsing="false" onAction="#btnSwitchToStudents" prefHeight="100.0" prefWidth="300.0" text="Students" textOverrun="CLIP">
                     <HBox.margin>
                         <Insets left="15.0" right="15.0" />
