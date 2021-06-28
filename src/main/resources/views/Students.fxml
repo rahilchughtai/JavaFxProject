@@ -23,9 +23,9 @@
 
     <center>
 
-            <TableView maxHeight="700" maxWidth="500" GridPane.columnIndex="0" GridPane.rowIndex="1" fx:id="tableUser" fixedCellSize="4.0" prefHeight="463.0" prefWidth="1077.0" BorderPane.alignment="CENTER">
+            <TableView maxHeight="700" maxWidth="800" GridPane.columnIndex="0" GridPane.rowIndex="1" fx:id="tableUser" fixedCellSize="4.0" prefHeight="463.0" prefWidth="1077.0" BorderPane.alignment="CENTER">
                 <columns>
-                    <TableColumn fx:id="columnId" minWidth="-1.0" prefWidth="150.0" text="ID" />
+                    <TableColumn fx:id="columnId" minWidth="-1.0" prefWidth="150.0" text="Matrikel-Nr" />
                     <TableColumn fx:id="columnVorname" minWidth="-1.0" prefWidth="150.0" text="Vorname" />
                     <TableColumn fx:id="columNachname" minWidth="-1.0" prefWidth="150.0" text="Nachname" />
                     <TableColumn fx:id="columnFirma" minWidth="-1.0" prefWidth="145.0" text="Firma" />

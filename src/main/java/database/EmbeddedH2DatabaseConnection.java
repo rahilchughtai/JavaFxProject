@@ -15,34 +15,56 @@ class EmbeddedH2DatabaseConnection implements DatabaseConnection {
 
     @Override
     public void createDefaultDatabaseSchemeIfNotExists() throws SQLException {
-//        var metaData = databaseConnection.getMetaData();
-//
-//        ResultSet resultSet = metaData.getTables(null, null, "ROOM", null);
-//
-//        if (resultSet.next()) {
-//            System.out.println("Database scheme was already been created.");
-//            return;
-//        }
 
         final var createRoomTableSql = """
                 CREATE TABLE IF NOT EXISTS ROOM
-                (ID INT,
-                NAME VARCHAR(255),
+                (ID INT AUTO_INCREMENT,
+                NAME VARCHAR(255) NOT NULL,
                 PRIMARY KEY (ID))
                 """;
         final var createCourseTableSql = """
                 CREATE TABLE IF NOT EXISTS COURSE
-                (ID INT,
-                NAME VARCHAR(255),
-                ROOM_ID INT,
+                (ID INT AUTO_INCREMENT,
+                NAME VARCHAR(255) NOT NULL,
+                ROOM_ID INT NOT NULL,
                 FOREIGN KEY (ROOM_ID) REFERENCES ROOM(ID),
                 PRIMARY KEY (ID))
+                """;
+
+        final var createCorporationTableSql = """
+                CREATE TABLE IF NOT EXISTS CORPORATION
+                (ID INT AUTO_INCREMENT,
+                NAME VARCHAR(255) NOT NULL,
+                PRIMARY KEY (ID))
+                """;
+
+        final var createStudentTableSql = """
+                CREATE TABLE IF NOT EXISTS STUDENT
+                (ID INT AUTO_INCREMENT,
+                MATRICULATION_NUMBER VARCHAR(255) UNIQUE,
+                FIRST_NAME VARCHAR(255) NOT NULL,
+                LAST_NAME VARCHAR(255) NOT NULL,
+                JAVA_SKILL_RATING INT,
+                CORPORATION_ID INT NOT NULL,
+                FOREIGN KEY (CORPORATION_ID) REFERENCES CORPORATION(ID),
+                PRIMARY KEY (ID))
+                """;
+
+        final var createStudentCourseTableSql = """
+                CREATE TABLE IF NOT EXISTS STUDENT_COURSE
+                (STUDENT_ID INT NOT NULL,
+                COURSE_ID INT NOT NULL,
+                FOREIGN KEY (STUDENT_ID) REFERENCES STUDENT(ID),
+                FOREIGN KEY (COURSE_ID) REFERENCES COURSE(ID))
                 """;
 
         final var statement = databaseConnection.createStatement();
 
         statement.executeUpdate(createRoomTableSql);
         statement.executeUpdate(createCourseTableSql);
+        statement.executeUpdate(createCorporationTableSql);
+        statement.executeUpdate(createStudentTableSql);
+        statement.executeUpdate(createStudentCourseTableSql);
     }
 
     @Override

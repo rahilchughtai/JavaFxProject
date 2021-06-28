@@ -15,6 +15,11 @@ import java.util.ResourceBundle;
 
 public class CoursesController extends SceneController {
 
+   // private String[] DummyNames = {"",12,13,14,15};
+   // private String[] DummyNames={
+
+   // }
+
     @FXML
     private TableView<Course> table_info;
 
@@ -37,58 +42,42 @@ public class CoursesController extends SceneController {
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         table_info_2 = table_info;
-        initTable();
+        initCols();
         loadData();
     }
 
-    private void initTable() {
-        initCols();
-    }
-
     private void initCols() {
-
         col_cid.setCellValueFactory(new PropertyValueFactory<>("cid"));
         col_courseName.setCellValueFactory(new PropertyValueFactory<>("courseName"));
         col_room.setCellValueFactory(new PropertyValueFactory<>("room"));
         col_update.setCellValueFactory(new PropertyValueFactory<>("update"));
-
         editableCols();
     }
 
     private void editableCols() {
         col_cid.setCellFactory(TextFieldTableCell.forTableColumn());
-
         col_cid.setOnEditCommit(e->{
                     e.getTableView().getItems().get(e.getTablePosition().getRow()).setCid(e.getNewValue());
         });
-
-
         col_courseName.setCellFactory(TextFieldTableCell.forTableColumn());
 
         col_courseName.setOnEditCommit(e->{
             e.getTableView().getItems().get(e.getTablePosition().getRow()).setCourse(e.getNewValue());
         });
-
-
         col_room.setCellFactory(TextFieldTableCell.forTableColumn());
 
         col_room.setOnEditCommit(e->{
             e.getTableView().getItems().get(e.getTablePosition().getRow()).setRoom(e.getNewValue());
         });
-
         table_info.setEditable(true);
-
     }
 
     private void loadData() {
         data_table = FXCollections.observableArrayList();
-
-        for (int i = 0; i < 10; i++) {
+        for (int i = 0; i < 50; i++) {
             data_table.add(new Course(String.valueOf(i),
-                    "courseName " + i, "room " + i, new Button("update")));
+                    "Kursname" + i, "Nr." + i, new Button("Update")));
         }
-
         table_info.setItems(data_table);
-
     }
 }
