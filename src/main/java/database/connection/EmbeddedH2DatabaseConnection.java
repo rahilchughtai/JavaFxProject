@@ -1,8 +1,7 @@
-package database;
+package database.connection;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
-import java.sql.ResultSet;
 import java.sql.SQLException;
 
 class EmbeddedH2DatabaseConnection implements DatabaseConnection {
@@ -65,6 +64,11 @@ class EmbeddedH2DatabaseConnection implements DatabaseConnection {
         statement.executeUpdate(createCorporationTableSql);
         statement.executeUpdate(createStudentTableSql);
         statement.executeUpdate(createStudentCourseTableSql);
+    }
+
+    @Override
+    public void initializeDatabaseWithTestData() {
+
     }
 
     @Override
