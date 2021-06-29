@@ -23,6 +23,8 @@ public class application extends Application {
     public void start(Stage stage) throws IOException, ClassNotFoundException, IllegalStateException, SQLException {
         initializeDatabaseConnectionManager();
 
+        System.out.println(RoomService.getService().getEntries(new ArrayList<>() {{ add(4); }}));
+
         initializeUI(stage);
     }
 

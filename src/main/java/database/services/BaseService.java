@@ -2,12 +2,15 @@ package database.services;
 
 import database.connection.DatabaseConnectionManager;
 import database.models.Model;
+import database.models.Room;
 
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public abstract class BaseService<ModelType extends Model> implements ModelService<ModelType> {
 
@@ -48,6 +51,31 @@ public abstract class BaseService<ModelType extends Model> implements ModelServi
         }
 
         databaseConnection.setAutoCommit(true);
+    }
+
+    protected PreparedStatement getEntriesFromDatabase(List<Integer> ids, String selectAndJoinSql, String orderByColumnName) throws SQLException {
+        final var databaseConnection = DatabaseConnectionManager.getDatabaseConnection();
+
+        final var selectEntriesSqlStringBuilder = new StringBuilder(selectAndJoinSql);
+
+        if (!ids.isEmpty()) {
+
+            selectEntriesSqlStringBuilder.append("\nWHERE ID IN (");
+
+            final var idParameters = ids
+                    .stream()
+                    .map(x -> "?")
+                    .collect(Collectors.joining(","));
+
+            selectEntriesSqlStringBuilder.append(idParameters);
+
+            selectEntriesSqlStringBuilder.append(")");
+
+        }
+
+        selectEntriesSqlStringBuilder.append("\nORDER BY " + orderByColumnName);
+
+        return databaseConnection.createPreparedStatement(selectEntriesSqlStringBuilder.toString());
     }
 
     @Override

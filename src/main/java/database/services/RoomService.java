@@ -60,54 +60,38 @@ public class RoomService extends BaseService<Room> {
 
     @Override
     public List<Room> getEntries(List<Integer> ids) throws SQLException {
-        final var databaseConnection = DatabaseConnectionManager.getDatabaseConnection();
-
-        final var rooms = new ArrayList<Room>();
-
-        final var selectRoomEntriesSqlStringBuilder = new StringBuilder(
+        final var preparedGetEntriesStatement = getEntriesFromDatabase(
+                ids,
                 """
                 SELECT ID, NAME
                 FROM ROOM
-                """);
+                """,
+                "NAME"
+        );
 
-        if (!ids.isEmpty()) {
+        final var models = new ArrayList<Room>();
 
-            selectRoomEntriesSqlStringBuilder.append("\nWHERE ID IN (");
-
-            final var idParameters = ids
-                    .stream()
-                    .map(x -> "?")
-                    .collect(Collectors.joining(","));
-
-            selectRoomEntriesSqlStringBuilder.append(idParameters);
-
-            selectRoomEntriesSqlStringBuilder.append(")");
-
-        }
-
-        selectRoomEntriesSqlStringBuilder.append("\nORDER BY NAME");
-
-        try (final var roomsPreparedStatement = databaseConnection.createPreparedStatement(selectRoomEntriesSqlStringBuilder.toString())) {
+        try (preparedGetEntriesStatement) {
 
             for (var i = 0; i < ids.size(); i++) {
-                roomsPreparedStatement.setInt(i+1, ids.get(i));
+                preparedGetEntriesStatement.setInt(i+1, ids.get(i));
             }
 
-            final var roomsFromDatabase = roomsPreparedStatement.executeQuery();
+            final var entriesFromDatabase = preparedGetEntriesStatement.executeQuery();
 
-            try (roomsFromDatabase) {
-                while (roomsFromDatabase.next()) {
-                    final var room = new Room() {{
-                        setId(roomsFromDatabase.getInt("ID"));
-                        setName(roomsFromDatabase.getString("NAME"));
+            try (entriesFromDatabase) {
+                while (entriesFromDatabase.next()) {
+                    final var model = new Room() {{
+                        setId(entriesFromDatabase.getInt("ID"));
+                        setName(entriesFromDatabase.getString("NAME"));
                     }};
 
-                    rooms.add(room);
+                    models.add(model);
                 }
             }
         }
 
-        return rooms;
+        return models;
     }
 
     @Override
