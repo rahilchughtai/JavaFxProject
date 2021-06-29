@@ -14,20 +14,11 @@
     </top>
 
     <left>
-
-        <VBox spacing="30">
-            <Button onAction="#btnSwitchToHome" mnemonicParsing="false" styleClass="btn-primary" text="Home">
-            </Button>
-            <Button onAction="#btnSwitchToRooms"  mnemonicParsing="false"  styleClass="btn-primary" text="Rooms">
-            </Button>
-            <Button  onAction="#btnSwitchToStudents" mnemonicParsing="false"  styleClass="btn-primary" text="Students">
-            </Button>
-            <Button onAction="#btnSwitchToCourses" mnemonicParsing="false"  styleClass="btn-primary" text="Courses">
-            </Button>
-        </VBox>
-
+        <fx:include source="Sidebar.fxml">
+        </fx:include>
     </left>
     <center>
+
     </center>
     <bottom>
     </bottom>

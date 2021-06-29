@@ -16,21 +16,10 @@
     </top>
 
     <left>
-
-    <VBox spacing="30">
-        <Button onAction="#btnSwitchToHome" mnemonicParsing="false" styleClass="btn-primary" text="Home">
-        </Button>
-        <Button onAction="#btnSwitchToRooms"  mnemonicParsing="false"  styleClass="btn-primary" text="Rooms">
-        </Button>
-        <Button  onAction="#btnSwitchToStudents" mnemonicParsing="false"  styleClass="btn-primary" text="Students">
-        </Button>
-        <Button onAction="#btnSwitchToCourses" mnemonicParsing="false"  styleClass="btn-primary" text="Courses">
-        </Button>
-    </VBox>
-
+   <fx:include source="Sidebar.fxml">
+   </fx:include>
     </left>
     <center>
-
             <TableView fx:id="tableUser" fixedCellSize="4.0" maxHeight="700" maxWidth="800" prefHeight="463.0" prefWidth="1077.0" BorderPane.alignment="CENTER" GridPane.columnIndex="0" GridPane.rowIndex="1">
                 <columns>
                     <TableColumn fx:id="columnId" minWidth="-1.0" prefWidth="150.0" text="Matrikel-Nr" />
@@ -40,13 +29,11 @@
                     <TableColumn fx:id="columnJavaSkills" minWidth="-1.0" prefWidth="155.0" text="Java-Kenntnisse" />
                 </columns>
             </TableView>
-
     </center>
 
 
     <bottom>
         <HBox alignment="center" spacing="10" GridPane.columnIndex="0" GridPane.rowIndex="2">
-
             <TextField id="matrikelNumberField" fx:id="matrikelNumberField" prefWidth="90"  promptText="Matrikel-Nr." />
             <TextField id="firstNameField" fx:id="firstNameField" prefWidth="140" promptText="Vorname" />
             <TextField id="lastNameField" fx:id="lastNameField" prefWidth="140" promptText="Nachname" />
