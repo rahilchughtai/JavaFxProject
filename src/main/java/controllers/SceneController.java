@@ -78,7 +78,7 @@ public class SceneController implements Initializable {
     }
 
     @FXML
-    private void btnSwitchToCourse(javafx.event.ActionEvent mouseEvent) throws IOException {
+    private void btnSwitchToCourses(javafx.event.ActionEvent mouseEvent) throws IOException {
         FxmlPathToScene(MyScene.COURSES.path,eventToWindow(mouseEvent));
     }
 

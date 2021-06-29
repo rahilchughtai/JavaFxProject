@@ -11,19 +11,24 @@
 
     <top>
         <HBox alignment="BASELINE_CENTER">
-            <Button fx:id="btnHome" alignment="TOP_RIGHT" contentDisplay="RIGHT" mnemonicParsing="false" onAction="#btnSwitchToHome" styleClass="btn-primary" text="Home" BorderPane.alignment="CENTER">
-            <HBox.margin>
-               <Insets right="100.0" />
-            </HBox.margin></Button>
             <Label styleClass="h1" text="Student Manager" textFill="WHITE" />
-            <Button fx:id="btnCourses" mnemonicParsing="false" onAction="#btnSwitchToCourse" styleClass="btn-primary" text="Courses">
-            <HBox.margin>
-               <Insets left="100.0" />
-            </HBox.margin></Button>
         </HBox>
-
     </top>
 
+    <left>
+
+    <VBox spacing="30">
+        <Button onAction="#btnSwitchToHome" mnemonicParsing="false" styleClass="btn-primary" text="Home">
+        </Button>
+        <Button onAction="#btnSwitchToRooms"  mnemonicParsing="false"  styleClass="btn-primary" text="Rooms">
+        </Button>
+        <Button  onAction="#btnSwitchToStudents" mnemonicParsing="false"  styleClass="btn-primary" text="Students">
+        </Button>
+        <Button onAction="#btnSwitchToCourses" mnemonicParsing="false"  styleClass="btn-primary" text="Courses">
+        </Button>
+    </VBox>
+
+    </left>
     <center>
 
             <TableView fx:id="tableUser" fixedCellSize="4.0" maxHeight="700" maxWidth="800" prefHeight="463.0" prefWidth="1077.0" BorderPane.alignment="CENTER" GridPane.columnIndex="0" GridPane.rowIndex="1">
