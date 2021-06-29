@@ -23,7 +23,8 @@ public class SceneController implements Initializable {
     private enum MyScene {
         HOME("Home.fxml"),
         COURSES("Courses.fxml"),
-        STUDENTS("Students.fxml");
+        STUDENTS("Students.fxml"),
+        ROOMS("Rooms.fxml");
         public final String path;
         //This converts the enum to the file path
         private MyScene(String path){
@@ -82,6 +83,13 @@ public class SceneController implements Initializable {
     private void btnSwitchToCourse(javafx.event.ActionEvent mouseEvent) throws IOException {
         FxmlPathToScene(MyScene.COURSES.path,eventToWindow(mouseEvent));
     }
+
+
+    @FXML
+    private void btnSwitchToRooms(javafx.event.ActionEvent mouseEvent) throws IOException {
+        FxmlPathToScene(MyScene.ROOMS.path,eventToWindow(mouseEvent));
+    }
+
     @FXML
     private void btnSwitchToHome(javafx.event.ActionEvent mouseEvent) throws IOException {
         FxmlPathToScene(MyScene.HOME.path,eventToWindow(mouseEvent));
