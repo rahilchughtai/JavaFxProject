@@ -15,6 +15,7 @@ import java.util.ResourceBundle;
 
 public class CoursesController extends SceneController {
 
+
     @FXML
     private TableView<Course> table_info;
 
