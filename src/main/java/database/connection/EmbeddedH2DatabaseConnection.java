@@ -1,9 +1,6 @@
 package database.connection;
 
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.ResultSet;
-import java.sql.SQLException;
+import java.sql.*;
 
 class EmbeddedH2DatabaseConnection implements DatabaseConnection {
     private static final String JDBC_DRIVER = "org.h2.Driver";
@@ -22,6 +19,7 @@ class EmbeddedH2DatabaseConnection implements DatabaseConnection {
                 NAME VARCHAR(255) NOT NULL,
                 PRIMARY KEY (ID))
                 """;
+
         final var createCourseTableSql = """
                 CREATE TABLE IF NOT EXISTS COURSE
                 (ID INT AUTO_INCREMENT,
@@ -79,16 +77,31 @@ class EmbeddedH2DatabaseConnection implements DatabaseConnection {
     }
 
     @Override
-    public void executeUpdate(String sql) throws SQLException {
-        var statement = databaseConnection.createStatement();
+    public PreparedStatement createPreparedStatement(String sql) throws SQLException {
+        var preparedStatement = databaseConnection.prepareStatement(sql);
 
-        statement.executeUpdate(sql);
+        return preparedStatement;
     }
 
     @Override
-    public ResultSet executeQuery(String sql) throws SQLException {
-        var statement = databaseConnection.createStatement();
+    public PreparedStatement createPreparedStatementWithReturnGeneratedKeys(final String sql) throws SQLException {
+        var preparedStatement = databaseConnection.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
 
-        return statement.executeQuery(sql);
+        return preparedStatement;
+    }
+
+    @Override
+    public void setAutoCommit(final boolean autoCommit) throws SQLException {
+        databaseConnection.setAutoCommit(autoCommit);
+    }
+
+    @Override
+    public void commit() throws SQLException {
+        databaseConnection.commit();
+    }
+
+    @Override
+    public void rollback() throws SQLException {
+        databaseConnection.rollback();
     }
 }
