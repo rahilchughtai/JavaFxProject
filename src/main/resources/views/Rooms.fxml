@@ -27,7 +27,7 @@
             </padding>
             </ChoiceBox>
 
-            <Button fx:id="btnSwitchView" mnemonicParsing="false" onAction="#btnSwitchView" styleClass="btn-primary" text="Switch View">
+            <Button fx:id="btnSwitch" mnemonicParsing="false" onAction="#btnSwitchView" styleClass="btn-primary" text="Switch View">
             </Button>
         </HBox>
     </top>

@@ -19,7 +19,6 @@ import java.util.Objects;
 import java.util.ResourceBundle;
 
 public class SceneController implements Initializable {
-
     private enum MyScene {
         HOME("Home.fxml"),
         COURSES("Courses.fxml"),
@@ -31,7 +30,6 @@ public class SceneController implements Initializable {
             this.path="views/"+path;
         }
     }
-
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
@@ -58,7 +56,7 @@ public class SceneController implements Initializable {
     /**
      * Takes Button Click event and returns the window
      */
-    private Window eventToWindow(ActionEvent mouseEvent){
+    public Window eventToWindow(ActionEvent mouseEvent){
         return ((Button) mouseEvent.getSource()).getScene().getWindow();
     }
     /**
@@ -68,7 +66,7 @@ public class SceneController implements Initializable {
      * @param fxml Path to the fxml file
      * @param clickedWindow The window that was clicked
      */
-    void FxmlPathToScene(String fxml, Window clickedWindow) throws IOException {
+    public void  FxmlPathToScene(String fxml, Window clickedWindow) throws IOException {
         Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getClassLoader().getResource(fxml)));
 
         Scene scene = new Scene(root);
@@ -83,7 +81,6 @@ public class SceneController implements Initializable {
     private void btnSwitchToCourse(javafx.event.ActionEvent mouseEvent) throws IOException {
         FxmlPathToScene(MyScene.COURSES.path,eventToWindow(mouseEvent));
     }
-
 
     @FXML
     private void btnSwitchToRooms(javafx.event.ActionEvent mouseEvent) throws IOException {
