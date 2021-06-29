@@ -2,14 +2,16 @@ package database.models;
 
 import java.util.Objects;
 
-public class Corporation {
+public class Corporation implements Model {
     private Integer id;
     private String name;
 
+    @Override
     public Integer getId() {
         return id;
     }
 
+    @Override
     public void setId(Integer id) {
         this.id = id;
     }

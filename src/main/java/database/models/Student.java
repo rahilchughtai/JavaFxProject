@@ -2,7 +2,7 @@ package database.models;
 
 import java.util.Objects;
 
-public class Student {
+public class Student implements Model {
     private Integer id;
     private String matriculationNumber;
     private String firstName;
