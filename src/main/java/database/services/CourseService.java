@@ -8,69 +8,95 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
-import java.util.stream.Collectors;
 
 // TODO Student Verknüpfung einbauen!
 public class CourseService extends BaseService<Course> {
+
+    private static CourseService courseService = null;
+
+    private CourseService() {
+    }
+
+    public static ModelService<Course> getService() {
+        if (courseService == null)
+            courseService = new CourseService();
+
+        return courseService;
+    }
+
     @Override
     protected void insertModels(final Collection<Course> models) throws SQLException {
+        final var preparedInsertStatement = DatabaseConnectionManager
+                .getDatabaseConnection()
+                .createPreparedStatementWithReturnGeneratedKeys("INSERT INTO COURSE (NAME, ROOM_ID) VALUES (?, ?)");
 
+        try (preparedInsertStatement) {
+            for (final var model : models) {
+
+                preparedInsertStatement.setString(1, model.getName());
+                preparedInsertStatement.setInt(2, model.getRoom().getId());
+
+                preparedInsertStatement.executeUpdate();
+
+                transferIdToModel(preparedInsertStatement, model);
+            }
+        }
     }
 
     @Override
     protected void updateModels(final Collection<Course> models) throws SQLException {
+        final var preparedUpdateStatement = DatabaseConnectionManager
+                .getDatabaseConnection()
+                .createPreparedStatement("UPDATE COURSE SET NAME = ?, ROOM_ID = ? WHERE ID = ?");
 
+        try (preparedUpdateStatement) {
+            for (final var model : models) {
+                preparedUpdateStatement.setString(1, model.getName());
+                preparedUpdateStatement.setInt(2, model.getRoom().getId());
+                preparedUpdateStatement.setInt(3, model.getId());
+
+                preparedUpdateStatement.executeUpdate();
+            }
+        }
     }
 
     @Override
     public List<Course> getEntries(final List<Integer> ids) throws SQLException {
-//        final var databaseConnection = DatabaseConnectionManager.getDatabaseConnection();
-//
-//        final var courses = new ArrayList<Course>();
-//
-//        final var selectCourseEntriesSqlStringBuilder = new StringBuilder(
-//                """
-//                        SELECT COURSE.ID, COURSE.NAME, ROOM.NAME AS ROOM_NAME
-//                        FROM COURSE
-//                        JOIN ROOM ON COURSE.ROOM_ID = ROOM.ID
-//                        """);
-//
-//        if (!ids.isEmpty()) {
-//
-//            selectCourseEntriesSqlStringBuilder.append("\nWHERE ID IN (");
-//
-//            final var idParameters = ids
-//                    .stream()
-//                    .map(x -> "?")
-//                    .collect(Collectors.joining(","));
-//
-//            selectCourseEntriesSqlStringBuilder.append(idParameters);
-//
-//            selectCourseEntriesSqlStringBuilder.append(")");
-//
-//        }
-//
-//        selectCourseEntriesSqlStringBuilder.append("\nORDER BY NAME");
-//
-//        try (final var roomsPreparedStatement = databaseConnection.createPreparedStatement(selectCourseEntriesSqlStringBuilder.toString())) {
-//
-//            for (var i = 0; i < ids.size(); i++) {
-//                roomsPreparedStatement.setInt(i+1, ids.get(i));
-//            }
-//
-//            final var roomsFromDatabase = roomsPreparedStatement.executeQuery();
-//
-//            try (roomsFromDatabase) {
-//                while (roomsFromDatabase.next()) {
-//                    final var room = new Room() {{
-//                        setId(roomsFromDatabase.getInt("ID"));
-//                        setName(roomsFromDatabase.getString("NAME"));
-//                    }};
-//
-//                    courses.add(room);
-//                }
-//            }
-        return null;
+
+        final var preparedGetEntriesStatement = getEntriesFromDatabase(
+                ids,
+                """
+                SELECT COURSE.ID, COURSE.NAME, ROOM.ID AS ROOM_ID, ROOM.NAME AS ROOM_NAME
+                FROM COURSE
+                JOIN ROOM ON COURSE.ROOM_ID = ROOM.ID
+                """,
+                "NAME",
+                "COURSE"
+        );
+
+        final var models = new ArrayList<Course>();
+
+        try (preparedGetEntriesStatement) {
+
+            final var entriesFromDatabase = preparedGetEntriesStatement.executeQuery();
+
+            try (entriesFromDatabase) {
+                while (entriesFromDatabase.next()) {
+                    final var model = new Course() {{
+                        setId(entriesFromDatabase.getInt("ID"));
+                        setName(entriesFromDatabase.getString("NAME"));
+                        setRoom(new Room() {{
+                            setId(entriesFromDatabase.getInt("ROOM_ID"));
+                            setName(entriesFromDatabase.getString("ROOM_NAME"));
+                        }});
+                    }};
+
+                    models.add(model);
+                }
+            }
+        }
+
+        return models;
     }
 
     @Override

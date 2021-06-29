@@ -53,14 +53,14 @@ public abstract class BaseService<ModelType extends Model> implements ModelServi
         databaseConnection.setAutoCommit(true);
     }
 
-    protected PreparedStatement getEntriesFromDatabase(List<Integer> ids, String selectAndJoinSql, String orderByColumnName) throws SQLException {
+    protected PreparedStatement getEntriesFromDatabase(List<Integer> ids, String selectAndJoinSql, String orderByColumnName, String tableName) throws SQLException {
         final var databaseConnection = DatabaseConnectionManager.getDatabaseConnection();
 
         final var selectEntriesSqlStringBuilder = new StringBuilder(selectAndJoinSql);
 
         if (!ids.isEmpty()) {
 
-            selectEntriesSqlStringBuilder.append("\nWHERE ID IN (");
+            selectEntriesSqlStringBuilder.append("\nWHERE " + tableName + ".ID IN (");
 
             final var idParameters = ids
                     .stream()
@@ -70,12 +70,19 @@ public abstract class BaseService<ModelType extends Model> implements ModelServi
             selectEntriesSqlStringBuilder.append(idParameters);
 
             selectEntriesSqlStringBuilder.append(")");
-
         }
 
         selectEntriesSqlStringBuilder.append("\nORDER BY " + orderByColumnName);
 
-        return databaseConnection.createPreparedStatement(selectEntriesSqlStringBuilder.toString());
+        final var preparedGetEntriesStatement = databaseConnection.createPreparedStatement(selectEntriesSqlStringBuilder.toString());
+
+        for (var i = 0; i < ids.size(); i++) {
+            preparedGetEntriesStatement.setInt(i+1, ids.get(i));
+        }
+
+        System.out.println(selectEntriesSqlStringBuilder);
+
+        return preparedGetEntriesStatement;
     }
 
     @Override

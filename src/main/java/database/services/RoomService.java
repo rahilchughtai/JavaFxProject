@@ -66,16 +66,13 @@ public class RoomService extends BaseService<Room> {
                 SELECT ID, NAME
                 FROM ROOM
                 """,
-                "NAME"
+                "NAME",
+                "ROOM"
         );
 
         final var models = new ArrayList<Room>();
 
         try (preparedGetEntriesStatement) {
-
-            for (var i = 0; i < ids.size(); i++) {
-                preparedGetEntriesStatement.setInt(i+1, ids.get(i));
-            }
 
             final var entriesFromDatabase = preparedGetEntriesStatement.executeQuery();
 
