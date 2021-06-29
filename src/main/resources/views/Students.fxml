@@ -39,6 +39,7 @@
             <ComboBox fx:id="javaSkillsComboBox" promptText="Java-Kenntnisse">
                 <items>
                     <FXCollections fx:factory="observableArrayList">
+                        <String fx:value="None" />
                         <String fx:value="Beginner" />
                         <String fx:value="Intermediate" />
                         <String fx:value="Advanced" />
