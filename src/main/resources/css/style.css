@@ -7,6 +7,7 @@
     -fx-info: #0DCAF0;
     -fx-red: #B02A37;
     -fx-grey: #B0B3B8;
+    -fx-success: #198754;
 }
 
 /*Reusables*/
@@ -20,6 +21,17 @@
     -fx-text-fill: white;
     -fx-cursor: HAND;
 }
+
+.btn-add{
+    -fx-background-color: -fx-success;
+    -fx-text-fill: white;
+    -fx-cursor: HAND;
+    -fx-padding: 10 10 10 10;
+}
+.btn-add:hover{
+    -fx-background-color: #0a3622;
+}
+
 
 .btn-primary:hover{
     -fx-background-color: Black;

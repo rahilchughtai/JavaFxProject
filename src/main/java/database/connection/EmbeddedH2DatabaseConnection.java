@@ -2,6 +2,7 @@ package database.connection;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 
 class EmbeddedH2DatabaseConnection implements DatabaseConnection {
@@ -67,11 +68,6 @@ class EmbeddedH2DatabaseConnection implements DatabaseConnection {
     }
 
     @Override
-    public void initializeDatabaseWithTestData() {
-
-    }
-
-    @Override
     public void initializeConnection() throws ClassNotFoundException, SQLException {
         System.out.println("Trying to connect to the embedded H2 database...");
 
@@ -80,5 +76,19 @@ class EmbeddedH2DatabaseConnection implements DatabaseConnection {
         databaseConnection = DriverManager.getConnection(CONNECTION_STRING_FOR_EMBEDDED_DATABASE, USERNAME_FOR_EMBEDDED_DATABASE, PASSWORD_FOR_EMBEDDED_DATABASE);
 
         System.out.println("Embedded H2 database connection was established.");
+    }
+
+    @Override
+    public void executeUpdate(String sql) throws SQLException {
+        var statement = databaseConnection.createStatement();
+
+        statement.executeUpdate(sql);
+    }
+
+    @Override
+    public ResultSet executeQuery(String sql) throws SQLException {
+        var statement = databaseConnection.createStatement();
+
+        return statement.executeQuery(sql);
     }
 }

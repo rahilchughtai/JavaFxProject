@@ -17,7 +17,7 @@ public class DatabaseConnectionManager {
         if (databaseConnection != null)
             throw new IllegalStateException("Database connection was already been established!");
 
-        var databaseConnection = new EmbeddedH2DatabaseConnection();
+        databaseConnection = new EmbeddedH2DatabaseConnection();
         databaseConnection.initializeConnection();
         databaseConnection.createDefaultDatabaseSchemeIfNotExists();
     }

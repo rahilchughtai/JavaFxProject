@@ -4,6 +4,9 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
+<?import org.kordamp.ikonli.javafx.FontIcon?>
+<?import javafx.collections.FXCollections?>
+<?import java.lang.String?>
 <BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="720.0" prefWidth="1080.0" styleClass="bg-dark" stylesheets="@../css/style.css" xmlns="http://javafx.com/javafx/11.0.2" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.StudentsController">
 
     <top>
@@ -23,7 +26,7 @@
 
     <center>
 
-            <TableView maxHeight="700" maxWidth="800" GridPane.columnIndex="0" GridPane.rowIndex="1" fx:id="tableUser" fixedCellSize="4.0" prefHeight="463.0" prefWidth="1077.0" BorderPane.alignment="CENTER">
+            <TableView fx:id="tableUser" fixedCellSize="4.0" maxHeight="700" maxWidth="800" prefHeight="463.0" prefWidth="1077.0" BorderPane.alignment="CENTER" GridPane.columnIndex="0" GridPane.rowIndex="1">
                 <columns>
                     <TableColumn fx:id="columnId" minWidth="-1.0" prefWidth="150.0" text="Matrikel-Nr" />
                     <TableColumn fx:id="columnVorname" minWidth="-1.0" prefWidth="150.0" text="Vorname" />
@@ -34,4 +37,32 @@
             </TableView>
 
     </center>
+
+
+    <bottom>
+        <HBox alignment="center" spacing="10" GridPane.columnIndex="0" GridPane.rowIndex="2">
+
+            <TextField id="matrikelNUmberField" fx:id="matrikelNumberField" prefWidth="90"  promptText="Matrikel-Nr." />
+            <TextField id="firstNameField" fx:id="firstNameField" prefWidth="140" promptText="Vorname" />
+            <TextField id="lastNameField" fx:id="lastNameField" prefWidth="140" promptText="Nachname" />
+            <ComboBox promptText="Java-Kenntnisse">
+                <items>
+                    <FXCollections fx:factory="observableArrayList">
+                        <String fx:value="Beginner" />
+                        <String fx:value="Intermediate" />
+                        <String fx:value="Advanced" />
+                        <String fx:value="Sebastian" />
+                    </FXCollections>
+                </items>
+            </ComboBox>
+            <Button styleClass="btn-add" text="Hinzufügen">
+                <graphic>
+                    <FontIcon styleClass="icon" iconLiteral="fa-plus-circle" />
+                </graphic>
+            </Button>
+         <BorderPane.margin>
+            <Insets bottom="20.0" top="10.0" />
+         </BorderPane.margin>
+        </HBox>
+    </bottom>
 </BorderPane>
