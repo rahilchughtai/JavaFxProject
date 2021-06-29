@@ -33,5 +33,5 @@ JavaFx+Datenbank Projekt für Vorlesung Java von Sebastian Damm
 
 
 ### DB Scheme
-![](./src/main/java/database/SMS.png)
+![](resources/sql/SMS.png)
 [Link](https://dbdiagram.io/d/60bf650fb29a09603d187c14)
