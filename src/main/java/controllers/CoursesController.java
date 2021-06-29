@@ -15,11 +15,6 @@ import java.util.ResourceBundle;
 
 public class CoursesController extends SceneController {
 
-   // private String[] DummyNames = {"",12,13,14,15};
-   // private String[] DummyNames={
-
-   // }
-
     @FXML
     private TableView<Course> table_info;
 

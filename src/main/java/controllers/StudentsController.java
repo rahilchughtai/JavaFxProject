@@ -47,7 +47,7 @@ public class StudentsController extends SceneController {
                 Student Info:
                 Mtr-Nr: %s
                 Name: %s %s
-                Java-Skills %s
+                Java-Skills: %s
                 Firma: %s
                 """,
                 matrikelNumberField.getText(),
