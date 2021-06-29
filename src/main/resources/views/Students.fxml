@@ -42,10 +42,10 @@
     <bottom>
         <HBox alignment="center" spacing="10" GridPane.columnIndex="0" GridPane.rowIndex="2">
 
-            <TextField id="matrikelNUmberField" fx:id="matrikelNumberField" prefWidth="90"  promptText="Matrikel-Nr." />
+            <TextField id="matrikelNumberField" fx:id="matrikelNumberField" prefWidth="90"  promptText="Matrikel-Nr." />
             <TextField id="firstNameField" fx:id="firstNameField" prefWidth="140" promptText="Vorname" />
             <TextField id="lastNameField" fx:id="lastNameField" prefWidth="140" promptText="Nachname" />
-            <ComboBox promptText="Java-Kenntnisse">
+            <ComboBox fx:id="javaSkillsComboBox" promptText="Java-Kenntnisse">
                 <items>
                     <FXCollections fx:factory="observableArrayList">
                         <String fx:value="Beginner" />
@@ -55,7 +55,8 @@
                     </FXCollections>
                 </items>
             </ComboBox>
-            <Button styleClass="btn-add" text="Hinzufügen">
+            <TextField fx:id="companyField" prefWidth="140" promptText="Firma" />
+            <Button onAction="#addNewStudent" styleClass="btn-add" text="Hinzufügen">
                 <graphic>
                     <FontIcon styleClass="icon" iconLiteral="fa-plus-circle" />
                 </graphic>
