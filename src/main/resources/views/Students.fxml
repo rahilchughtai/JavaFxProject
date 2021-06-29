@@ -5,6 +5,8 @@
 <?import javafx.scene.layout.*?>
 
 <?import org.kordamp.ikonli.javafx.FontIcon?>
+<?import javafx.collections.FXCollections?>
+<?import java.lang.String?>
 <BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="720.0" prefWidth="1080.0" styleClass="bg-dark" stylesheets="@../css/style.css" xmlns="http://javafx.com/javafx/11.0.2" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.StudentsController">
 
     <top>
@@ -39,12 +41,20 @@
 
     <bottom>
         <HBox alignment="center" spacing="10" GridPane.columnIndex="0" GridPane.rowIndex="2">
-            
+
             <TextField id="matrikelNUmberField" fx:id="matrikelNumberField" prefWidth="90"  promptText="Matrikel-Nr." />
             <TextField id="firstNameField" fx:id="firstNameField" prefWidth="140" promptText="Vorname" />
             <TextField id="lastNameField" fx:id="lastNameField" prefWidth="140" promptText="Nachname" />
-            <TextField id="companyField" fx:id="companyField" prefWidth="140" promptText="Firma" />
-            <TextField id="javaSkillsField" fx:id="javaSkillsField" prefWidth="140" promptText="Java Kenntnisse" />
+            <ComboBox promptText="Java-Kenntnisse">
+                <items>
+                    <FXCollections fx:factory="observableArrayList">
+                        <String fx:value="Beginner" />
+                        <String fx:value="Intermediate" />
+                        <String fx:value="Advanced" />
+                        <String fx:value="Sebastian" />
+                    </FXCollections>
+                </items>
+            </ComboBox>
             <Button styleClass="btn-add" text="Hinzufügen">
                 <graphic>
                     <FontIcon styleClass="icon" iconLiteral="fa-plus-circle" />
