@@ -4,95 +4,114 @@ import database.connection.DatabaseConnectionManager;
 import database.models.Room;
 
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.Collection;
-import java.util.LinkedList;
 import java.util.List;
 import java.util.stream.Collectors;
 
-public class RoomService implements ModelService<Room> {
+public class RoomService extends BaseService<Room> {
 
     private static RoomService roomService = null;
 
     private RoomService() {
     }
 
-    public static ModelService<Room> getRoomService() {
+    public static ModelService<Room> getService() {
         if (roomService == null)
             roomService = new RoomService();
 
         return roomService;
     }
 
-    private String generateInsertRoomsSql(Collection<Room> models) {
-        if (models.isEmpty())
-            return "";
+    @Override
+    protected void insertModels(Collection<Room> models) throws SQLException {
 
-        final var roomsInsertSqlStringBuilder = new StringBuilder("INSERT INTO ROOM (NAME) VALUES ");
+        final var preparedInsertStatement = DatabaseConnectionManager
+                .getDatabaseConnection()
+                .createPreparedStatementWithReturnGeneratedKeys("INSERT INTO ROOM (NAME) VALUES (?)");
 
-        roomsInsertSqlStringBuilder.append(models
-                        .stream()
-                        .map(model -> "('" + model.getName() + "')")
-                        .collect(Collectors.joining(",")));
+        try (preparedInsertStatement) {
+            for (final var model : models) {
 
-        return roomsInsertSqlStringBuilder.toString();
-    }
+                preparedInsertStatement.setString(1, model.getName());
 
-    private String generateUpdateRoomsSql(Collection<Room> models) {
-        return models
-                .stream()
-                .map(model -> "UPDATE ROOM SET NAME = '" + model.getName() + "' WHERE ID = " + model.getId())
-                .collect(Collectors.joining(";"));
+                preparedInsertStatement.executeUpdate();
+
+                transferIdToModel(preparedInsertStatement, model);
+            }
+        }
     }
 
     @Override
-    public List<Room> getAllEntries() throws SQLException {
+    protected void updateModels(Collection<Room> models) throws SQLException {
+        final var preparedUpdateStatement = DatabaseConnectionManager
+                .getDatabaseConnection()
+                .createPreparedStatement("UPDATE ROOM SET NAME = ? WHERE ID = ?");
+
+        try (preparedUpdateStatement) {
+            for (final var model : models) {
+                preparedUpdateStatement.setString(1, model.getName());
+                preparedUpdateStatement.setInt(2, model.getId());
+
+                preparedUpdateStatement.executeUpdate();
+            }
+        }
+    }
+
+    @Override
+    public List<Room> getEntries(List<Integer> ids) throws SQLException {
         final var databaseConnection = DatabaseConnectionManager.getDatabaseConnection();
 
-        final var roomsDatabaseResult = databaseConnection.executeQuery("""
+        final var rooms = new ArrayList<Room>();
+
+        final var selectRoomEntriesSqlStringBuilder = new StringBuilder(
+                """
                 SELECT ID, NAME
                 FROM ROOM
-                ORDER BY NAME
                 """);
 
-        final var rooms = new LinkedList<Room>();
+        if (!ids.isEmpty()) {
 
-        while (roomsDatabaseResult.next()) {
-            final var room = new Room() {{
-                setId(roomsDatabaseResult.getInt("ID"));
-                setName(roomsDatabaseResult.getString("NAME"));
-            }};
+            selectRoomEntriesSqlStringBuilder.append("\nWHERE ID IN (");
 
-            rooms.add(room);
+            final var idParameters = ids
+                    .stream()
+                    .map(x -> "?")
+                    .collect(Collectors.joining(","));
+
+            selectRoomEntriesSqlStringBuilder.append(idParameters);
+
+            selectRoomEntriesSqlStringBuilder.append(")");
+
+        }
+
+        selectRoomEntriesSqlStringBuilder.append("\nORDER BY NAME");
+
+        try (final var roomsPreparedStatement = databaseConnection.createPreparedStatement(selectRoomEntriesSqlStringBuilder.toString())) {
+
+            for (var i = 0; i < ids.size(); i++) {
+                roomsPreparedStatement.setInt(i+1, ids.get(i));
+            }
+
+            final var roomsFromDatabase = roomsPreparedStatement.executeQuery();
+
+            try (roomsFromDatabase) {
+                while (roomsFromDatabase.next()) {
+                    final var room = new Room() {{
+                        setId(roomsFromDatabase.getInt("ID"));
+                        setName(roomsFromDatabase.getString("NAME"));
+                    }};
+
+                    rooms.add(room);
+                }
+            }
         }
 
         return rooms;
     }
 
     @Override
-    public void save(final Collection<Room> models) throws SQLException {
-
-        final var sqlForNewRooms = generateInsertRoomsSql(models.stream().filter(x -> x.getId() == null).toList());
-        final var sqlForExistingRooms = generateUpdateRoomsSql(models.stream().filter(x -> x.getId() != null).toList());
-
-        final var databaseConnection = DatabaseConnectionManager.getDatabaseConnection();
-
-        databaseConnection.executeUpdate(sqlForNewRooms);
-        databaseConnection.executeUpdate(sqlForExistingRooms);
-    }
-
-    @Override
     public void delete(final Collection<Room> models) throws SQLException {
-        final var roomIds = models
-                .stream()
-                .filter(x -> x.getId() != null)
-                .map(x -> x.getId().toString())
-                .toList();
-
-        if (roomIds.isEmpty())
-            throw new IllegalArgumentException("Only rooms with IDs can be deleted!");
-
-        final var roomsDeleteSql = "DELETE FROM ROOM WHERE ID IN (" + String.join(",", roomIds) + ")";
-
-        DatabaseConnectionManager.getDatabaseConnection().executeUpdate(roomsDeleteSql);
+        delete(models, "ROOM");
     }
 }

@@ -2,7 +2,7 @@ package database.models;
 
 import java.util.Objects;
 
-public class Room {
+public class Room implements Model {
     private Integer id;
     private String name;
 
