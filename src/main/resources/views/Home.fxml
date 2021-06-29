@@ -51,8 +51,6 @@
                         <FontIcon styleClass="icon" iconLiteral="mdi-table" />
                     </graphic>
                 </Button>
-
-
             </children>
         </HBox>
     </center>
