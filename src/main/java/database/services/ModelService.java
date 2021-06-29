@@ -1,7 +1,6 @@
 package database.services;
 
 import database.models.Model;
-import database.models.Room;
 
 import java.sql.SQLException;
 import java.util.Collection;

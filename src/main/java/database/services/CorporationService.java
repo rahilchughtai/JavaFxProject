@@ -1,6 +1,8 @@
 package database.services;
 
 import database.connection.DatabaseConnectionManager;
+import database.models.Corporation;
+import database.models.Course;
 import database.models.Room;
 
 import java.sql.SQLException;
@@ -8,26 +10,25 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
-public class RoomService extends BaseService<Room> {
+public class CorporationService extends BaseService<Corporation> {
 
-    private static RoomService service = null;
+    private static CorporationService service;
 
-    private RoomService() {
+    private CorporationService(){
     }
 
-    public static ModelService<Room> getService() {
+    public static ModelService<Corporation> getService() {
         if (service == null)
-            service = new RoomService();
+            service = new CorporationService();
 
         return service;
     }
 
     @Override
-    protected void insertModels(Collection<Room> models) throws SQLException {
-
+    protected void insertModels(final Collection<Corporation> models) throws SQLException {
         final var preparedInsertStatement = DatabaseConnectionManager
                 .getDatabaseConnection()
-                .createPreparedStatementWithReturnGeneratedKeys("INSERT INTO ROOM (NAME) VALUES (?)");
+                .createPreparedStatementWithReturnGeneratedKeys("INSERT INTO CORPORATION (NAME) VALUES (?)");
 
         try (preparedInsertStatement) {
             for (final var model : models) {
@@ -42,10 +43,10 @@ public class RoomService extends BaseService<Room> {
     }
 
     @Override
-    protected void updateModels(Collection<Room> models) throws SQLException {
+    protected void updateModels(final Collection<Corporation> models) throws SQLException {
         final var preparedUpdateStatement = DatabaseConnectionManager
                 .getDatabaseConnection()
-                .createPreparedStatement("UPDATE ROOM SET NAME = ? WHERE ID = ?");
+                .createPreparedStatement("UPDATE CORPORATION SET NAME = ? WHERE ID = ?");
 
         try (preparedUpdateStatement) {
             for (final var model : models) {
@@ -58,18 +59,18 @@ public class RoomService extends BaseService<Room> {
     }
 
     @Override
-    public List<Room> getEntries(List<Integer> ids) throws SQLException {
+    public List<Corporation> getEntries(final List<Integer> ids) throws SQLException {
         final var preparedGetEntriesStatement = getEntriesFromDatabase(
                 ids,
                 """
                 SELECT ID, NAME
-                FROM ROOM
+                FROM CORPORATION
                 """,
                 "NAME",
-                "ROOM"
+                "CORPORATION"
         );
 
-        final var models = new ArrayList<Room>();
+        final var models = new ArrayList<Corporation>();
 
         try (preparedGetEntriesStatement) {
 
@@ -77,7 +78,7 @@ public class RoomService extends BaseService<Room> {
 
             try (entriesFromDatabase) {
                 while (entriesFromDatabase.next()) {
-                    final var model = new Room() {{
+                    final var model = new Corporation() {{
                         setId(entriesFromDatabase.getInt("ID"));
                         setName(entriesFromDatabase.getString("NAME"));
                     }};
@@ -91,7 +92,7 @@ public class RoomService extends BaseService<Room> {
     }
 
     @Override
-    public void delete(final Collection<Room> models) throws SQLException {
-        delete(models, "ROOM", "ID");
+    public void delete(final Collection<Corporation> models) throws SQLException {
+        delete(models, "CORPORATION", "ID");
     }
 }

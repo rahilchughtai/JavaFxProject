@@ -2,10 +2,8 @@ package database.services;
 
 import database.connection.DatabaseConnectionManager;
 import database.models.Model;
-import database.models.Room;
 
 import java.sql.PreparedStatement;
-import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Collection;
@@ -25,7 +23,7 @@ public abstract class BaseService<ModelType extends Model> implements ModelServi
         }
     }
 
-    protected void delete(final Collection<ModelType> models, String tableName) throws SQLException {
+    protected void delete(final Collection<ModelType> models, String tableName, String idColumnName) throws SQLException {
         final var rooms = models
                 .stream()
                 .filter(x -> x.getId() != null)
@@ -38,7 +36,7 @@ public abstract class BaseService<ModelType extends Model> implements ModelServi
 
         databaseConnection.setAutoCommit(false);
 
-        final var preparedDeleteStatement = databaseConnection.createPreparedStatement("DELETE FROM " + tableName + " WHERE ID = ?");
+        final var preparedDeleteStatement = databaseConnection.createPreparedStatement("DELETE FROM " + tableName + " WHERE " + idColumnName + " = ?");
 
         try (preparedDeleteStatement) {
             for (final var room : rooms) {
@@ -79,8 +77,6 @@ public abstract class BaseService<ModelType extends Model> implements ModelServi
         for (var i = 0; i < ids.size(); i++) {
             preparedGetEntriesStatement.setInt(i+1, ids.get(i));
         }
-
-        System.out.println(selectEntriesSqlStringBuilder);
 
         return preparedGetEntriesStatement;
     }

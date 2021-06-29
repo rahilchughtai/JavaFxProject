@@ -12,16 +12,16 @@ import java.util.List;
 // TODO Student Verknüpfung einbauen!
 public class CourseService extends BaseService<Course> {
 
-    private static CourseService courseService = null;
+    private static CourseService service = null;
 
     private CourseService() {
     }
 
     public static ModelService<Course> getService() {
-        if (courseService == null)
-            courseService = new CourseService();
+        if (service == null)
+            service = new CourseService();
 
-        return courseService;
+        return service;
     }
 
     @Override
@@ -101,6 +101,6 @@ public class CourseService extends BaseService<Course> {
 
     @Override
     public void delete(final Collection<Course> models) throws SQLException {
-        delete(models, "COURSE");
+        delete(models, "COURSE", "ID");
     }
 }
