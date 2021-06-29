@@ -3,14 +3,13 @@ package database.services;
 import database.connection.DatabaseConnectionManager;
 import database.models.Room;
 
-import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 import java.util.stream.Collectors;
 
-public class RoomService implements ModelService<Room> {
+public class RoomService extends BaseService<Room> {
 
     private static RoomService roomService = null;
 
@@ -24,15 +23,8 @@ public class RoomService implements ModelService<Room> {
         return roomService;
     }
 
-    private void transferRoomIdToModel(PreparedStatement preparedInsertStatement, Room model) throws SQLException {
-        try (final var idResult = preparedInsertStatement.getGeneratedKeys()) {
-            idResult.next();
-
-            model.setId(idResult.getInt(1));
-        }
-    }
-
-    private void insertRooms(Collection<Room> models) throws SQLException {
+    @Override
+    protected void insertModels(Collection<Room> models) throws SQLException {
 
         final var preparedInsertStatement = DatabaseConnectionManager
                 .getDatabaseConnection()
@@ -45,12 +37,13 @@ public class RoomService implements ModelService<Room> {
 
                 preparedInsertStatement.executeUpdate();
 
-                transferRoomIdToModel(preparedInsertStatement, model);
+                transferIdToModel(preparedInsertStatement, model);
             }
         }
     }
 
-    private void updateRooms(Collection<Room> models) throws SQLException {
+    @Override
+    protected void updateModels(Collection<Room> models) throws SQLException {
         final var preparedUpdateStatement = DatabaseConnectionManager
                 .getDatabaseConnection()
                 .createPreparedStatement("UPDATE ROOM SET NAME = ? WHERE ID = ?");
@@ -94,8 +87,6 @@ public class RoomService implements ModelService<Room> {
 
         selectRoomEntriesSqlStringBuilder.append("\nORDER BY NAME");
 
-        System.out.println(selectRoomEntriesSqlStringBuilder);
-
         try (final var roomsPreparedStatement = databaseConnection.createPreparedStatement(selectRoomEntriesSqlStringBuilder.toString())) {
 
             for (var i = 0; i < ids.size(); i++) {
@@ -120,51 +111,7 @@ public class RoomService implements ModelService<Room> {
     }
 
     @Override
-    public List<Room> getAllEntries() throws SQLException {
-        return getEntries(new ArrayList<>());
-    }
-
-    @Override
-    public void save(final Collection<Room> models) throws SQLException {
-
-        final var databaseConnection = DatabaseConnectionManager.getDatabaseConnection();
-
-        databaseConnection.setAutoCommit(false);
-
-        insertRooms(models.stream().filter(x -> x.getId() == null).toList());
-        updateRooms(models.stream().filter(x -> x.getId() != null).toList());
-
-        databaseConnection.commit();
-
-        databaseConnection.setAutoCommit(true);
-    }
-
-    @Override
     public void delete(final Collection<Room> models) throws SQLException {
-        final var rooms = models
-                .stream()
-                .filter(x -> x.getId() != null)
-                .toList();
-
-        if (rooms.isEmpty())
-            throw new IllegalArgumentException("Only rooms with IDs can be deleted!");
-
-        final var databaseConnection = DatabaseConnectionManager.getDatabaseConnection();
-
-        databaseConnection.setAutoCommit(false);
-
-        final var preparedDeleteStatement = databaseConnection.createPreparedStatement("DELETE FROM ROOM WHERE ID = ?");
-
-        try (preparedDeleteStatement) {
-            for (final var room : rooms) {
-                preparedDeleteStatement.setInt(1, room.getId());
-
-                preparedDeleteStatement.executeUpdate();
-            }
-
-            databaseConnection.commit();
-        }
-
-        databaseConnection.setAutoCommit(true);
+        delete(models, "ROOM");
     }
 }
