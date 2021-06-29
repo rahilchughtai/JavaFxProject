@@ -5,6 +5,7 @@ import javafx.fxml.FXML;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.TextField;
 import java.net.URL;
+import java.sql.SQLOutput;
 import java.util.ResourceBundle;
 
 
@@ -41,10 +42,21 @@ public class StudentsController extends SceneController {
     @FXML
     private void addNewStudent(ActionEvent actionEvent) {
         // Refactor this and implement addNewStudentMethod, use Student Model
-        System.out.println(firstNameField.getText());
-        System.out.println(lastNameField.getText());
-        System.out.println(javaSkillsComboBox.getValue());
-
+        String Output= String.format(
+                """
+                Student Info:
+                Mtr-Nr: %s
+                Name: %s %s
+                Java-Skills %s
+                Firma: %s
+                """,
+                matrikelNumberField.getText(),
+                firstNameField.getText(),
+                lastNameField.getText(),
+                javaSkillsComboBox.getValue(),
+                companyField.getText()
+        );
+        System.out.println(Output);
         System.out.println("Adding a new student!!");
 
     }

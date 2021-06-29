@@ -55,6 +55,7 @@
                     </FXCollections>
                 </items>
             </ComboBox>
+            <TextField fx:id="companyField" prefWidth="140" promptText="Firma" />
             <Button onAction="#addNewStudent" styleClass="btn-add" text="Hinzufügen">
                 <graphic>
                     <FontIcon styleClass="icon" iconLiteral="fa-plus-circle" />
