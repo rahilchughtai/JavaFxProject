@@ -68,11 +68,8 @@ public class SceneController implements Initializable {
      */
     public void  FxmlPathToScene(String fxml, Window clickedWindow) throws IOException {
         Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getClassLoader().getResource(fxml)));
-
         Scene scene = new Scene(root);
         Stage appStage = (Stage) clickedWindow;
-        Image icon = new Image(getClass().getResourceAsStream("/images/dhbwicon.png"));
-        appStage.getIcons().add(icon);
         appStage.setScene(scene);
         appStage.show();
     }
