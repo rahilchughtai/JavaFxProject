@@ -76,18 +76,31 @@ public class CoursesController extends SceneController {
 
     private void initializeColumns() {
         col_room.setCellFactory(ComboBoxTableCell.forTableColumn(new DefaultStringConverter(), data_roomNames));
-        col_room.setOnEditCommit(x -> {
+        col_room.setOnEditCommit(cellEditEvent -> {
 
-            final var rowValue = x.getRowValue();
+            final var rowValue = cellEditEvent.getRowValue();
 
             final var indexOfRowValue = data_courses.indexOf(rowValue);
 
             if (indexOfRowValue == -1)
                 return;
 
-            final var updatedCourse = new Course(rowValue.getId(), rowValue.getName(), rowValue.getRoomId(), rowValue.getRoomName());
+            final var selectedRoom = possibleRooms.stream().filter(x -> x.getName().equals(cellEditEvent.getNewValue())).findFirst().get();
 
-            System.out.println(updatedCourse);
+            final var updatedCourse = new Course(rowValue.getId(), rowValue.getName(), selectedRoom.getId(), selectedRoom.getName());
+
+            data_courses.set(indexOfRowValue, updatedCourse);
+        });
+
+        col_courseName.setOnEditCommit(cellEditEvent -> {
+            final var rowValue = cellEditEvent.getRowValue();
+
+            final var indexOfRowValue = data_courses.indexOf(rowValue);
+
+            if (indexOfRowValue == -1)
+                return;
+
+            final var updatedCourse = new Course(rowValue.getId(), cellEditEvent.getNewValue(), rowValue.getId(), rowValue.getName());
 
             data_courses.set(indexOfRowValue, updatedCourse);
         });
@@ -123,17 +136,15 @@ public class CoursesController extends SceneController {
 
     @FXML
     private void saveCourses(ActionEvent actionEvent){
-//        try {
+        try {
             final var changedCourses = data_courses
                     .stream()
                     .map(x -> new database.models.Course(x.getId(), x.getName(), new Room(x.getRoomId(), x.getRoomName())))
                     .toList();
 
-            System.out.println(changedCourses);
-
-//            courseService.save(changedCourses);
-//        } catch (SQLException sqlException) {
-//            sqlException.printStackTrace();
-//        }
+            courseService.save(changedCourses);
+        } catch (SQLException sqlException) {
+            sqlException.printStackTrace();
+        }
     }
 }
