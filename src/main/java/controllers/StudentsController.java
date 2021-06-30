@@ -1,6 +1,5 @@
 package controllers;
 
-import database.models.Corporation;
 import database.models.JavaSkillRating;
 import database.models.Student;
 import database.services.ModelService;
