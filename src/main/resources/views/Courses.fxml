@@ -13,10 +13,10 @@
 <?import javafx.scene.control.cell.PropertyValueFactory?>
 
 <?import javafx.scene.control.cell.TextFieldTableCell?>
+<?import javafx.scene.control.cell.ComboBoxTableCell?>
 
 <?import javafx.scene.control.ComboBox?>
-<?import javafx.collections.FXCollections?>
-<?import java.lang.String?>
+
 <GridPane alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="720.0" prefWidth="1080.0" styleClass="bg-dark" stylesheets="@../css/style.css" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.CoursesController">
 
    <HBox alignment="BASELINE_CENTER" GridPane.columnIndex="1" GridPane.rowIndex="0" GridPane.columnSpan="6">
@@ -41,7 +41,7 @@
                   <PropertyValueFactory property="roomName" />
                </cellValueFactory>
                <cellFactory>
-                  <TextFieldTableCell fx:factory="forTableColumn" />
+<!--                  <ComboBoxTableCell fx:factory="forTableColumn" />-->
                </cellFactory>
             </TableColumn>
          </columns>
