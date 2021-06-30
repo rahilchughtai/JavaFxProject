@@ -4,12 +4,12 @@ import database.services.CourseService;
 import database.services.ModelService;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
-import javafx.scene.control.cell.TextFieldTableCell;
 import models.Course;
 
 import java.net.URL;
@@ -36,6 +36,11 @@ public class CoursesController extends SceneController {
 
     @FXML
     private TableColumn<Course, Button> col_update;
+
+    @FXML
+    private void addNewCourse(ActionEvent actionEvent) {
+
+    }
 
     public static ObservableList<Course> data_table;
 
