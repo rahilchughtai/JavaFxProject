@@ -6,37 +6,38 @@ import database.models.Model;
 public class Student implements Model {
 
     private String matri_Id;
-    private String FirstName;
-    private String LastName;
-    private String Corporation;
-    private JavaSkillRating JavaSkill;
+    private String firstName;
+    private String lastName;
+    private String corporation;
+    private JavaSkillRating javaSkill;
+    private String courseName;
 
     public Student(){
-
     }
 
-    public Student(final String matri_id, final String firstName,final String lastName, final String corporation, final JavaSkillRating javaSkill) {
-        matri_Id = matri_id;
-        FirstName = firstName;
-        LastName = lastName;
-        Corporation = corporation;
-        JavaSkill = javaSkill;
+    public Student(String matri_Id, String firstName, String lastName, String corporation, JavaSkillRating javaSkill, String courseName) {
+        this.matri_Id = matri_Id;
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.corporation = corporation;
+        this.javaSkill = javaSkill;
+        this.courseName = courseName;
     }
 
     public JavaSkillRating getJavaSkill() {
-        return JavaSkill;
+        return javaSkill;
     }
 
     public String getCorporation() {
-        return Corporation;
+        return corporation;
     }
 
     public String getFirstName() {
-        return FirstName;
+        return firstName;
     }
 
     public String getLastName() {
-        return LastName;
+        return lastName;
     }
 
     @Override
