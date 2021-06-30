@@ -17,7 +17,7 @@ JavaFx+Datenbank Projekt für Vorlesung Java von Sebastian Damm
 ## To-Do:
 ### Backend:
 #### Java:
-- [ ] Objekte für Räume/Studenten/Kurse/Enrollment
+- [x] Objekte für Räume/Studenten/Kurse/Enrollment
 #### SQL/Java:
 - [ ] Räume hinzufügen/löschen
 - [ ] Studenten hinzufügen/löschen
