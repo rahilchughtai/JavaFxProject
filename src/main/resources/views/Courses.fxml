@@ -25,7 +25,7 @@
 
       <TableView editable="true" fx:id="table_info" maxHeight="700" maxWidth="800" prefHeight="463.0" prefWidth="1077.0" GridPane.columnIndex="1" GridPane.rowIndex="1" GridPane.rowSpan="6" GridPane.columnSpan="6">
          <columns>
-            <TableColumn fx:id="col_courseName" prefWidth="200.0" text="Kurs-Name">
+            <TableColumn fx:id="col_courseName" prefWidth="400.0" text="Kurs-Name">
                <cellValueFactory>
                   <PropertyValueFactory property="name" />
                </cellValueFactory>
