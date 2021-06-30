@@ -1,8 +1,9 @@
 package controllers;
 
+import database.models.Corporation;
 import database.models.JavaSkillRating;
 import database.models.Student;
-import database.services.DummyDataService;
+import database.services.ModelService;
 import database.services.StudentService;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -10,10 +11,15 @@ import javafx.scene.control.ComboBox;
 import javafx.scene.control.TextField;
 
 import java.net.URL;
+import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.Collection;
 import java.util.ResourceBundle;
 
 
 public class StudentsController extends SceneController {
+
+    private ModelService<Student> studentService;
 
     @FXML
     private TextField matrikelNumberField;
@@ -35,48 +41,42 @@ public class StudentsController extends SceneController {
     private String firstName;
     private String lastName;
     private String companyName;
-*/
+    */
+
+
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
+        studentService = StudentService.getService();
         textFieldToNumberField(matrikelNumberField);
+
     }
 
+
     private JavaSkillRating javaSkillStringToEnum(String skillRating) {
-        if (skillRating==null)
+        if (skillRating == null)
             return JavaSkillRating.NONE;
         return JavaSkillRating.valueOf(skillRating.toUpperCase());
     }
 
     @FXML
-    private void addNewStudent(ActionEvent actionEvent) {
-        System.out.println(javaSkillStringToEnum(javaSkillsComboBox.getValue()));
-        // Refactor this and implement addNewStudentMethod, use Student Model
-        String Output = String.format(
-                """
-                        Student Info:
-                        Mtr-Nr: %s
-                        Name: %s %s
-                        Java-Skills: %s
-                        Firma: %s
-                        """,
-                matrikelNumberField.getText(),
-                firstNameField.getText(),
-                lastNameField.getText(),
-                javaSkillsComboBox.getValue(),
-                companyField.getText()
-        );
-        System.out.println(Output);
-        System.out.println("Adding a new student!!");
-        Student student = new Student() {
+    private void addNewStudent(ActionEvent actionEvent) throws SQLException {
+        Collection<Student> students;
+        studentService.save(new ArrayList<Student>() {
             {
-                setMatriculationNumber("9000");
-                setFirstName("Peter");
-                setLastName("Parker");
-                setJavaSkillRating(JavaSkillRating.ADVANCED);
+                add(
+                        new Student() {
+                            {
+                                //setCorporation(new Corporation(null,"Test"));
+                                setMatriculationNumber(matrikelNumberField.getText());
+                                setFirstName(firstNameField.getText());
+                                setLastName(lastNameField.getText());
+                                setJavaSkillRating(javaSkillStringToEnum(javaSkillsComboBox.getValue()));
+                            }
+                        });
 
             }
-        };
 
+        });
     }
 }

@@ -39,7 +39,7 @@ class EmbeddedH2DatabaseConnection implements DatabaseConnection {
         final var createStudentTableSql = """
                 CREATE TABLE IF NOT EXISTS STUDENT
                 (ID INT AUTO_INCREMENT,
-                MATRICULATION_NUMBER VARCHAR(255) UNIQUE,
+                MATRICULATION_NUMBER VARCHAR(255) UNIQUE NOT NULL,
                 FIRST_NAME VARCHAR(255) NOT NULL,
                 LAST_NAME VARCHAR(255) NOT NULL,
                 JAVA_SKILL_RATING INT NOT NULL,
