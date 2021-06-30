@@ -39,6 +39,9 @@ public class CoursesController extends SceneController {
     private TableColumn<Course, String> col_room;
 
     @FXML
+    private TableColumn<Course, String> col_courseName;
+
+    @FXML
     private void addNewCourse(ActionEvent actionEvent) {
         final var selectedRoomName = combo_room.getSelectionModel().getSelectedItem();
         final var newCourseName = text_newCourseName.getText();
@@ -47,7 +50,7 @@ public class CoursesController extends SceneController {
             return;
 
         final var selectedRoom = possibleRooms.stream().filter(x -> x.getName().equals(selectedRoomName)).findFirst().get();
-        final var newCourse = new Course(newCourseName, selectedRoom.getId(), selectedRoom.getName());
+        final var newCourse = new Course(null, newCourseName, selectedRoom.getId(), selectedRoom.getName());
 
         try {
             courseService.save(new ArrayList<>() {{ add(new database.models.Course(null, newCourse.getName(), new Room(newCourse.getRoomId(), newCourse.getRoomName()))); }});
@@ -58,8 +61,8 @@ public class CoursesController extends SceneController {
         }
     }
 
-    public static ObservableList<Course> data_courses;
-    public static ObservableList<String> data_roomNames;
+    private ObservableList<Course> data_courses;
+    private ObservableList<String> data_roomNames;
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
@@ -73,6 +76,21 @@ public class CoursesController extends SceneController {
 
     private void initializeColumns() {
         col_room.setCellFactory(ComboBoxTableCell.forTableColumn(new DefaultStringConverter(), data_roomNames));
+        col_room.setOnEditCommit(x -> {
+
+            final var rowValue = x.getRowValue();
+
+            final var indexOfRowValue = data_courses.indexOf(rowValue);
+
+            if (indexOfRowValue == -1)
+                return;
+
+            final var updatedCourse = new Course(rowValue.getId(), rowValue.getName(), rowValue.getRoomId(), rowValue.getRoomName());
+
+            System.out.println(updatedCourse);
+
+            data_courses.set(indexOfRowValue, updatedCourse);
+        });
     }
 
 
@@ -93,7 +111,7 @@ public class CoursesController extends SceneController {
             data_courses.addAll(courseService
                     .get()
                     .stream()
-                    .map(x -> new Course(x.getName(), x.getRoom().getId(), x.getRoom().getName()))
+                    .map(x -> new Course(x.getId(), x.getName(), x.getRoom().getId(), x.getRoom().getName()))
                     .toList());
 
         } catch (SQLException sqlException) {
@@ -105,6 +123,17 @@ public class CoursesController extends SceneController {
 
     @FXML
     private void saveCourses(ActionEvent actionEvent){
+//        try {
+            final var changedCourses = data_courses
+                    .stream()
+                    .map(x -> new database.models.Course(x.getId(), x.getName(), new Room(x.getRoomId(), x.getRoomName())))
+                    .toList();
 
+            System.out.println(changedCourses);
+
+//            courseService.save(changedCourses);
+//        } catch (SQLException sqlException) {
+//            sqlException.printStackTrace();
+//        }
     }
 }

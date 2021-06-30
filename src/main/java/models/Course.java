@@ -12,7 +12,8 @@ public class Course {
     public Course() {
     }
 
-    public Course(final String name, final Integer roomId, final String roomName) {
+    public Course(final Integer id, final String name, final Integer roomId, final String roomName) {
+        this.setId(id);
         this.setName(name);
         this.setRoomId(roomId);
         this.setRoomName(roomName);
