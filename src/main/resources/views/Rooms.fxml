@@ -3,10 +3,11 @@
 <?import javafx.geometry.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
-<?import javafx.scene.image.*?>
-<?import org.kordamp.ikonli.javafx.FontIcon?>
+<?import org.kordamp.ikonli.javafx.*?>
 
-<GridPane alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="720.0" prefWidth="1080.0" styleClass="bg-dark" stylesheets="@../css/style.css" xmlns="http://javafx.com/javafx/11.0.2" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.RoomsController">
+<?import javafx.scene.control.cell.PropertyValueFactory?>
+<?import javafx.scene.control.cell.TextFieldTableCell?>
+<GridPane alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="720.0" prefWidth="1080.0" styleClass="bg-dark" stylesheets="@../css/style.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.RoomsController">
 
     <HBox alignment="BASELINE_CENTER" GridPane.columnIndex="1" GridPane.columnSpan="6" GridPane.rowIndex="0">
             <Label styleClass="h1" text="Room Manager" textFill="WHITE" />
@@ -15,10 +16,16 @@
     <fx:include source="Sidebar.fxml" GridPane.columnIndex="0" GridPane.rowIndex="1" GridPane.rowSpan="6">
     </fx:include>
 
-    <TableView fx:id="tableUser" fixedCellSize="4.0" maxHeight="700" maxWidth="300" prefHeight="463.0" prefWidth="1077.0" GridPane.columnIndex="1" GridPane.columnSpan="6" GridPane.rowIndex="1" GridPane.rowSpan="6">
+    <TableView editable="true" fx:id="table_rooms" fixedCellSize="4.0" maxHeight="700" maxWidth="300.0" prefHeight="463.0" prefWidth="300.0" GridPane.columnIndex="1" GridPane.columnSpan="6" GridPane.rowIndex="1" GridPane.rowSpan="6">
         <columns>
-            <TableColumn fx:id="columnId" minWidth="-1.0" prefWidth="140.0" text="Raum-Nummer" />
-            <TableColumn fx:id="columnVorname" minWidth="-1.0" prefWidth="140.0" text="Raum-Name" />
+            <TableColumn fx:id="columnRoomName"  text="Raum-Name" maxWidth="300.0" prefWidth="300.0">
+            <cellValueFactory>
+                <PropertyValueFactory property="name" />
+            </cellValueFactory>
+            <cellFactory>
+                <TextFieldTableCell fx:factory="forTableColumn" />
+            </cellFactory>
+            </TableColumn>
         </columns>
         <GridPane.margin>
             <Insets left="10.0" />
@@ -28,11 +35,30 @@
         <TextField id="roomField" fx:id="roomField" prefWidth="90" promptText="Raumname" />
         <Button onAction="#addNewRoom" styleClass="btn-add" text="Hinzufügen">
             <graphic>
-                <FontIcon styleClass="icon" iconLiteral="fa-plus-circle" />
+                <FontIcon iconLiteral="fa-plus-circle" styleClass="icon" />
             </graphic>
         </Button>
         <GridPane.margin>
             <Insets bottom="20.0" top="10.0" />
         </GridPane.margin>
     </HBox>
+   <columnConstraints>
+      <ColumnConstraints />
+      <ColumnConstraints />
+      <ColumnConstraints />
+      <ColumnConstraints />
+      <ColumnConstraints />
+      <ColumnConstraints />
+      <ColumnConstraints />
+   </columnConstraints>
+   <rowConstraints>
+      <RowConstraints />
+      <RowConstraints />
+      <RowConstraints />
+      <RowConstraints />
+      <RowConstraints />
+      <RowConstraints />
+      <RowConstraints />
+      <RowConstraints />
+   </rowConstraints>
 </GridPane>

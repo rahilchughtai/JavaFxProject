@@ -21,36 +21,29 @@ public class StudentsController extends SceneController {
     private ModelService<Student> studentService;
 
     @FXML
-    private TextField matrikelNumberField;
+    private TextField text_newMatrikelNumber;
 
     @FXML
-    private TextField firstNameField;
+    private TextField text_newFirstName;
 
     @FXML
-    private TextField lastNameField;
+    private TextField text_newLastName;
 
     @FXML
-    private TextField companyField;
+    private TextField text_newCorporation;
 
     @FXML
-    private ComboBox<String> javaSkillsComboBox;
-
-    /*
-    private int matrikelNumber;
-    private String firstName;
-    private String lastName;
-    private String companyName;
-    */
-
+    private ComboBox<String> combo_javaSkills;
 
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
+
         studentService = StudentService.getService();
-        textFieldToNumberField(matrikelNumberField);
+
+        textFieldToNumberField(text_newMatrikelNumber);
 
     }
-
 
     private JavaSkillRating javaSkillStringToEnum(String skillRating) {
         if (skillRating == null)
@@ -66,11 +59,12 @@ public class StudentsController extends SceneController {
                 add(
                         new Student() {
                             {
-                                //setCorporation(new Corporation(null,"Test"));
-                                setMatriculationNumber(matrikelNumberField.getText());
-                                setFirstName(firstNameField.getText());
-                                setLastName(lastNameField.getText());
-                                setJavaSkillRating(javaSkillStringToEnum(javaSkillsComboBox.getValue()));
+
+                                setMatriculationNumber(text_newMatrikelNumber.getText());
+                                setFirstName(text_newFirstName.getText());
+                                setLastName(text_newLastName.getText());
+                                setJavaSkillRating(javaSkillStringToEnum(combo_javaSkills.getValue()));
+                                setCorporationName(text_newCorporation.getText());
                             }
                         });
 
