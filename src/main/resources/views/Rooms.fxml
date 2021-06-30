@@ -3,6 +3,8 @@
 <?import javafx.geometry.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
+<?import javafx.scene.image.*?>
+<?import org.kordamp.ikonli.javafx.FontIcon?>
 
 <GridPane alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="720.0" prefWidth="1080.0" styleClass="bg-dark" stylesheets="@../css/style.css" xmlns="http://javafx.com/javafx/11.0.2" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.RoomsController">
 
@@ -22,4 +24,15 @@
             <Insets left="10.0" />
         </GridPane.margin>
     </TableView>
+    <HBox alignment="center" spacing="10" GridPane.columnIndex="1" GridPane.columnSpan="6" GridPane.rowIndex="7">
+        <TextField id="roomField" fx:id="roomField" prefWidth="90" promptText="Raumname" />
+        <Button onAction="#addNewRoom" styleClass="btn-add" text="Hinzufügen">
+            <graphic>
+                <FontIcon styleClass="icon" iconLiteral="fa-plus-circle" />
+            </graphic>
+        </Button>
+        <GridPane.margin>
+            <Insets bottom="20.0" top="10.0" />
+        </GridPane.margin>
+    </HBox>
 </GridPane>

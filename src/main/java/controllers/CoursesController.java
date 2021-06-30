@@ -1,5 +1,9 @@
 package controllers;
 
+import database.models.JavaSkillRating;
+import database.models.Student;
+import database.services.DummyDataService;
+import database.services.StudentService;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -8,7 +12,16 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.control.cell.TextFieldTableCell;
+import javafx.scene.control.ComboBox;
+import javafx.scene.control.TextField;
+import javafx.event.ActionEvent;
 import model.Course;
+
+
+import java.net.URL;
+import java.util.ResourceBundle;
+
+
 
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -33,6 +46,10 @@ public class CoursesController extends SceneController {
     @FXML
     private TableColumn<Course, Button> col_update;
 
+    @FXML
+    private void addNewCourse(ActionEvent actionEvent) {
+
+    }
     public static ObservableList<Course> data_table;
 
     @Override
@@ -76,4 +93,6 @@ public class CoursesController extends SceneController {
         }
         table_info.setItems(data_table);
     }
+
+
 }
