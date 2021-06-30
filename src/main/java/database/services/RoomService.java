@@ -58,9 +58,9 @@ public class RoomService extends BaseService<Room> {
     }
 
     @Override
-    public List<Room> getEntries(List<Integer> ids) throws SQLException {
+    public List<Room> getEntries(List<Integer> modelIds) throws SQLException {
         final var preparedGetEntriesStatement = getEntriesFromDatabase(
-                ids,
+                modelIds,
                 """
                 SELECT ID, NAME
                 FROM ROOM
@@ -91,7 +91,7 @@ public class RoomService extends BaseService<Room> {
     }
 
     @Override
-    public void delete(final Collection<Room> models) throws SQLException {
-        delete(models, "ROOM", "ID");
+    public void delete(final Collection<Integer> modelIds) throws SQLException {
+        delete(modelIds, "ROOM", "ID");
     }
 }

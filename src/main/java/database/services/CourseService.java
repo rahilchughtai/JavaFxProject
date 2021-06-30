@@ -9,7 +9,6 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
-// TODO Student Verknüpfung einbauen!
 public class CourseService extends BaseService<Course> {
 
     private static CourseService service = null;
@@ -61,10 +60,10 @@ public class CourseService extends BaseService<Course> {
     }
 
     @Override
-    public List<Course> getEntries(final List<Integer> ids) throws SQLException {
+    public List<Course> getEntries(final List<Integer> modelIds) throws SQLException {
 
         final var preparedGetEntriesStatement = getEntriesFromDatabase(
-                ids,
+                modelIds,
                 """
                 SELECT COURSE.ID, COURSE.NAME, ROOM.ID AS ROOM_ID, ROOM.NAME AS ROOM_NAME
                 FROM COURSE
@@ -100,7 +99,7 @@ public class CourseService extends BaseService<Course> {
     }
 
     @Override
-    public void delete(final Collection<Course> models) throws SQLException {
-        delete(models, "COURSE", "ID");
+    public void delete(final Collection<Integer> modelIds) throws SQLException {
+        delete(modelIds, "COURSE", "ID");
     }
 }

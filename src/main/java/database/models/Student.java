@@ -9,6 +9,7 @@ public class Student implements Model {
     private String lastName;
     private JavaSkillRating javaSkillRating;
     private Corporation corporation;
+    private Course course;
 
     public Integer getId() {
         return id;
@@ -58,6 +59,14 @@ public class Student implements Model {
         this.corporation = corporation;
     }
 
+    public Course getCourse() {
+        return course;
+    }
+
+    public void setCourse(final Course course) {
+        this.course = course;
+    }
+
     @Override
     public String toString() {
         return "Student{" +
@@ -67,6 +76,7 @@ public class Student implements Model {
                 ", lastName='" + lastName + '\'' +
                 ", javaSkillRating=" + javaSkillRating +
                 ", corporation=" + corporation +
+                ", course=" + course +
                 '}';
     }
 
@@ -75,11 +85,11 @@ public class Student implements Model {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Student student = (Student) o;
-        return Objects.equals(id, student.id) && Objects.equals(matriculationNumber, student.matriculationNumber) && Objects.equals(firstName, student.firstName) && Objects.equals(lastName, student.lastName) && javaSkillRating == student.javaSkillRating && Objects.equals(corporation, student.corporation);
+        return Objects.equals(id, student.id) && Objects.equals(matriculationNumber, student.matriculationNumber) && Objects.equals(firstName, student.firstName) && Objects.equals(lastName, student.lastName) && javaSkillRating == student.javaSkillRating && Objects.equals(corporation, student.corporation) && Objects.equals(course, student.course);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, matriculationNumber, firstName, lastName, javaSkillRating, corporation);
+        return Objects.hash(id, matriculationNumber, firstName, lastName, javaSkillRating, corporation, course);
     }
 }

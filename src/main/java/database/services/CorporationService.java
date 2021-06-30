@@ -59,9 +59,9 @@ public class CorporationService extends BaseService<Corporation> {
     }
 
     @Override
-    public List<Corporation> getEntries(final List<Integer> ids) throws SQLException {
+    public List<Corporation> getEntries(final List<Integer> modelIds) throws SQLException {
         final var preparedGetEntriesStatement = getEntriesFromDatabase(
-                ids,
+                modelIds,
                 """
                 SELECT ID, NAME
                 FROM CORPORATION
@@ -92,7 +92,7 @@ public class CorporationService extends BaseService<Corporation> {
     }
 
     @Override
-    public void delete(final Collection<Corporation> models) throws SQLException {
-        delete(models, "CORPORATION", "ID");
+    public void delete(final Collection<Integer> modelIds) throws SQLException {
+        delete(modelIds, "CORPORATION", "ID");
     }
 }

@@ -23,14 +23,14 @@ public abstract class BaseService<ModelType extends Model> implements ModelServi
         }
     }
 
-    protected void delete(final Collection<ModelType> models, String tableName, String idColumnName) throws SQLException {
-        final var rooms = models
+    protected void delete(final Collection<Integer> modelIds, String tableName, String idColumnName) throws SQLException {
+        final var existingIds = modelIds
                 .stream()
-                .filter(x -> x.getId() != null)
+                .filter(x -> x != null)
                 .toList();
 
-        if (rooms.isEmpty())
-            throw new IllegalArgumentException("Only rooms with IDs can be deleted!");
+        if (existingIds.size() != modelIds.size())
+            throw new IllegalArgumentException("Some models have missing IDs!");
 
         final var databaseConnection = DatabaseConnectionManager.getDatabaseConnection();
 
@@ -39,8 +39,8 @@ public abstract class BaseService<ModelType extends Model> implements ModelServi
         final var preparedDeleteStatement = databaseConnection.createPreparedStatement("DELETE FROM " + tableName + " WHERE " + idColumnName + " = ?");
 
         try (preparedDeleteStatement) {
-            for (final var room : rooms) {
-                preparedDeleteStatement.setInt(1, room.getId());
+            for (final var id : existingIds) {
+                preparedDeleteStatement.setInt(1, id);
 
                 preparedDeleteStatement.executeUpdate();
             }
