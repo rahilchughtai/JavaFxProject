@@ -33,7 +33,6 @@ public class StudentsController extends SceneController {
     public TableView<Student> table_Students;
     public ComboBox<String> combo_course;
 
-
     @FXML
     private TextField text_newMatrikelNumber;
     @FXML
@@ -99,6 +98,7 @@ public class StudentsController extends SceneController {
                 add(
                         new database.models.Student() {
                             {
+                                setCourse(new Course(null,combo_course.getValue(),null));
                                 setMatriculationNumber(text_newMatrikelNumber.getText());
                                 setFirstName(text_newFirstName.getText());
                                 setLastName(text_newLastName.getText());
