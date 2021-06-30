@@ -23,6 +23,7 @@ public class StudentsController extends SceneController {
 
     public static ObservableList<Student> data_table;
     public TableView<Student> table_Students;
+
     private ModelService<database.models.Student> studentService;
     @FXML
     private TextField text_newMatrikelNumber;
@@ -49,6 +50,7 @@ public class StudentsController extends SceneController {
         return JavaSkillRating.valueOf(skillRating.toUpperCase());
     }
 
+    Student stud = new Student();
     private void loadData() {
         data_table = FXCollections.observableArrayList();
         try {
@@ -59,7 +61,8 @@ public class StudentsController extends SceneController {
                                     s.getFirstName(),
                                     s.getLastName(),
                                     s.getCorporationName(),
-                                    s.getJavaSkillRating()
+                                    s.getJavaSkillRating(),
+                                    s.getCourse().getName()
                             )
                     ).toList()
             );
@@ -67,6 +70,7 @@ public class StudentsController extends SceneController {
         } catch (SQLException sqlException) {
             sqlException.printStackTrace();
         }
+        System.out.println(data_table.toString());
 
         table_Students.setItems(data_table);
     }
