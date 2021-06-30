@@ -24,6 +24,14 @@ public class Student implements Model {
         this.courseName = courseName;
     }
 
+    public String getMatri_Id() {
+        return matri_Id;
+    }
+
+    public String getCourseName() {
+        return courseName;
+    }
+
     public JavaSkillRating getJavaSkill() {
         return javaSkill;
     }
