@@ -2,16 +2,18 @@
 
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
-<?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.control.Label?>
 
 <?import javafx.scene.control.Button?>
-<?import javafx.scene.layout.VBox?>
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.TextField?>
 <?import org.kordamp.ikonli.javafx.FontIcon?>
+<?import javafx.scene.control.cell.PropertyValueFactory?>
+
+<?import javafx.scene.control.cell.TextFieldTableCell?>
+
 <GridPane alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="720.0" prefWidth="1080.0" styleClass="bg-dark" stylesheets="@../css/style.css" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.CoursesController">
 
    <HBox alignment="BASELINE_CENTER" GridPane.columnIndex="1" GridPane.rowIndex="0" GridPane.columnSpan="6">
@@ -21,25 +23,24 @@
    <fx:include source="Sidebar.fxml" GridPane.rowIndex="1" GridPane.columnIndex="0" GridPane.rowSpan="6">
       </fx:include>
 
-      <TableView fx:id="table_info" maxHeight="700" maxWidth="800" prefHeight="463.0" prefWidth="1077.0" GridPane.columnIndex="1" GridPane.rowIndex="1" GridPane.rowSpan="6" GridPane.columnSpan="6">
+      <TableView editable="true" fx:id="table_info" maxHeight="700" maxWidth="800" prefHeight="463.0" prefWidth="1077.0" GridPane.columnIndex="1" GridPane.rowIndex="1" GridPane.rowSpan="6" GridPane.columnSpan="6">
          <columns>
-            <TableColumn fx:id="col_cid" prefWidth="200.0" text="Kurs-ID">
-               <cellFactory>
-
-               </cellFactory>
-               <cellValueFactory>
-
-               </cellValueFactory>
-            </TableColumn>
             <TableColumn fx:id="col_courseName" prefWidth="200.0" text="Kurs-Name">
                <cellValueFactory>
+                  <PropertyValueFactory property="name" />
                </cellValueFactory>
+               <cellFactory>
+                  <TextFieldTableCell fx:factory="forTableColumn" />
+               </cellFactory>
             </TableColumn>
-            <TableColumn fx:id="col_room" prefWidth="200.0" text="Raum-Nummer">
+            <TableColumn fx:id="col_room" prefWidth="400.0" text="Raum-Name">
                <cellValueFactory>
+                  <PropertyValueFactory property="roomName" />
                </cellValueFactory>
+               <cellFactory>
+                  <TextFieldTableCell fx:factory="forTableColumn" />
+               </cellFactory>
             </TableColumn>
-            <TableColumn fx:id="col_update" prefWidth="200.0" text="Update" />
          </columns>
          <items>
          </items>
@@ -47,16 +48,16 @@
             <Insets left="10.0"/>
          </GridPane.margin>
       </TableView>
-   <HBox alignment="center" spacing="10" GridPane.columnIndex="1" GridPane.rowIndex="7" GridPane.columnSpan="6">
-      <TextField id="placeholder1" fx:id="placeholder1" prefWidth="140" promptText="Platzhalter" />
-      <TextField id="placeholder2" fx:id="placeholder2" prefWidth="140" promptText="Platzhalter" />
-      <Button onAction="#addNewCourse" styleClass="btn-add" text="Hinzufügen">
-         <graphic>
-            <FontIcon styleClass="icon" iconLiteral="fa-plus-circle" />
-         </graphic>
-      </Button>
-      <GridPane.margin>
-         <Insets bottom="20.0" top="10.0" />
-      </GridPane.margin>
-   </HBox>
+      <HBox alignment="center" spacing="10" GridPane.columnIndex="1" GridPane.rowIndex="7" GridPane.columnSpan="6">
+         <TextField id="text_newCourseName" fx:id="text_newCourseName" prefWidth="140" promptText="Kurs-Name" />
+         <TextField id="text_newRoomName" fx:id="text_newRoomName" prefWidth="140" promptText="Raum-Name" />
+         <Button onAction="#addNewCourse" styleClass="btn-add" text="Hinzufügen">
+            <graphic>
+               <FontIcon styleClass="icon" iconLiteral="fa-plus-circle" />
+            </graphic>
+         </Button>
+         <GridPane.margin>
+            <Insets bottom="20.0" top="10.0" />
+         </GridPane.margin>
+      </HBox>
 </GridPane>

@@ -96,7 +96,7 @@ public class Student implements Model {
                 ", firstName='" + firstName + '\'' +
                 ", lastName='" + lastName + '\'' +
                 ", javaSkillRating=" + javaSkillRating +
-                ", corporationName=" + corporationName +
+                ", corporationName='" + corporationName + '\'' +
                 ", course=" + course +
                 '}';
     }

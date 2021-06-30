@@ -41,6 +41,15 @@ public class Course {
     }
 
     @Override
+    public String toString() {
+        return "Course{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", roomName='" + roomName + '\'' +
+                '}';
+    }
+
+    @Override
     public boolean equals(final Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;

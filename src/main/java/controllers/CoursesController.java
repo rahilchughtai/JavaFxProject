@@ -9,7 +9,7 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
-import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.control.TextField;
 import models.Course;
 
 import java.net.URL;
@@ -23,59 +23,27 @@ public class CoursesController extends SceneController {
     @FXML
     private TableView<Course> table_info;
 
-    public static TableView<Course> table_info_2;
+    @FXML
+    private TextField text_newCourseName;
 
     @FXML
-    private TableColumn<Course, String> col_cid;
-
-    @FXML
-    private TableColumn<Course, String> col_courseName;
-
-    @FXML
-    private TableColumn<Course, String> col_room;
-
-    @FXML
-    private TableColumn<Course, Button> col_update;
+    private TextField text_newRoomName;
 
     @FXML
     private void addNewCourse(ActionEvent actionEvent) {
+        final var newCourse = new Course(text_newCourseName.getText(), text_newRoomName.getText());
 
+        System.out.println(newCourse);
     }
 
     public static ObservableList<Course> data_table;
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        table_info_2 = table_info;
 
         courseService = CourseService.getService();
 
-        initCols();
         loadData();
-    }
-
-    private void initCols() {
-        col_courseName.setCellValueFactory(new PropertyValueFactory<>("name"));
-        col_room.setCellValueFactory(new PropertyValueFactory<>("roomName"));
-        editableCols();
-    }
-
-    private void editableCols() {
-//        col_cid.setCellFactory(TextFieldTableCell.forTableColumn());
-//        col_cid.setOnEditCommit(e->{
-//                    e.getTableView().getItems().get(e.getTablePosition().getRow()).setCid(e.getNewValue());
-//        });
-//        col_courseName.setCellFactory(TextFieldTableCell.forTableColumn());
-//
-//        col_courseName.setOnEditCommit(e->{
-//            e.getTableView().getItems().get(e.getTablePosition().getRow()).setCourse(e.getNewValue());
-//        });
-//        col_room.setCellFactory(TextFieldTableCell.forTableColumn());
-//
-//        col_room.setOnEditCommit(e->{
-//            e.getTableView().getItems().get(e.getTablePosition().getRow()).setRoom(e.getNewValue());
-//        });
-//        table_info.setEditable(true);
     }
 
     private void loadData() {
