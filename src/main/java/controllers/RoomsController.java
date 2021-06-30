@@ -59,4 +59,9 @@ public class RoomsController extends SceneController {
         }
         table_rooms.setItems(data_table);
     }
+
+    @FXML
+    private void saveRooms(ActionEvent actionEvent){
+
+    }
 }

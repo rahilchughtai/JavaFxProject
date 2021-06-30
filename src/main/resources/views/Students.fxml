@@ -15,10 +15,10 @@
     </HBox>
 
 
-    <fx:include source="Sidebar.fxml" GridPane.columnIndex="0" GridPane.rowIndex="1" GridPane.rowSpan="6">
+    <fx:include source="Sidebar.fxml" GridPane.columnIndex="0" GridPane.rowIndex="1" GridPane.rowSpan="5">
     </fx:include>
 
-    <TableView fx:id="table_Students" fixedCellSize="4.0" maxHeight="700" maxWidth="800" prefHeight="463.0" prefWidth="1077.0" GridPane.columnIndex="1" GridPane.columnSpan="6" GridPane.rowIndex="1" GridPane.rowSpan="6">
+    <TableView fx:id="table_Students"  maxHeight="700" maxWidth="800" prefHeight="463.0" prefWidth="1077.0" GridPane.columnIndex="1" GridPane.columnSpan="6" GridPane.rowIndex="1" GridPane.rowSpan="6">
         <columns>
             <TableColumn fx:id="col_mid" minWidth="-1.0" prefWidth="133.0" text="Matrikel-Nr"
             />
@@ -38,6 +38,14 @@
             <Insets left="10.0" />
         </GridPane.margin>
     </TableView>
+
+    <VBox GridPane.columnIndex="0" GridPane.rowIndex="6" alignment="CENTER_LEFT">
+        <Button onAction="#saveStudents" style="-fx-font-size: 24.0; -fx-max-width: 200.0 " styleClass="btn-add" text="Speichern">
+            <graphic>
+                <FontIcon iconLiteral="fa-save" styleClass="icon" />
+            </graphic>
+        </Button>
+    </VBox>
 
     <HBox alignment="center" spacing="10" GridPane.columnIndex="1" GridPane.columnSpan="6" GridPane.rowIndex="7">
         <TextField id="matrikelNumberField" fx:id="text_newMatrikelNumber" prefWidth="90" promptText="Matrikel-Nr." />

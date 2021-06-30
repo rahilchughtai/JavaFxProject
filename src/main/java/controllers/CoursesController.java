@@ -91,4 +91,9 @@ public class CoursesController extends SceneController {
 
         table_info.setItems(data_courses);
     }
+
+    @FXML
+    private void saveCourses(ActionEvent actionEvent){
+
+    }
 }
