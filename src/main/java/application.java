@@ -1,5 +1,4 @@
 import database.connection.DatabaseConnectionManager;
-import database.services.DummyDataService;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -20,8 +19,6 @@ public class application extends Application {
     @Override
     public void start(Stage stage) throws IOException, ClassNotFoundException, IllegalStateException, SQLException {
         initializeDatabaseConnectionManager();
-
-        DummyDataService.getService().createDefaultDummyDataOnClearedDatabase();
 
         initializeUI(stage);
     }

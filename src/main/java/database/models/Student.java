@@ -3,6 +3,7 @@ package database.models;
 import java.util.Objects;
 
 public class Student implements Model {
+
     private Integer id;
     private String matriculationNumber;
     private String firstName;
@@ -10,6 +11,26 @@ public class Student implements Model {
     private JavaSkillRating javaSkillRating;
     private Corporation corporation;
     private Course course;
+
+    public Student() {
+    }
+
+    public Student(
+            final Integer id,
+            final String matriculationNumber,
+            final String firstName,
+            final String lastName,
+            final JavaSkillRating javaSkillRating,
+            final Corporation corporation,
+            final Course course) {
+        this.id = id;
+        this.matriculationNumber = matriculationNumber;
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.javaSkillRating = javaSkillRating;
+        this.corporation = corporation;
+        this.course = course;
+    }
 
     public Integer getId() {
         return id;

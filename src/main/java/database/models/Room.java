@@ -3,8 +3,17 @@ package database.models;
 import java.util.Objects;
 
 public class Room implements Model {
+
     private Integer id;
     private String name;
+
+    public Room() {
+    }
+
+    public Room(final Integer id, final String name) {
+        this.id = id;
+        this.name = name;
+    }
 
     public Integer getId() {
         return id;

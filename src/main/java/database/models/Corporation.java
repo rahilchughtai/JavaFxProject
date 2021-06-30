@@ -1,10 +1,20 @@
 package database.models;
 
+import java.util.Collection;
 import java.util.Objects;
 
 public class Corporation implements Model {
+
     private Integer id;
     private String name;
+
+    public Corporation() {
+    }
+
+    public Corporation(final Integer id, final String name) {
+        this.id = id;
+        this.name = name;
+    }
 
     @Override
     public Integer getId() {

@@ -3,9 +3,19 @@ package database.models;
 import java.util.Objects;
 
 public class Course implements Model {
+
     private Integer id;
     private String name;
     private Room room;
+
+    public Course() {
+    }
+
+    public Course(final Integer id, final String name, final Room room) {
+        this.id = id;
+        this.name = name;
+        this.room = room;
+    }
 
     public Integer getId() {
         return id;

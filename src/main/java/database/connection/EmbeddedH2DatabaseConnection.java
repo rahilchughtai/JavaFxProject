@@ -16,14 +16,14 @@ class EmbeddedH2DatabaseConnection implements DatabaseConnection {
         final var createRoomTableSql = """
                 CREATE TABLE IF NOT EXISTS ROOM
                 (ID INT AUTO_INCREMENT,
-                NAME VARCHAR(255) NOT NULL,
+                NAME VARCHAR(255) NOT NULL UNIQUE,
                 PRIMARY KEY (ID))
                 """;
 
         final var createCourseTableSql = """
                 CREATE TABLE IF NOT EXISTS COURSE
                 (ID INT AUTO_INCREMENT,
-                NAME VARCHAR(255) NOT NULL,
+                NAME VARCHAR(255) NOT NULL UNIQUE,
                 ROOM_ID INT NOT NULL,
                 FOREIGN KEY (ROOM_ID) REFERENCES ROOM(ID),
                 PRIMARY KEY (ID))
@@ -32,7 +32,7 @@ class EmbeddedH2DatabaseConnection implements DatabaseConnection {
         final var createCorporationTableSql = """
                 CREATE TABLE IF NOT EXISTS CORPORATION
                 (ID INT AUTO_INCREMENT,
-                NAME VARCHAR(255) NOT NULL,
+                NAME VARCHAR(255) NOT NULL UNIQUE,
                 PRIMARY KEY (ID))
                 """;
 
@@ -42,7 +42,7 @@ class EmbeddedH2DatabaseConnection implements DatabaseConnection {
                 MATRICULATION_NUMBER VARCHAR(255) UNIQUE,
                 FIRST_NAME VARCHAR(255) NOT NULL,
                 LAST_NAME VARCHAR(255) NOT NULL,
-                JAVA_SKILL_RATING INT,
+                JAVA_SKILL_RATING INT NOT NULL,
                 CORPORATION_ID INT NOT NULL,
                 COURSE_ID INT NOT NULL,
                 FOREIGN KEY (CORPORATION_ID) REFERENCES CORPORATION(ID),
