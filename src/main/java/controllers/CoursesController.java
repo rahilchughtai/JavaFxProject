@@ -63,10 +63,8 @@ public class CoursesController extends SceneController {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-
         courseService = CourseService.getService();
         roomService = RoomService.getService();
-
         loadData();
         initializeColumns();
     }
@@ -82,12 +80,10 @@ public class CoursesController extends SceneController {
 
         try {
             possibleRooms = roomService.get();
-
             data_roomNames.addAll(possibleRooms
                 .stream()
-                .map(x -> x.getName())
+                .map(Room::getName)
                 .toList());
-
             combo_room.setItems(data_roomNames);
 
             data_courses.addAll(courseService
@@ -95,11 +91,9 @@ public class CoursesController extends SceneController {
                     .stream()
                     .map(x -> new Course(x.getName(), x.getRoom().getId(), x.getRoom().getName()))
                     .toList());
-
         } catch (SQLException sqlException) {
             sqlException.printStackTrace();
         }
-
         table_info.setItems(data_courses);
     }
 

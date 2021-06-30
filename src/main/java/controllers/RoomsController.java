@@ -22,8 +22,7 @@ public class RoomsController extends SceneController {
     private ModelService<database.models.Room> roomService;
     private RoomService roomDbService;
 
-    //@FXML
-    //private TableColumn<Room, String> columnRoomName;
+
     @FXML
     private TableView<Room> table_rooms;
 

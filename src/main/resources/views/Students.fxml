@@ -43,7 +43,6 @@
                 <cellValueFactory>
                     <PropertyValueFactory property="firstName"/>
                 </cellValueFactory>
-
             </TableColumn>
 
             <TableColumn fx:id="col_lastName" minWidth="-1.0" prefWidth="133.0" text="Nachname">
@@ -102,6 +101,13 @@
                 </FXCollections>
             </items>
         </ComboBox>
+        <ComboBox fx:id="combo_course" promptText="Kurs">
+            <items>
+                <FXCollections fx:factory="observableArrayList">
+                </FXCollections>
+            </items>
+        </ComboBox>
+
         <TextField fx:id="text_newCorporation" prefWidth="140" promptText="Firma"/>
         <Button onAction="#addNewStudent" styleClass="btn-add" text="Hinzufügen">
             <graphic>
