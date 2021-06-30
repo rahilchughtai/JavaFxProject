@@ -9,6 +9,8 @@ import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
+import javafx.scene.control.cell.ComboBoxTableCell;
+import javafx.util.converter.DefaultStringConverter;
 import models.Course;
 
 import java.net.URL;
@@ -32,6 +34,9 @@ public class CoursesController extends SceneController {
 
     @FXML
     private TextField text_newCourseName;
+
+    @FXML
+    private TableColumn<Course, String> col_room;
 
     @FXML
     private void addNewCourse(ActionEvent actionEvent) {
@@ -63,7 +68,13 @@ public class CoursesController extends SceneController {
         roomService = RoomService.getService();
 
         loadData();
+        initializeColumns();
     }
+
+    private void initializeColumns() {
+        col_room.setCellFactory(ComboBoxTableCell.forTableColumn(new DefaultStringConverter(), data_roomNames));
+    }
+
 
     private void loadData() {
         data_courses = FXCollections.observableArrayList();
