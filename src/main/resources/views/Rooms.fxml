@@ -16,7 +16,7 @@
     <fx:include source="Sidebar.fxml" GridPane.columnIndex="0" GridPane.rowIndex="1" GridPane.rowSpan="6">
     </fx:include>
 
-    <TableView editable="true" fx:id="table_rooms" fixedCellSize="4.0" maxHeight="700" maxWidth="300.0" prefHeight="463.0" prefWidth="300.0" GridPane.columnIndex="1" GridPane.columnSpan="6" GridPane.rowIndex="1" GridPane.rowSpan="6">
+    <TableView editable="true" fx:id="table_rooms" maxHeight="700" maxWidth="300.0" prefHeight="463.0" prefWidth="300.0" GridPane.columnIndex="1" GridPane.columnSpan="6" GridPane.rowIndex="1" GridPane.rowSpan="6">
         <columns>
             <TableColumn fx:id="columnRoomName"  text="Raum-Name" maxWidth="300.0" prefWidth="300.0">
             <cellValueFactory>
@@ -42,23 +42,4 @@
             <Insets bottom="20.0" top="10.0" />
         </GridPane.margin>
     </HBox>
-   <columnConstraints>
-      <ColumnConstraints />
-      <ColumnConstraints />
-      <ColumnConstraints />
-      <ColumnConstraints />
-      <ColumnConstraints />
-      <ColumnConstraints />
-      <ColumnConstraints />
-   </columnConstraints>
-   <rowConstraints>
-      <RowConstraints />
-      <RowConstraints />
-      <RowConstraints />
-      <RowConstraints />
-      <RowConstraints />
-      <RowConstraints />
-      <RowConstraints />
-      <RowConstraints />
-   </rowConstraints>
 </GridPane>
