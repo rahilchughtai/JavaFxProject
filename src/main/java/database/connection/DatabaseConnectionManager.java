@@ -1,5 +1,7 @@
 package database.connection;
 
+import database.services.DummyDataService;
+
 import java.sql.SQLException;
 
 public class DatabaseConnectionManager {
@@ -20,6 +22,8 @@ public class DatabaseConnectionManager {
         databaseConnection = new EmbeddedH2DatabaseConnection();
         databaseConnection.initializeConnection();
         databaseConnection.createDefaultDatabaseSchemeIfNotExists();
+
+        DummyDataService.getService().createDefaultDummyDataIfDatabaseIsEmpty();
     }
 
 }

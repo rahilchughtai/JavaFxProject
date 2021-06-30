@@ -9,13 +9,11 @@ import java.util.Collection;
 public class DummyDataService {
     private static DummyDataService service;
 
-    private ModelService<Corporation> corporationService;
     private ModelService<Course> courseService;
     private ModelService<Room> roomService;
     private ModelService<Student> studentService;
 
     private DummyDataService(){
-        corporationService = CorporationService.getService();
         courseService = CourseService.getService();
         roomService = RoomService.getService();
         studentService = StudentService.getService();
@@ -63,28 +61,14 @@ public class DummyDataService {
         return dummyRooms;
     }
 
-    private Collection<Corporation> createDummyCorporations() throws SQLException {
-        final var dummyCorporations = new ArrayList<Corporation>() {{
-           add(new Corporation() {{ setName("VESCON GmbH"); }});
-            add(new Corporation() {{ setName("Atos SE"); }});
-            add(new Corporation() {{ setName("SAP SE"); }});
-            add(new Corporation() {{ setName("MLP Finanzberatung SE"); }});
-            add(new Corporation() {{ setName("Stark Industries"); }});
-        }};
-
-        corporationService.save(dummyCorporations);
-
-        return dummyCorporations;
-    }
-
-    private void createDummyStudents(final Collection<Course> dummyCourses, final Collection<Corporation> dummyCorporations) throws SQLException {
+    private void createDummyStudents(final Collection<Course> dummyCourses) throws SQLException {
         final var dummyStudents = new ArrayList<Student>() {{
            add(new Student() {{
                setMatriculationNumber("007");
                setFirstName("David");
                setLastName("Hedtke");
-               setJavaSkillRating(JavaSkillRating.SEBASTIAN);
-               setCorporation(dummyCorporations.stream().filter(x -> x.getName().equals("VESCON GmbH")).findFirst().get());
+               setJavaSkillRating(JavaSkillRating.ADVANCED);
+               setCorporationName("VESCON GmbH");
                setCourse(dummyCourses.stream().filter(x -> x.getName().equals("TINF20 AI2")).findFirst().get());
            }});
 
@@ -93,25 +77,25 @@ public class DummyDataService {
                 setFirstName("Jan");
                 setLastName("Baumann");
                 setJavaSkillRating(JavaSkillRating.INTERMEDIATE);
-                setCorporation(dummyCorporations.stream().filter(x -> x.getName().equals("Atos SE")).findFirst().get());
+                setCorporationName("Atos SE");
                 setCourse(dummyCourses.stream().filter(x -> x.getName().equals("TINF20 AI2")).findFirst().get());
             }});
 
             add(new Student() {{
-                setMatriculationNumber(null);
+                setMatriculationNumber("10");
                 setFirstName("Sebastian");
                 setLastName("Damm");
                 setJavaSkillRating(JavaSkillRating.SEBASTIAN);
-                setCorporation(dummyCorporations.stream().filter(x -> x.getName().startsWith("MLP")).findFirst().get());
+                setCorporationName("MLP Finanzberatung SE");
                 setCourse(dummyCourses.stream().filter(x -> x.getName().equals("TINF19 AI2")).findFirst().get());
             }});
 
             add(new Student() {{
-                setMatriculationNumber(null);
+                setMatriculationNumber("-10");
                 setFirstName("Eckard");
                 setLastName("Kruse");
                 setJavaSkillRating(JavaSkillRating.NONE);
-                setCorporation(dummyCorporations.stream().filter(x -> x.getName().equals("Atos SE")).findFirst().get());
+                setCorporationName("Atos SE");
                 setCourse(dummyCourses.stream().filter(x -> x.getName().equals("TINF20 AI1")).findFirst().get());
             }});
 
@@ -120,7 +104,7 @@ public class DummyDataService {
                 setFirstName("Peter");
                 setLastName("Parker");
                 setJavaSkillRating(JavaSkillRating.ADVANCED);
-                setCorporation(dummyCorporations.stream().filter(x -> x.getName().equals("SAP SE")).findFirst().get());
+                setCorporationName("SAP SE");
                 setCourse(dummyCourses.stream().filter(x -> x.getName().equals("TINF19 AI2")).findFirst().get());
             }});
 
@@ -129,7 +113,7 @@ public class DummyDataService {
                 setFirstName("Tony");
                 setLastName("Stark");
                 setJavaSkillRating(JavaSkillRating.SEBASTIAN);
-                setCorporation(dummyCorporations.stream().filter(x -> x.getName().equals("Stark Industries")).findFirst().get());
+                setCorporationName("Stark Industries");
                 setCourse(dummyCourses.stream().filter(x -> x.getName().equals("TINF20 AI2")).findFirst().get());
             }});
 
@@ -138,7 +122,7 @@ public class DummyDataService {
                 setFirstName("Mary-Jane");
                 setLastName("Watson");
                 setJavaSkillRating(JavaSkillRating.BEGINNER);
-                setCorporation(dummyCorporations.stream().filter(x -> x.getName().equals("SAP SE")).findFirst().get());
+                setCorporationName("SAP SE");
                 setCourse(dummyCourses.stream().filter(x -> x.getName().equals("TINF20 AI1")).findFirst().get());
             }});
         }};
@@ -146,17 +130,18 @@ public class DummyDataService {
         studentService.save(dummyStudents);
     }
 
-    public void createDefaultDummyDataOnClearedDatabase() throws SQLException {
+    public void createDefaultDummyDataIfDatabaseIsEmpty() throws SQLException {
 
-        studentService.clear();
-        corporationService.clear();
-        courseService.clear();
-        roomService.clear();
+        if (!roomService.isEmpty() || !courseService.isEmpty() || !studentService.isEmpty())
+            return;
+
+        System.out.println("Creating dummy data...");
 
         final var dummyRooms = createDummyRooms();
         final var dummyCourses = createDummyCourses(dummyRooms);
-        final var dummyCorporations = createDummyCorporations();
 
-        createDummyStudents(dummyCourses, dummyCorporations);
+        createDummyStudents(dummyCourses);
+
+        System.out.println("Dummy data created.");
     }
 }

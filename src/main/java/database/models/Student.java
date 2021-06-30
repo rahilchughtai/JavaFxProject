@@ -9,7 +9,7 @@ public class Student implements Model {
     private String firstName;
     private String lastName;
     private JavaSkillRating javaSkillRating;
-    private Corporation corporation;
+    private String corporationName;
     private Course course;
 
     public Student() {
@@ -21,14 +21,14 @@ public class Student implements Model {
             final String firstName,
             final String lastName,
             final JavaSkillRating javaSkillRating,
-            final Corporation corporation,
+            final String corporationName,
             final Course course) {
         this.id = id;
         this.matriculationNumber = matriculationNumber;
         this.firstName = firstName;
         this.lastName = lastName;
         this.javaSkillRating = javaSkillRating;
-        this.corporation = corporation;
+        this.corporationName = corporationName;
         this.course = course;
     }
 
@@ -72,12 +72,12 @@ public class Student implements Model {
         this.javaSkillRating = javaSkillRating;
     }
 
-    public Corporation getCorporation() {
-        return corporation;
+    public String getCorporationName() {
+        return corporationName;
     }
 
-    public void setCorporation(Corporation corporation) {
-        this.corporation = corporation;
+    public void setCorporationName(final String corporationName) {
+        this.corporationName = corporationName;
     }
 
     public Course getCourse() {
@@ -96,7 +96,7 @@ public class Student implements Model {
                 ", firstName='" + firstName + '\'' +
                 ", lastName='" + lastName + '\'' +
                 ", javaSkillRating=" + javaSkillRating +
-                ", corporation=" + corporation +
+                ", corporationName=" + corporationName +
                 ", course=" + course +
                 '}';
     }
@@ -106,11 +106,11 @@ public class Student implements Model {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Student student = (Student) o;
-        return Objects.equals(id, student.id) && Objects.equals(matriculationNumber, student.matriculationNumber) && Objects.equals(firstName, student.firstName) && Objects.equals(lastName, student.lastName) && javaSkillRating == student.javaSkillRating && Objects.equals(corporation, student.corporation) && Objects.equals(course, student.course);
+        return Objects.equals(id, student.id) && Objects.equals(matriculationNumber, student.matriculationNumber) && Objects.equals(firstName, student.firstName) && Objects.equals(lastName, student.lastName) && javaSkillRating == student.javaSkillRating && Objects.equals(corporationName, student.corporationName) && Objects.equals(course, student.course);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, matriculationNumber, firstName, lastName, javaSkillRating, corporation, course);
+        return Objects.hash(id, matriculationNumber, firstName, lastName, javaSkillRating, corporationName, course);
     }
 }

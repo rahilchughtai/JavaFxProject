@@ -29,13 +29,6 @@ class EmbeddedH2DatabaseConnection implements DatabaseConnection {
                 PRIMARY KEY (ID))
                 """;
 
-        final var createCorporationTableSql = """
-                CREATE TABLE IF NOT EXISTS CORPORATION
-                (ID INT AUTO_INCREMENT,
-                NAME VARCHAR(255) NOT NULL UNIQUE,
-                PRIMARY KEY (ID))
-                """;
-
         final var createStudentTableSql = """
                 CREATE TABLE IF NOT EXISTS STUDENT
                 (ID INT AUTO_INCREMENT,
@@ -43,9 +36,8 @@ class EmbeddedH2DatabaseConnection implements DatabaseConnection {
                 FIRST_NAME VARCHAR(255) NOT NULL,
                 LAST_NAME VARCHAR(255) NOT NULL,
                 JAVA_SKILL_RATING INT NOT NULL,
-                CORPORATION_ID INT NOT NULL,
+                CORPORATION_NAME VARCHAR(255) NOT NULL,
                 COURSE_ID INT NOT NULL,
-                FOREIGN KEY (CORPORATION_ID) REFERENCES CORPORATION(ID),
                 FOREIGN KEY (COURSE_ID) REFERENCES COURSE(ID),
                 PRIMARY KEY (ID))
                 """;
@@ -54,7 +46,6 @@ class EmbeddedH2DatabaseConnection implements DatabaseConnection {
 
         statement.executeUpdate(createRoomTableSql);
         statement.executeUpdate(createCourseTableSql);
-        statement.executeUpdate(createCorporationTableSql);
         statement.executeUpdate(createStudentTableSql);
     }
 

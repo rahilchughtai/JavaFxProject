@@ -101,6 +101,11 @@ public class CourseService extends BaseModelService<Course> {
     }
 
     @Override
+    public boolean isEmpty() throws SQLException {
+        return isEmpty(TABLE_NAME);
+    }
+
+    @Override
     public void delete(final Collection<Integer> modelIds) throws SQLException {
         delete(modelIds, TABLE_NAME, "ID");
     }

@@ -34,7 +34,7 @@ public class StudentService extends BaseModelService<Student> {
                             	FIRST_NAME,
                             	LAST_NAME,
                             	JAVA_SKILL_RATING,
-                            	CORPORATION_ID,
+                            	CORPORATION_NAME,
                             	COURSE_ID
                             	)
                             	VALUES (
@@ -55,7 +55,7 @@ public class StudentService extends BaseModelService<Student> {
                 preparedInsertStatement.setString(2, model.getFirstName());
                 preparedInsertStatement.setString(3, model.getLastName());
                 preparedInsertStatement.setInt(4, model.getJavaSkillRating().getValue());
-                preparedInsertStatement.setInt(5, model.getCorporation().getId());
+                preparedInsertStatement.setString(5, model.getCorporationName());
                 preparedInsertStatement.setInt(6, model.getCourse().getId());
 
                 preparedInsertStatement.executeUpdate();
@@ -76,7 +76,7 @@ public class StudentService extends BaseModelService<Student> {
                             	FIRST_NAME = ?,
                             	LAST_NAME = ?,
                             	JAVA_SKILL_RATING = ?,
-                            	CORPORATION_ID = ?,
+                            	CORPORATION_NAME = ?,
                             	COURSE_ID = ?
                             WHERE
                             	ID = ?
@@ -89,7 +89,7 @@ public class StudentService extends BaseModelService<Student> {
                 preparedUpdateStatement.setString(2, model.getFirstName());
                 preparedUpdateStatement.setString(3, model.getLastName());
                 preparedUpdateStatement.setInt(4, model.getJavaSkillRating().getValue());
-                preparedUpdateStatement.setInt(5, model.getCorporation().getId());
+                preparedUpdateStatement.setString(5, model.getCorporationName());
                 preparedUpdateStatement.setInt(6, model.getCourse().getId());
                 preparedUpdateStatement.setInt(7, model.getId());
 
@@ -109,14 +109,12 @@ public class StudentService extends BaseModelService<Student> {
                  	STUDENT.FIRST_NAME,
                  	STUDENT.LAST_NAME,
                  	STUDENT.JAVA_SKILL_RATING,
-                 	CORPORATION.ID AS CORPORATION_ID,
-                 	CORPORATION.NAME AS CORPORATION_NAME,
+                 	CORPORATION_NAME,
                  	COURSE.ID AS COURSE_ID,
                  	COURSE.NAME AS COURSE_NAME,
                  	ROOM.ID  AS COURSE_ROOM_ID,
                  	ROOM.NAME AS COURSE_ROOM_NAME
                  FROM STUDENT
-                 JOIN CORPORATION ON STUDENT.CORPORATION_ID = CORPORATION.ID
                  JOIN COURSE ON STUDENT.COURSE_ID = COURSE.ID
                  JOIN ROOM ON COURSE.ROOM_ID = ROOM.ID
                  """,
@@ -138,10 +136,7 @@ public class StudentService extends BaseModelService<Student> {
                         setLastName(entriesFromDatabase.getString("LAST_NAME"));
                         setJavaSkillRating(JavaSkillRating.valueOf(entriesFromDatabase.getInt("JAVA_SKILL_RATING")));
                         setMatriculationNumber(entriesFromDatabase.getString("MATRICULATION_NUMBER"));
-                        setCorporation(new Corporation() {{
-                            setId(entriesFromDatabase.getInt("CORPORATION_ID"));
-                            setName(entriesFromDatabase.getString("CORPORATION_NAME"));
-                        }});
+                        setCorporationName(entriesFromDatabase.getString("CORPORATION_NAME"));
                         setCourse(new Course() {{
                             setId(entriesFromDatabase.getInt("COURSE_ID"));
                             setName(entriesFromDatabase.getString("COURSE_NAME"));
@@ -158,6 +153,11 @@ public class StudentService extends BaseModelService<Student> {
         }
 
         return models;
+    }
+
+    @Override
+    public boolean isEmpty() throws SQLException {
+        return isEmpty(TABLE_NAME);
     }
 
     @Override

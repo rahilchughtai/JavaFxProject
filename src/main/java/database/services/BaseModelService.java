@@ -89,6 +89,24 @@ public abstract class BaseModelService<ModelType extends Model> implements Model
                 .executeUpdate();
     }
 
+    protected boolean isEmpty(String tableName) throws SQLException {
+        final var databaseConnection = DatabaseConnectionManager.getDatabaseConnection();
+
+        final var preparedCountOfEntriesStatement = databaseConnection.createPreparedStatement("SELECT COUNT(*) AS COUNT_OF_ENTRIES FROM " + tableName);
+
+        int countOfEntries;
+
+        try (preparedCountOfEntriesStatement) {
+            final var countOfEntriesFromDatabase = preparedCountOfEntriesStatement.executeQuery();
+
+            countOfEntriesFromDatabase.next();
+
+            countOfEntries = countOfEntriesFromDatabase.getInt("COUNT_OF_ENTRIES");
+        }
+
+        return countOfEntries == 0;
+    }
+
     @Override
     public List<ModelType> get() throws SQLException {
         return get(new ArrayList<>());
