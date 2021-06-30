@@ -55,7 +55,6 @@
          <TextField id="text_newCourseName" fx:id="text_newCourseName" prefWidth="140" promptText="Kurs-Name" />
          <ComboBox fx:id="combo_room" promptText="Raum">
          </ComboBox>
-         <TextField id="text_newRoomName" fx:id="text_newRoomName" prefWidth="140" promptText="Raum-Name" />
          <Button onAction="#addNewCourse" styleClass="btn-add" text="Hinzufügen">
             <graphic>
                <FontIcon styleClass="icon" iconLiteral="fa-plus-circle" />
