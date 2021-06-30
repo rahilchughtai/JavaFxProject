@@ -1,12 +1,13 @@
 package controllers;
 
-import database.services.StudentService;
+import database.models.JavaSkillRating;
+import database.models.Student;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.TextField;
+
 import java.net.URL;
-import java.sql.SQLOutput;
 import java.util.ResourceBundle;
 
 
@@ -39,19 +40,25 @@ public class StudentsController extends SceneController {
         textFieldToNumberField(matrikelNumberField);
     }
 
+    private JavaSkillRating javaSkillStringToEnum(String skillRating) {
+        if (skillRating==null)
+            return JavaSkillRating.NONE;
+        return JavaSkillRating.valueOf(skillRating.toUpperCase());
+    }
 
     @FXML
     private void addNewStudent(ActionEvent actionEvent) {
 
+        System.out.println(javaSkillStringToEnum(javaSkillsComboBox.getValue()));
         // Refactor this and implement addNewStudentMethod, use Student Model
-        String Output= String.format(
+        String Output = String.format(
                 """
-                Student Info:
-                Mtr-Nr: %s
-                Name: %s %s
-                Java-Skills: %s
-                Firma: %s
-                """,
+                        Student Info:
+                        Mtr-Nr: %s
+                        Name: %s %s
+                        Java-Skills: %s
+                        Firma: %s
+                        """,
                 matrikelNumberField.getText(),
                 firstNameField.getText(),
                 lastNameField.getText(),
@@ -60,6 +67,15 @@ public class StudentsController extends SceneController {
         );
         System.out.println(Output);
         System.out.println("Adding a new student!!");
+        Student student = new Student() {
+            {
+                setMatriculationNumber("9000");
+                setFirstName("Peter");
+                setLastName("Parker");
+                setJavaSkillRating(JavaSkillRating.ADVANCED);
+
+            }
+        };
 
     }
 }
