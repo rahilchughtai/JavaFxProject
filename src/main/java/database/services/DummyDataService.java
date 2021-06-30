@@ -21,6 +21,13 @@ public class DummyDataService {
         studentService = StudentService.getService();
     }
 
+    public static DummyDataService getService() {
+        if (service == null)
+            service = new DummyDataService();
+
+        return service;
+    }
+
     private Collection<Course> createDummyCourses(final Collection<Room> dummyRooms) throws SQLException {
         final var dummyCourses = new ArrayList<Course>() {{
             add(new Course() {{
@@ -137,13 +144,6 @@ public class DummyDataService {
         }};
 
         studentService.save(dummyStudents);
-    }
-
-    public static DummyDataService getService() {
-        if (service == null)
-            service = new DummyDataService();
-
-        return service;
     }
 
     public void createDefaultDummyDataOnClearedDatabase() throws SQLException {
