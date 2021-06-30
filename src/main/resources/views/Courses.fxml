@@ -50,7 +50,7 @@
    <HBox alignment="center" spacing="10" GridPane.columnIndex="1" GridPane.rowIndex="7" GridPane.columnSpan="6">
       <TextField id="placeholder1" fx:id="placeholder1" prefWidth="140" promptText="Platzhalter" />
       <TextField id="placeholder2" fx:id="placeholder2" prefWidth="140" promptText="Platzhalter" />
-      <Button styleClass="btn-add" text="Hinzufügen">
+      <Button onAction="#addNewCourse" styleClass="btn-add" text="Hinzufügen">
          <graphic>
             <FontIcon styleClass="icon" iconLiteral="fa-plus-circle" />
          </graphic>
