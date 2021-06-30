@@ -63,4 +63,8 @@
 
 }
 
+#sideBarBtn{
+    -fx-max-width: 200;
+}
+
 
