@@ -8,7 +8,9 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
-public class StudentService extends BaseService<Student> {
+public class StudentService extends BaseModelService<Student> {
+    public static final String TABLE_NAME = "STUDENT";
+
     private static StudentService service;
 
     private StudentService(){
@@ -97,7 +99,7 @@ public class StudentService extends BaseService<Student> {
     }
 
     @Override
-    public List<Student> getEntries(final List<Integer> modelIds) throws SQLException {
+    public List<Student> get(final List<Integer> modelIds) throws SQLException {
         final var preparedGetEntriesStatement = getEntriesFromDatabase(
                 modelIds,
                 """
@@ -119,7 +121,7 @@ public class StudentService extends BaseService<Student> {
                  JOIN ROOM ON COURSE.ROOM_ID = ROOM.ID
                  """,
                 "LAST_NAME",
-                "STUDENT"
+                TABLE_NAME
         );
 
         final var models = new ArrayList<Student>();
@@ -160,6 +162,11 @@ public class StudentService extends BaseService<Student> {
 
     @Override
     public void delete(final Collection<Integer> modelIds) throws SQLException {
-        delete(modelIds, "STUDENT", "ID");
+        delete(modelIds, TABLE_NAME, "ID");
+    }
+
+    @Override
+    public void clear() throws SQLException {
+        clear(TABLE_NAME);
     }
 }

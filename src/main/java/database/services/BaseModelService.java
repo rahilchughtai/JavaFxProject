@@ -10,7 +10,7 @@ import java.util.Collection;
 import java.util.List;
 import java.util.stream.Collectors;
 
-public abstract class BaseService<ModelType extends Model> implements ModelService<ModelType> {
+public abstract class BaseModelService<ModelType extends Model> implements ModelService<ModelType> {
 
     protected abstract void insertModels(Collection<ModelType> models) throws SQLException;
     protected abstract void updateModels(Collection<ModelType> models) throws SQLException;
@@ -81,9 +81,17 @@ public abstract class BaseService<ModelType extends Model> implements ModelServi
         return preparedGetEntriesStatement;
     }
 
+    protected void clear(String tableName) throws SQLException {
+        final var databaseConnection = DatabaseConnectionManager.getDatabaseConnection();
+
+        databaseConnection
+                .createPreparedStatement("DELETE FROM " + tableName)
+                .executeUpdate();
+    }
+
     @Override
-    public List<ModelType> getAllEntries() throws SQLException {
-        return getEntries(new ArrayList<>());
+    public List<ModelType> get() throws SQLException {
+        return get(new ArrayList<>());
     }
 
     @Override

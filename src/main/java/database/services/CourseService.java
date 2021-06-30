@@ -9,7 +9,9 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
-public class CourseService extends BaseService<Course> {
+public class CourseService extends BaseModelService<Course> {
+
+    public static final String TABLE_NAME = "COURSE";
 
     private static CourseService service = null;
 
@@ -60,7 +62,7 @@ public class CourseService extends BaseService<Course> {
     }
 
     @Override
-    public List<Course> getEntries(final List<Integer> modelIds) throws SQLException {
+    public List<Course> get(final List<Integer> modelIds) throws SQLException {
 
         final var preparedGetEntriesStatement = getEntriesFromDatabase(
                 modelIds,
@@ -70,7 +72,7 @@ public class CourseService extends BaseService<Course> {
                 JOIN ROOM ON COURSE.ROOM_ID = ROOM.ID
                 """,
                 "NAME",
-                "COURSE"
+                TABLE_NAME
         );
 
         final var models = new ArrayList<Course>();
@@ -100,6 +102,11 @@ public class CourseService extends BaseService<Course> {
 
     @Override
     public void delete(final Collection<Integer> modelIds) throws SQLException {
-        delete(modelIds, "COURSE", "ID");
+        delete(modelIds, TABLE_NAME, "ID");
+    }
+
+    @Override
+    public void clear() throws SQLException {
+        clear(TABLE_NAME);
     }
 }

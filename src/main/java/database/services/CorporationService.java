@@ -2,16 +2,15 @@ package database.services;
 
 import database.connection.DatabaseConnectionManager;
 import database.models.Corporation;
-import database.models.Course;
-import database.models.Room;
 
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
-public class CorporationService extends BaseService<Corporation> {
+public class CorporationService extends BaseModelService<Corporation> {
 
+    public static final String TABLE_NAME = "CORPORATION";
     private static CorporationService service;
 
     private CorporationService(){
@@ -59,7 +58,7 @@ public class CorporationService extends BaseService<Corporation> {
     }
 
     @Override
-    public List<Corporation> getEntries(final List<Integer> modelIds) throws SQLException {
+    public List<Corporation> get(final List<Integer> modelIds) throws SQLException {
         final var preparedGetEntriesStatement = getEntriesFromDatabase(
                 modelIds,
                 """
@@ -67,7 +66,7 @@ public class CorporationService extends BaseService<Corporation> {
                 FROM CORPORATION
                 """,
                 "NAME",
-                "CORPORATION"
+                TABLE_NAME
         );
 
         final var models = new ArrayList<Corporation>();
@@ -93,6 +92,11 @@ public class CorporationService extends BaseService<Corporation> {
 
     @Override
     public void delete(final Collection<Integer> modelIds) throws SQLException {
-        delete(modelIds, "CORPORATION", "ID");
+        delete(modelIds, TABLE_NAME, "ID");
+    }
+
+    @Override
+    public void clear() throws SQLException {
+        clear(TABLE_NAME);
     }
 }
