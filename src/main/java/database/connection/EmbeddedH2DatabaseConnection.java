@@ -44,16 +44,10 @@ class EmbeddedH2DatabaseConnection implements DatabaseConnection {
                 LAST_NAME VARCHAR(255) NOT NULL,
                 JAVA_SKILL_RATING INT,
                 CORPORATION_ID INT NOT NULL,
-                FOREIGN KEY (CORPORATION_ID) REFERENCES CORPORATION(ID),
-                PRIMARY KEY (ID))
-                """;
-
-        final var createStudentCourseTableSql = """
-                CREATE TABLE IF NOT EXISTS STUDENT_COURSE
-                (STUDENT_ID INT NOT NULL,
                 COURSE_ID INT NOT NULL,
-                FOREIGN KEY (STUDENT_ID) REFERENCES STUDENT(ID),
-                FOREIGN KEY (COURSE_ID) REFERENCES COURSE(ID))
+                FOREIGN KEY (CORPORATION_ID) REFERENCES CORPORATION(ID),
+                FOREIGN KEY (COURSE_ID) REFERENCES COURSE(ID),
+                PRIMARY KEY (ID))
                 """;
 
         final var statement = databaseConnection.createStatement();
@@ -62,7 +56,6 @@ class EmbeddedH2DatabaseConnection implements DatabaseConnection {
         statement.executeUpdate(createCourseTableSql);
         statement.executeUpdate(createCorporationTableSql);
         statement.executeUpdate(createStudentTableSql);
-        statement.executeUpdate(createStudentCourseTableSql);
     }
 
     @Override
