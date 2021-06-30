@@ -1,17 +1,25 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import java.lang.*?>
-<?import javafx.collections.*?>
 <?import javafx.geometry.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
 <GridPane alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="720.0" prefWidth="1080.0" styleClass="bg-dark" stylesheets="@../css/style.css" xmlns="http://javafx.com/javafx/11.0.2" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.RoomsController">
 
-    <HBox alignment="BASELINE_CENTER" GridPane.columnIndex="1" GridPane.rowIndex="0" GridPane.columnSpan="6">
+    <HBox alignment="BASELINE_CENTER" GridPane.columnIndex="1" GridPane.columnSpan="6" GridPane.rowIndex="0">
             <Label styleClass="h1" text="Room Manager" textFill="WHITE" />
-        </HBox>
+    </HBox>
 
-    <fx:include source="Sidebar.fxml" GridPane.rowIndex="1" GridPane.columnIndex="0" GridPane.rowSpan="6">
+    <fx:include source="Sidebar.fxml" GridPane.columnIndex="0" GridPane.rowIndex="1" GridPane.rowSpan="6">
     </fx:include>
+
+    <TableView fx:id="tableUser" fixedCellSize="4.0" maxHeight="700" maxWidth="300" prefHeight="463.0" prefWidth="1077.0" GridPane.columnIndex="1" GridPane.columnSpan="6" GridPane.rowIndex="1" GridPane.rowSpan="6">
+        <columns>
+            <TableColumn fx:id="columnId" minWidth="-1.0" prefWidth="140.0" text="Raum-Nummer" />
+            <TableColumn fx:id="columnVorname" minWidth="-1.0" prefWidth="140.0" text="Raum-Name" />
+        </columns>
+        <GridPane.margin>
+            <Insets left="10.0" />
+        </GridPane.margin>
+    </TableView>
 </GridPane>

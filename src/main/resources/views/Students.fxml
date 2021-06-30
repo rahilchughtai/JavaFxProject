@@ -1,60 +1,61 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import java.lang.*?>
+<?import javafx.collections.*?>
 <?import javafx.geometry.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
+<?import org.kordamp.ikonli.javafx.*?>
 
-<?import org.kordamp.ikonli.javafx.FontIcon?>
-<?import javafx.collections.FXCollections?>
-<?import java.lang.String?>
 <GridPane alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="720.0" prefWidth="1080.0" styleClass="bg-dark" stylesheets="@../css/style.css" xmlns="http://javafx.com/javafx/11.0.2" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.StudentsController">
 
 
-        <HBox alignment="BASELINE_CENTER" GridPane.columnIndex="1" GridPane.rowIndex="0" GridPane.columnSpan="6">
-            <Label styleClass="h1" text="Student Manager" textFill="WHITE" />
-        </HBox>
+    <HBox alignment="BASELINE_CENTER" GridPane.columnIndex="1" GridPane.columnSpan="6" GridPane.rowIndex="0">
+        <Label styleClass="h1" text="Student Manager" textFill="WHITE" />
+    </HBox>
 
 
+    <fx:include source="Sidebar.fxml" GridPane.columnIndex="0" GridPane.rowIndex="1" GridPane.rowSpan="6">
+    </fx:include>
 
-   <fx:include source="Sidebar.fxml" GridPane.rowIndex="1" GridPane.columnIndex="0" GridPane.rowSpan="6">
-   </fx:include>
+    <TableView fx:id="tableUser" fixedCellSize="4.0" maxHeight="700" maxWidth="800" prefHeight="463.0" prefWidth="1077.0" GridPane.columnIndex="1" GridPane.columnSpan="6" GridPane.rowIndex="1" GridPane.rowSpan="6">
+        <columns>
+            <TableColumn fx:id="columnId" minWidth="-1.0" prefWidth="133.0" text="Matrikel-Nr" />
+            <TableColumn fx:id="columnCourse" minWidth="-1.0" prefWidth="133.0" text="Kurs" />
+            <TableColumn fx:id="columnVorname" minWidth="-1.0" prefWidth="133.0" text="Vorname" />
+            <TableColumn fx:id="columNachname" minWidth="-1.0" prefWidth="133.0" text="Nachname" />
+            <TableColumn fx:id="columnFirma" minWidth="-1.0" prefWidth="133.0" text="Firma" />
+            <TableColumn fx:id="columnJavaSkills" minWidth="-1.0" prefWidth="133.0" text="Java-Kenntnisse" />
+        </columns>
 
-            <TableView fx:id="tableUser" fixedCellSize="4.0" maxHeight="700" maxWidth="800" prefHeight="463.0" prefWidth="1077.0" GridPane.columnIndex="1" GridPane.rowIndex="1" GridPane.rowSpan="6" GridPane.columnSpan="6">
-                <columns>
-                    <TableColumn fx:id="columnId" minWidth="-1.0" prefWidth="150.0" text="Matrikel-Nr" />
-                    <TableColumn fx:id="columnVorname" minWidth="-1.0" prefWidth="150.0" text="Vorname" />
-                    <TableColumn fx:id="columNachname" minWidth="-1.0" prefWidth="150.0" text="Nachname" />
-                    <TableColumn fx:id="columnFirma" minWidth="-1.0" prefWidth="145.0" text="Firma" />
-                    <TableColumn fx:id="columnJavaSkills" minWidth="-1.0" prefWidth="155.0" text="Java-Kenntnisse" />
-                </columns>
-                <GridPane.margin>
-                    <Insets left="10.0"/>
-                </GridPane.margin>
-            </TableView>
+        <GridPane.margin>
+            <Insets left="10.0" />
+        </GridPane.margin>
+    </TableView>
 
-        <HBox alignment="center" spacing="10" GridPane.columnIndex="1" GridPane.rowIndex="7" GridPane.columnSpan="6">
-            <TextField id="matrikelNumberField" fx:id="matrikelNumberField" prefWidth="90"  promptText="Matrikel-Nr." />
-            <TextField id="firstNameField" fx:id="firstNameField" prefWidth="140" promptText="Vorname" />
-            <TextField id="lastNameField" fx:id="lastNameField" prefWidth="140" promptText="Nachname" />
-            <ComboBox fx:id="javaSkillsComboBox" promptText="Java-Kenntnisse">
-                <items>
-                    <FXCollections fx:factory="observableArrayList">
-                        <String fx:value="None" />
-                        <String fx:value="Beginner" />
-                        <String fx:value="Intermediate" />
-                        <String fx:value="Advanced" />
-                        <String fx:value="Sebastian" />
-                    </FXCollections>
-                </items>
-            </ComboBox>
-            <TextField fx:id="companyField" prefWidth="140" promptText="Firma" />
-            <Button onAction="#addNewStudent" styleClass="btn-add" text="Hinzufügen">
-                <graphic>
-                    <FontIcon styleClass="icon" iconLiteral="fa-plus-circle" />
-                </graphic>
-            </Button>
-         <GridPane.margin>
+    <HBox alignment="center" spacing="10" GridPane.columnIndex="1" GridPane.columnSpan="6" GridPane.rowIndex="7">
+        <TextField id="matrikelNumberField" fx:id="matrikelNumberField" prefWidth="90" promptText="Matrikel-Nr." />
+        <TextField id="firstNameField" fx:id="firstNameField" prefWidth="140" promptText="Vorname" />
+        <TextField id="lastNameField" fx:id="lastNameField" prefWidth="140" promptText="Nachname" />
+        <ComboBox fx:id="javaSkillsComboBox" promptText="Java-Kenntnisse">
+            <items>
+                <FXCollections fx:factory="observableArrayList">
+                    <String fx:value="None" />
+                    <String fx:value="Beginner" />
+                    <String fx:value="Intermediate" />
+                    <String fx:value="Advanced" />
+                    <String fx:value="Sebastian" />
+                </FXCollections>
+            </items>
+        </ComboBox>
+        <TextField fx:id="companyField" prefWidth="140" promptText="Firma" />
+        <Button onAction="#addNewStudent" styleClass="btn-add" text="Hinzufügen">
+            <graphic>
+                <FontIcon iconLiteral="fa-plus-circle" styleClass="icon" />
+            </graphic>
+        </Button>
+        <GridPane.margin>
             <Insets bottom="20.0" top="10.0" />
-         </GridPane.margin>
-        </HBox>
+        </GridPane.margin>
+    </HBox>
 </GridPane>

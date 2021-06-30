@@ -18,13 +18,12 @@
          <Label styleClass="h1" text="Courses Manager" textFill="WHITE" />
       </HBox>
 
-
    <fx:include source="Sidebar.fxml" GridPane.rowIndex="1" GridPane.columnIndex="0" GridPane.rowSpan="6">
       </fx:include>
 
       <TableView fx:id="table_info" maxHeight="700" maxWidth="800" prefHeight="463.0" prefWidth="1077.0" GridPane.columnIndex="1" GridPane.rowIndex="1" GridPane.rowSpan="6" GridPane.columnSpan="6">
          <columns>
-            <TableColumn fx:id="col_cid" prefWidth="100.0" text="Kurs-ID">
+            <TableColumn fx:id="col_cid" prefWidth="200.0" text="Kurs-ID">
                <cellFactory>
 
                </cellFactory>
@@ -36,11 +35,11 @@
                <cellValueFactory>
                </cellValueFactory>
             </TableColumn>
-            <TableColumn fx:id="col_room" prefWidth="300.0" text="Raum-Nummer">
+            <TableColumn fx:id="col_room" prefWidth="200.0" text="Raum-Nummer">
                <cellValueFactory>
                </cellValueFactory>
             </TableColumn>
-            <TableColumn fx:id="col_update" prefWidth="150.0" text="Update" />
+            <TableColumn fx:id="col_update" prefWidth="200.0" text="Update" />
          </columns>
          <items>
          </items>

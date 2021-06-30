@@ -1,5 +1,6 @@
 package controllers;
 
+import database.services.StudentService;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.ComboBox;
@@ -41,6 +42,7 @@ public class StudentsController extends SceneController {
 
     @FXML
     private void addNewStudent(ActionEvent actionEvent) {
+
         // Refactor this and implement addNewStudentMethod, use Student Model
         String Output= String.format(
                 """

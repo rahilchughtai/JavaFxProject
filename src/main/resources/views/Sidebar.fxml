@@ -3,12 +3,11 @@
 <?import javafx.scene.layout.VBox?>
 <?import org.kordamp.ikonli.javafx.FontIcon?>
 
-
 <VBox spacing="30"
       xmlns="http://javafx.com/javafx"
       xmlns:fx="http://javafx.com/fxml"
-      fx:controller="controllers.SidebarController">
-    <Button   id="sideBarBtn" onAction="#btnSwitchToHome"  mnemonicParsing="false" styleClass="btn-primary" text="Home">
+      fx:controller="controllers.SceneController">
+    <Button id="sideBarBtn" onAction="#btnSwitchToHome"  mnemonicParsing="false" styleClass="btn-primary" text="Home">
         <graphic>
             <FontIcon styleClass="icon" iconLiteral="mdi-home" />
         </graphic>
