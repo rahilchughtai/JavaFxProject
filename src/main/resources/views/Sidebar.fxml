@@ -7,22 +7,22 @@
       xmlns="http://javafx.com/javafx"
       xmlns:fx="http://javafx.com/fxml"
       fx:controller="controllers.SceneController">
-    <Button id="sideBarBtn" onAction="#btnSwitchToHome"  mnemonicParsing="false" styleClass="btn-primary" text="Home">
+    <Button id="sideBarBtn" onAction="#btnSwitchSceneClick"  mnemonicParsing="false" styleClass="btn-primary" text="Home">
         <graphic>
             <FontIcon styleClass="icon" iconLiteral="mdi-home" />
         </graphic>
     </Button>
-    <Button fx:id="sideBarBtnRooms" id="sideBarBtn"  onAction="#btnSwitchToRooms"  mnemonicParsing="false" styleClass="btn-primary" text="Rooms">
+    <Button fx:id="sideBarBtnRooms" id="sideBarBtn"  onAction="#btnSwitchSceneClick"  mnemonicParsing="false" styleClass="btn-primary" text="Rooms">
         <graphic>
             <FontIcon styleClass="icon" iconLiteral="mdi-table" />
         </graphic>
     </Button>
-    <Button fx:id="sideBarBtnStudents"  id="sideBarBtn"  onAction="#btnSwitchToStudents" mnemonicParsing="false" styleClass="btn-primary" text="Students">
+    <Button fx:id="sideBarBtnStudents"  id="sideBarBtn"  onAction="#btnSwitchSceneClick" mnemonicParsing="false" styleClass="btn-primary" text="Students">
         <graphic>
             <FontIcon styleClass="icon" iconLiteral="fa-graduation-cap" />
         </graphic>
     </Button>
-    <Button fx:id="sideBarBtnCourses"   id="sideBarBtn"  onAction="#btnSwitchToCourses" mnemonicParsing="false" styleClass="btn-primary" text="Courses">
+    <Button fx:id="sideBarBtnCourses"   id="sideBarBtn"  onAction="#btnSwitchSceneClick" mnemonicParsing="false" styleClass="btn-primary" text="Courses">
         <graphic>
             <FontIcon styleClass="icon" iconLiteral="mdi-table" />
         </graphic>
