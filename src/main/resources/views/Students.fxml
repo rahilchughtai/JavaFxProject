@@ -18,13 +18,13 @@
     <fx:include source="Sidebar.fxml" GridPane.columnIndex="0" GridPane.rowIndex="1" GridPane.rowSpan="6">
     </fx:include>
 
-    <TableView fx:id="tableUser" fixedCellSize="4.0" maxHeight="700" maxWidth="800" prefHeight="463.0" prefWidth="1077.0" GridPane.columnIndex="1" GridPane.columnSpan="6" GridPane.rowIndex="1" GridPane.rowSpan="6">
+    <TableView fx:id="table_Students" fixedCellSize="4.0" maxHeight="700" maxWidth="800" prefHeight="463.0" prefWidth="1077.0" GridPane.columnIndex="1" GridPane.columnSpan="6" GridPane.rowIndex="1" GridPane.rowSpan="6">
         <columns>
             <TableColumn fx:id="col_mid" minWidth="-1.0" prefWidth="133.0" text="Matrikel-Nr"
             />
             <TableColumn fx:id="col_course" minWidth="-1.0" prefWidth="133.0" text="Kurs"
             />
-            <TableColumn fx:id="col_surName" minWidth="-1.0" prefWidth="133.0" text="Vorname"
+            <TableColumn fx:id="col_newName" minWidth="-1.0" prefWidth="133.0" text="Vorname"
             />
             <TableColumn fx:id="col_lastName" minWidth="-1.0" prefWidth="133.0" text="Nachname"
             />
