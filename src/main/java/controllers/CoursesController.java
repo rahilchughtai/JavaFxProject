@@ -1,24 +1,28 @@
 package controllers;
 
+import database.models.Room;
 import database.services.CourseService;
 import database.services.ModelService;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.scene.control.Button;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import models.Course;
 
 import java.net.URL;
 import java.sql.SQLException;
+import java.util.Collection;
 import java.util.ResourceBundle;
 
 public class CoursesController extends SceneController {
 
     private ModelService<database.models.Course> courseService;
+
+    private Collection<Room> possibleRooms;
+
+    @FXML
+    private ComboBox<String> combo_room;
 
     @FXML
     private TableView<Course> table_info;
@@ -31,9 +35,7 @@ public class CoursesController extends SceneController {
 
     @FXML
     private void addNewCourse(ActionEvent actionEvent) {
-        final var newCourse = new Course(text_newCourseName.getText(), text_newRoomName.getText());
-
-        System.out.println(newCourse);
+//        final var newCourse = new Course(text_newCourseName.getText(), text_newRoomName.getText());
     }
 
     public static ObservableList<Course> data_table;
@@ -50,11 +52,10 @@ public class CoursesController extends SceneController {
         data_table = FXCollections.observableArrayList();
 
         try {
-
             data_table.addAll(courseService
                     .get()
                     .stream()
-                    .map(x -> new Course(x.getName(), x.getRoom().getName()))
+                    .map(x -> new Course(x.getName(), x.getRoom().getId(), x.getRoom().getName()))
                     .toList());
 
         } catch (SQLException sqlException) {

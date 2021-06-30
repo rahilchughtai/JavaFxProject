@@ -6,13 +6,15 @@ public class Course {
 
     private Integer id;
     private String name;
+    private Integer roomId;
     private String roomName;
 
     public Course() {
     }
 
-    public Course(final String name, final String roomName) {
+    public Course(final String name, final Integer roomId, final String roomName) {
         this.setName(name);
+        this.setRoomId(roomId);
         this.setRoomName(roomName);
     }
 
@@ -32,6 +34,14 @@ public class Course {
         this.name = name;
     }
 
+    public Integer getRoomId() {
+        return roomId;
+    }
+
+    public void setRoomId(Integer roomId) {
+        this.roomId = roomId;
+    }
+
     public String getRoomName() {
         return roomName;
     }
@@ -45,6 +55,7 @@ public class Course {
         return "Course{" +
                 "id=" + id +
                 ", name='" + name + '\'' +
+                ", roomId=" + roomId +
                 ", roomName='" + roomName + '\'' +
                 '}';
     }
@@ -54,11 +65,11 @@ public class Course {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Course course = (Course) o;
-        return Objects.equals(id, course.id) && Objects.equals(name, course.name) && Objects.equals(roomName, course.roomName);
+        return Objects.equals(id, course.id) && Objects.equals(name, course.name) && Objects.equals(roomId, course.roomId) && Objects.equals(roomName, course.roomName);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, name, roomName);
+        return Objects.hash(id, name, roomId, roomName);
     }
 }

@@ -14,6 +14,9 @@
 
 <?import javafx.scene.control.cell.TextFieldTableCell?>
 
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.collections.FXCollections?>
+<?import java.lang.String?>
 <GridPane alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="720.0" prefWidth="1080.0" styleClass="bg-dark" stylesheets="@../css/style.css" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.CoursesController">
 
    <HBox alignment="BASELINE_CENTER" GridPane.columnIndex="1" GridPane.rowIndex="0" GridPane.columnSpan="6">
@@ -50,6 +53,8 @@
       </TableView>
       <HBox alignment="center" spacing="10" GridPane.columnIndex="1" GridPane.rowIndex="7" GridPane.columnSpan="6">
          <TextField id="text_newCourseName" fx:id="text_newCourseName" prefWidth="140" promptText="Kurs-Name" />
+         <ComboBox fx:id="combo_room" promptText="Raum">
+         </ComboBox>
          <TextField id="text_newRoomName" fx:id="text_newRoomName" prefWidth="140" promptText="Raum-Name" />
          <Button onAction="#addNewCourse" styleClass="btn-add" text="Hinzufügen">
             <graphic>
