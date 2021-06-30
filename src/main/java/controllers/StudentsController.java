@@ -91,4 +91,9 @@ public class StudentsController extends SceneController {
 
         });
     }
+
+    @FXML
+    private void saveStudents(ActionEvent actionEvent){
+
+    }
 }

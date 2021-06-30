@@ -13,7 +13,7 @@
             <Label styleClass="h1" text="Room Manager" textFill="WHITE" />
     </HBox>
 
-    <fx:include source="Sidebar.fxml" GridPane.columnIndex="0" GridPane.rowIndex="1" GridPane.rowSpan="6">
+    <fx:include source="Sidebar.fxml" GridPane.columnIndex="0" GridPane.rowIndex="1" GridPane.rowSpan="5">
     </fx:include>
 
     <TableView editable="true" fx:id="table_rooms" maxHeight="700" maxWidth="300.0" prefHeight="463.0" prefWidth="300.0" GridPane.columnIndex="1" GridPane.columnSpan="6" GridPane.rowIndex="1" GridPane.rowSpan="6">
@@ -31,6 +31,15 @@
             <Insets left="10.0" />
         </GridPane.margin>
     </TableView>
+
+    <VBox GridPane.columnIndex="0" GridPane.rowIndex="6" alignment="CENTER_LEFT">
+        <Button onAction="#saveRooms" style="-fx-font-size: 24.0; -fx-max-width: 200.0 " styleClass="btn-add" text="Speichern">
+            <graphic>
+                <FontIcon iconLiteral="fa-save" styleClass="icon" />
+            </graphic>
+        </Button>
+    </VBox>
+
     <HBox alignment="center" spacing="10" GridPane.columnIndex="1" GridPane.columnSpan="6" GridPane.rowIndex="7">
         <TextField id="roomField" fx:id="roomField" prefWidth="90" promptText="Raumname" />
         <Button onAction="#addNewRoom" styleClass="btn-add" text="Hinzufügen">
