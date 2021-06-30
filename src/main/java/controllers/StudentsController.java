@@ -1,6 +1,8 @@
 package controllers;
 
+import database.models.Course;
 import database.models.JavaSkillRating;
+import database.services.CourseService;
 import database.services.ModelService;
 import database.services.StudentService;
 import javafx.collections.FXCollections;
@@ -10,6 +12,8 @@ import javafx.fxml.FXML;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
+import javafx.scene.control.cell.ComboBoxTableCell;
+import javafx.util.converter.DefaultStringConverter;
 import models.Student;
 
 import java.net.URL;
@@ -21,10 +25,14 @@ import java.util.ResourceBundle;
 
 public class StudentsController extends SceneController {
 
-    public static ObservableList<Student> data_table;
-    public TableView<Student> table_Students;
-
+    private ModelService<database.models.Course> courseService;
     private ModelService<database.models.Student> studentService;
+
+    public static ObservableList<Student> data_table;
+
+    public TableView<Student> table_Students;
+    public ComboBox<String> combo_course;
+
     @FXML
     private TextField text_newMatrikelNumber;
     @FXML
@@ -38,10 +46,10 @@ public class StudentsController extends SceneController {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
+        courseService = CourseService.getService();
         studentService = StudentService.getService();
         textFieldToNumberField(text_newMatrikelNumber);
         loadData();
-
     }
 
     private JavaSkillRating javaSkillStringToEnum(String skillRating) {
@@ -50,10 +58,19 @@ public class StudentsController extends SceneController {
         return JavaSkillRating.valueOf(skillRating.toUpperCase());
     }
 
-    Student stud = new Student();
+
     private void loadData() {
         data_table = FXCollections.observableArrayList();
+        ObservableList<String> data_courses = FXCollections.observableArrayList();
+
         try {
+            Collection<Course> possibleCourses = courseService.get();
+            data_courses.addAll(possibleCourses
+                    .stream()
+                    .map(Course::getName)
+                    .toList());
+            combo_course.setItems(data_courses);
+
             data_table.addAll(
                     studentService.get().stream().map(
                             s -> new Student(
@@ -70,8 +87,6 @@ public class StudentsController extends SceneController {
         } catch (SQLException sqlException) {
             sqlException.printStackTrace();
         }
-        System.out.println(data_table.toString());
-
         table_Students.setItems(data_table);
     }
 
@@ -83,6 +98,7 @@ public class StudentsController extends SceneController {
                 add(
                         new database.models.Student() {
                             {
+                                setCourse(new Course(null,combo_course.getValue(),null));
                                 setMatriculationNumber(text_newMatrikelNumber.getText());
                                 setFirstName(text_newFirstName.getText());
                                 setLastName(text_newLastName.getText());
@@ -94,6 +110,7 @@ public class StudentsController extends SceneController {
             }
 
         });
+        loadData();
     }
 
     @FXML
