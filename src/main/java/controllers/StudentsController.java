@@ -29,6 +29,18 @@ import java.util.ResourceBundle;
 public class StudentsController extends SceneController {
 
     public static ObservableList<Student> data_table;
+
+    @FXML
+    private TableColumn<Student,String> col_corporation;
+    @FXML
+    private TableColumn<Student,String> col_lastName;
+    @FXML
+    private TableColumn<Student,String> col_newName;
+    @FXML
+    private TableColumn<Student,String> col_course;
+    @FXML
+    private TableColumn<Student,String> col_mid;
+
     private ModelService<database.models.Course> courseService;
     private ModelService<database.models.Student> studentService;
     private Collection<database.models.Course> possibleCourses;
