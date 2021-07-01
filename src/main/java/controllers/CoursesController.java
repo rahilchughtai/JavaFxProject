@@ -115,9 +115,9 @@ public class CoursesController extends SceneController {
         courseService = CourseService.getService();
         roomService = RoomService.getService();
 
-        initializeColumns();
-
         super.initialize(url, resourceBundle);
+
+        initializeColumns();
     }
 
     void editRow(TableColumn.CellEditEvent<Course, String > cellEditEvent, boolean roomChanged) {
