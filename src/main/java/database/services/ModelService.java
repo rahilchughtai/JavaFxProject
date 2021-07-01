@@ -12,6 +12,7 @@ public interface ModelService<ModelType extends Model> {
     void save(ModelType model) throws SQLException;
     void save(Collection<ModelType> models) throws SQLException;
     boolean isEmpty() throws SQLException;
+    void delete(Integer modelId) throws SQLException;
     void delete(Collection<Integer> modelIds) throws SQLException;
     void clear() throws SQLException;
 }

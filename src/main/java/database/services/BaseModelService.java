@@ -130,4 +130,9 @@ public abstract class BaseModelService<ModelType extends Model> implements Model
 
         databaseConnection.setAutoCommit(true);
     }
+
+    @Override
+    public void delete(final Integer modelId) throws SQLException {
+        delete(new ArrayList<>() {{ add(modelId); }});
+    }
 }

@@ -32,7 +32,7 @@ public class CoursesController extends SceneController {
     private ComboBox<String> combo_room;
 
     @FXML
-    private TableView<Course> table_info;
+    private TableView<Course> table_courses;
 
     @FXML
     private TextField text_newCourseName;
@@ -67,6 +67,26 @@ public class CoursesController extends SceneController {
 
             courseErrorAlert.show();
         } catch (SQLException sqlException) {
+            sqlException.printStackTrace();
+        }
+    }
+
+    @FXML
+    private void deleteSelectedCourse(final ActionEvent actionEvent) {
+        final var selectedCourse = table_courses.getSelectionModel().getSelectedItem();
+
+        if (selectedCourse == null)
+            return;
+
+        try {
+            courseService.delete(selectedCourse.getId());
+
+            data_courses.remove(selectedCourse);
+        } catch (JdbcSQLIntegrityConstraintViolationException jdbcSQLIntegrityConstraintViolationException) {
+            courseErrorAlert.setHeaderText("Dieser Kurs wird verwendet!");
+
+            courseErrorAlert.show();
+        }catch (SQLException sqlException) {
             sqlException.printStackTrace();
         }
     }
@@ -155,6 +175,6 @@ public class CoursesController extends SceneController {
         } catch (SQLException sqlException) {
             sqlException.printStackTrace();
         }
-        table_info.setItems(data_courses);
+        table_courses.setItems(data_courses);
     }
 }
