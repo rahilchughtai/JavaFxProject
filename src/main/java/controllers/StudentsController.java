@@ -12,27 +12,24 @@ import javafx.fxml.FXML;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
-import javafx.scene.control.cell.ComboBoxTableCell;
-import javafx.util.converter.DefaultStringConverter;
 import models.Student;
 
 import java.net.URL;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Optional;
 import java.util.ResourceBundle;
 
 
 public class StudentsController extends SceneController {
 
-    private ModelService<database.models.Course> courseService;
-    private ModelService<database.models.Student> studentService;
-
     public static ObservableList<Student> data_table;
-
     public TableView<Student> table_Students;
     public ComboBox<String> combo_course;
-
+    private ModelService<database.models.Course> courseService;
+    private ModelService<database.models.Student> studentService;
+    private Collection<database.models.Course> possibleCourses;
     @FXML
     private TextField text_newMatrikelNumber;
     @FXML
@@ -63,8 +60,9 @@ public class StudentsController extends SceneController {
         data_table = FXCollections.observableArrayList();
         ObservableList<String> data_courses = FXCollections.observableArrayList();
 
+
         try {
-            Collection<Course> possibleCourses = courseService.get();
+            possibleCourses = courseService.get();
             data_courses.addAll(possibleCourses
                     .stream()
                     .map(Course::getName)
@@ -90,15 +88,24 @@ public class StudentsController extends SceneController {
         table_Students.setItems(data_table);
     }
 
+    Course findCourse(String courseName) throws SQLException {
+        possibleCourses = courseService.get();
+        Optional<Course> foundCourse = possibleCourses.stream().filter(course -> course.getName().
+                equals(courseName)).findFirst();
+        return foundCourse.orElse(null);
+
+    }
+
     @FXML
     private void addNewStudent(ActionEvent actionEvent) throws SQLException {
         Collection<database.models.Student> students;
+        Course course = findCourse(combo_course.getValue());
         studentService.save(new ArrayList<database.models.Student>() {
             {
                 add(
                         new database.models.Student() {
                             {
-                                setCourse(new Course(null,combo_course.getValue(),null));
+                                setCourse(course);
                                 setMatriculationNumber(text_newMatrikelNumber.getText());
                                 setFirstName(text_newFirstName.getText());
                                 setLastName(text_newLastName.getText());
@@ -114,7 +121,7 @@ public class StudentsController extends SceneController {
     }
 
     @FXML
-    private void saveStudents(ActionEvent actionEvent){
+    private void saveStudents(ActionEvent actionEvent) {
 
     }
 }
