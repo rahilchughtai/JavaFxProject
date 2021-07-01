@@ -12,9 +12,22 @@
          <Label styleClass="h1" text="Courses Manager" textFill="WHITE" />
       </HBox>
 
-   <fx:include source="Sidebar.fxml" GridPane.columnIndex="0" GridPane.rowIndex="1" GridPane.rowSpan="5">
+   <VBox alignment="CENTER_LEFT" GridPane.columnIndex="0" GridPane.rowIndex="6" spacing="30">
+      <fx:include source="Sidebar.fxml" GridPane.columnIndex="0" GridPane.rowIndex="1" GridPane.rowSpan="5">
       </fx:include>
 
+      <Button onAction="#saveCourses" style="-fx-font-size: 24.0; -fx-max-width: 200.0 " styleClass="btn-add" text="Speichern">
+         <graphic>
+            <FontIcon iconLiteral="fa-save" styleClass="icon" />
+         </graphic>
+      </Button>
+      <Button onAction="#deleteSelectedCourse" style="-fx-font-size: 24.0; -fx-max-width: 200.0; -fx-background-color: -fx-red; " styleClass="btn-add" text="Löschen">
+         <graphic>
+            <FontIcon iconLiteral="fa-remove" styleClass="icon" />
+         </graphic>
+
+      </Button>
+   </VBox>
       <TableView styleClass="data-table" fx:id="table_courses" editable="true" maxHeight="700" maxWidth="800" prefHeight="463.0" prefWidth="1077.0" GridPane.columnIndex="1" GridPane.columnSpan="6" GridPane.rowIndex="1" GridPane.rowSpan="6">
          <columns>
             <TableColumn fx:id="col_courseName" prefWidth="400.0" text="Kursname">
@@ -36,21 +49,7 @@
          </GridPane.margin>
       </TableView>
 
-      <VBox alignment="CENTER_LEFT" GridPane.columnIndex="0" GridPane.rowIndex="6">
-         <Button onAction="#saveCourses" style="-fx-font-size: 24.0; -fx-max-width: 200.0 " styleClass="btn-add" text="Speichern">
-            <graphic>
-               <FontIcon iconLiteral="fa-save" styleClass="icon" />
-            </graphic>
-         </Button>
-         <Button onAction="#deleteSelectedCourse" style="-fx-font-size: 24.0; -fx-max-width: 200.0; -fx-background-color: -fx-red; " styleClass="btn-add" text="Löschen">
-            <graphic>
-               <FontIcon iconLiteral="fa-remove" styleClass="icon" />
-            </graphic>
-         <VBox.margin>
-            <Insets top="10.0" />
-         </VBox.margin>
-         </Button>
-      </VBox>
+
 
       <HBox alignment="center" spacing="10" GridPane.columnIndex="1" GridPane.columnSpan="6" GridPane.rowIndex="7">
          <TextField id="text_newCourseName" fx:id="text_newCourseName" prefWidth="140" promptText="Kursname" />
