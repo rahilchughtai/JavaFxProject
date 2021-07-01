@@ -8,7 +8,10 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.scene.control.*;
+import javafx.scene.control.ComboBox;
+import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableView;
+import javafx.scene.control.TextField;
 import javafx.scene.control.cell.ComboBoxTableCell;
 import javafx.util.converter.DefaultStringConverter;
 import models.Course;
@@ -86,7 +89,6 @@ public class CoursesController extends SceneController {
     @FXML
     private void deleteSelectedCourse(final ActionEvent actionEvent) {
         final var selectedCourse = table_courses.getSelectionModel().getSelectedItem();
-
         if (selectedCourse == null)
             return;
 
@@ -96,13 +98,13 @@ public class CoursesController extends SceneController {
             data_courses.remove(selectedCourse);
         } catch (JdbcSQLIntegrityConstraintViolationException jdbcSQLIntegrityConstraintViolationException) {
             showError("Dieser Kurs wird verwendet und kann daher nicht gelöscht werden!");
-        }catch (SQLException sqlException) {
+        } catch (SQLException sqlException) {
             sqlException.printStackTrace();
         }
     }
 
     @FXML
-    private void saveCourses(ActionEvent actionEvent){
+    private void saveCourses(ActionEvent actionEvent) {
         try {
             final var changedCourses = data_courses
                     .stream()
@@ -117,7 +119,7 @@ public class CoursesController extends SceneController {
         }
     }
 
-    private void editRow(TableColumn.CellEditEvent<Course, String > cellEditEvent, boolean roomChanged) {
+    private void editRow(TableColumn.CellEditEvent<Course, String> cellEditEvent, boolean roomChanged) {
         final var rowValue = cellEditEvent.getRowValue();
         final var indexOfRowValue = data_courses.indexOf(rowValue);
         if (indexOfRowValue == -1)
@@ -140,23 +142,34 @@ public class CoursesController extends SceneController {
 
     @Override
     protected void loadData() {
-        data_courses = FXCollections.observableArrayList();
-        data_roomNames = FXCollections.observableArrayList();
         try {
-            possibleRooms = roomService.get();
-            data_roomNames.addAll(possibleRooms
-                .stream()
-                .map(Room::getName)
-                .toList());
-            combo_room.setItems(data_roomNames);
-            data_courses.addAll(courseService
-                    .get()
-                    .stream()
-                    .map(x -> new Course(x.getId(), x.getName(), x.getRoom().getId(), x.getRoom().getName()))
-                    .toList());
+            loadComboBox();
+            loadCourses();
         } catch (SQLException sqlException) {
             sqlException.printStackTrace();
         }
+    }
+
+    protected void loadComboBox() throws SQLException {
+        data_roomNames = FXCollections.observableArrayList();
+        possibleRooms = roomService.get();
+        data_roomNames.addAll(possibleRooms
+                .stream()
+                .map(Room::getName)
+                .toList());
+        combo_room.setItems(data_roomNames);
+
+    }
+
+    protected void loadCourses() throws SQLException {
+        data_courses = FXCollections.observableArrayList();
+        data_courses.addAll(courseService
+                .get()
+                .stream()
+                .map(x -> new Course(x.getId(), x.getName(), x.getRoom().getId(), x.getRoom().getName()))
+                .toList());
         table_courses.setItems(data_courses);
     }
+
+
 }
