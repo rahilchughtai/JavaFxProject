@@ -198,8 +198,7 @@ public class StudentsController extends SceneController {
                 || lastName.isEmpty()
                 || corporationName.isEmpty()) {
 
-            showError("Eingabewerte fehlen!");
-
+            showError("Unnvollständige Eingabewerte.");
             return;
         }
 
@@ -212,7 +211,6 @@ public class StudentsController extends SceneController {
                 course.getId(),
                 course.getName(),
                 javaSkill);
-
         try {
             final var newDatabaseStudent = new database.models.Student()
             {{
@@ -225,9 +223,7 @@ public class StudentsController extends SceneController {
             }};
 
             studentService.save(newDatabaseStudent);
-
             newStudent.setId(newDatabaseStudent.getId());
-
             data_students.add(newStudent);
         } catch (JdbcSQLIntegrityConstraintViolationException jdbcSQLIntegrityConstraintViolationException) {
             showError("Dieser Eintrag kann wegen Duplikaten nicht eingefügt werden!");
@@ -236,5 +232,4 @@ public class StudentsController extends SceneController {
             sqlException.printStackTrace();
         }
     }
-
 }
