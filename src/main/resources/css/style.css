@@ -26,6 +26,7 @@
     -fx-background-color: -fx-success;
     -fx-text-fill: white;
     -fx-cursor: HAND;
+    -fx-font-size: 16;
     -fx-padding: 10 10 10 10;
 }
 .btn-add:hover{

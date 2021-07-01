@@ -124,13 +124,15 @@
         </ComboBox>
 
         <TextField fx:id="text_corporationName" prefWidth="140" promptText="Firma"/>
+        <GridPane.margin>
+            <Insets bottom="20.0" top="10.0"/>
+        </GridPane.margin>
+    </HBox>
+    <VBox GridPane.rowIndex="8" GridPane.columnIndex="6" alignment="CENTER">
         <Button onAction="#addNewStudent" styleClass="btn-add" text="Hinzufügen">
             <graphic>
                 <FontIcon iconLiteral="fa-plus-circle" styleClass="icon"/>
             </graphic>
         </Button>
-        <GridPane.margin>
-            <Insets bottom="20.0" top="10.0"/>
-        </GridPane.margin>
-    </HBox>
+    </VBox>
 </GridPane>
