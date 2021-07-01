@@ -12,7 +12,6 @@ import models.Room;
 
 import java.net.URL;
 import java.sql.SQLException;
-import java.util.ArrayList;
 import java.util.ResourceBundle;
 
 public class RoomsController extends SceneController {
@@ -31,11 +30,14 @@ public class RoomsController extends SceneController {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
+
         roomService = RoomService.getService();
-        loadData();
+
+        super.initialize(url, resourceBundle);
     }
 
-    private void loadData() {
+    @Override
+    protected void loadData() {
         data_rooms = FXCollections.observableArrayList();
         try {
             final var rooms = roomService

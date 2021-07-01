@@ -42,11 +42,13 @@ public class StudentsController extends SceneController {
     private ComboBox<String> combo_javaSkills;
 
     @Override
-    public void initialize(URL location, ResourceBundle resources) {
+    public void initialize(URL url, ResourceBundle resources) {
+
         courseService = CourseService.getService();
         studentService = StudentService.getService();
         textFieldToNumberField(text_newMatrikelNumber);
-        loadData();
+
+        super.initialize(url, resources);
     }
 
     private JavaSkillRating javaSkillStringToEnum(String skillRating) {
@@ -55,8 +57,8 @@ public class StudentsController extends SceneController {
         return JavaSkillRating.valueOf(skillRating.toUpperCase());
     }
 
-
-    private void loadData() {
+    @Override
+    protected void loadData() {
         data_table = FXCollections.observableArrayList();
         ObservableList<String> data_courses = FXCollections.observableArrayList();
 

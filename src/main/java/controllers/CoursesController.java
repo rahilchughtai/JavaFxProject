@@ -108,12 +108,12 @@ public class CoursesController extends SceneController {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        super.initialize(url, resourceBundle);
-
         courseService = CourseService.getService();
         roomService = RoomService.getService();
-        loadData();
+
         initializeColumns();
+
+        super.initialize(url, resourceBundle);
     }
 
     void editRow(TableColumn.CellEditEvent<Course, String > cellEditEvent, boolean roomChanged) {
@@ -146,7 +146,8 @@ public class CoursesController extends SceneController {
     }
 
 
-    private void loadData() {
+    @Override
+    protected void loadData() {
         data_courses = FXCollections.observableArrayList();
         data_roomNames = FXCollections.observableArrayList();
 

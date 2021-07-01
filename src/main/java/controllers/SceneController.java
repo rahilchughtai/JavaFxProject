@@ -35,13 +35,11 @@ public class SceneController implements Initializable {
 
     private Alert errorAlert;
 
-    @Override
-    public void initialize(URL location, ResourceBundle resources) {
-        initializeUIControls();
-    }
-
     private void initializeUIControls() {
         errorAlert = new Alert(Alert.AlertType.ERROR);
+    }
+
+    protected void loadData() {
     }
 
     protected void showError(String errorMessage) {
@@ -65,6 +63,12 @@ public class SceneController implements Initializable {
                 }
             }
         });
+    }
+
+    @Override
+    public void initialize(URL location, ResourceBundle resources) {
+        initializeUIControls();
+        loadData();
     }
 
     /**
