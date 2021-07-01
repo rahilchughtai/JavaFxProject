@@ -31,9 +31,6 @@
             <graphic>
                 <FontIcon iconLiteral="fa-remove" styleClass="icon" />
             </graphic>
-            <VBox.margin>
-                <Insets top="10.0" />
-            </VBox.margin>
         </Button>
     </VBox>
 
