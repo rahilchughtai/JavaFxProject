@@ -50,8 +50,12 @@ public class CoursesController extends SceneController {
         final var selectedRoomName = combo_room.getSelectionModel().getSelectedItem();
         final var newCourseName = text_newCourseName.getText();
 
-        if (selectedRoomName == null || newCourseName.isEmpty())
+        if (selectedRoomName == null || newCourseName.isEmpty()) {
+
+            showError("Raumname oder Kursename fehlt!");
+
             return;
+        }
 
         final var selectedRoom = possibleRooms.stream().filter(x -> x.getName().equals(selectedRoomName)).findFirst().get();
         final var newCourse = new Course(null, newCourseName, selectedRoom.getId(), selectedRoom.getName());

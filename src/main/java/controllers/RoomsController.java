@@ -8,7 +8,9 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
+import models.Course;
 import models.Room;
+import org.h2.jdbc.JdbcSQLIntegrityConstraintViolationException;
 
 import java.net.URL;
 import java.sql.SQLException;
@@ -17,7 +19,7 @@ import java.util.ResourceBundle;
 public class RoomsController extends SceneController {
 
     public static ObservableList<Room> data_rooms;
-    public TextField text_roomName;
+    public TextField text_newRoomName;
     private ModelService<database.models.Room> roomService;
 
     @FXML
@@ -25,7 +27,30 @@ public class RoomsController extends SceneController {
 
     @FXML
     private void addNewRoom(ActionEvent actionEvent) throws SQLException {
-        roomService.save(new database.models.Room(null, text_roomName.getText()));
+        final var newRoomName = text_newRoomName.getText();
+
+        if (newRoomName.isEmpty()) {
+            showError("Raumname fehlt!");
+
+            return;
+        }
+
+        final var newRoom = new Room(null, newRoomName);
+
+        try {
+            final var newDatabaseRoom = new database.models.Room(null, newRoomName);
+
+            roomService.save(newDatabaseRoom);
+
+            newRoom.setId(newDatabaseRoom.getId());
+
+            data_rooms.add(newRoom);
+        } catch (JdbcSQLIntegrityConstraintViolationException jdbcSQLIntegrityConstraintViolationException) {
+            showError("Dieser Eintrag kann wegen Duplikaten nicht eingefügt werden!");
+
+        } catch (SQLException sqlException) {
+            sqlException.printStackTrace();
+        }
     }
 
     @Override
