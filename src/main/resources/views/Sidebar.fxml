@@ -8,9 +8,9 @@
       xmlns:fx="http://javafx.com/fxml"
       fx:controller="controllers.SceneController">
     <Button userData="HOME" id="sideBarBtn" onAction="#btnSwitchSceneClick"  mnemonicParsing="false" styleClass="btn-primary" text="Home">
-        <graphic>
-            <FontIcon styleClass="icon" iconLiteral="mdi-home" />
-        </graphic>
+<!--        <graphic>-->
+<!--            <FontIcon styleClass="icon" iconLiteral="mdi-home" />-->
+<!--        </graphic>-->
     </Button>
     <Button userData="ROOMS" fx:id="sideBarBtnRooms" id="sideBarBtn"  onAction="#btnSwitchSceneClick"  mnemonicParsing="false" styleClass="btn-primary" text="Räume">
         <graphic>
@@ -23,8 +23,8 @@
         </graphic>
     </Button>
     <Button userData="COURSES" fx:id="sideBarBtnCourses"   id="sideBarBtn"  onAction="#btnSwitchSceneClick" mnemonicParsing="false" styleClass="btn-primary" text="Kurse">
-        <graphic>
-            <FontIcon styleClass="icon" iconLiteral="mdi-table" />
-        </graphic>
+<!--        <graphic>-->
+<!--            <FontIcon styleClass="icon" iconLiteral="mdi-table" />-->
+<!--        </graphic>-->
     </Button>
 </VBox>
