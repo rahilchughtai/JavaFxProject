@@ -4,7 +4,7 @@ import database.models.JavaSkillRating;
 import database.models.Model;
 
 public class Student implements Model {
-
+    private Integer Id;
     private String matri_Id;
     private String firstName;
     private String lastName;
@@ -15,7 +15,8 @@ public class Student implements Model {
     public Student(){
     }
 
-    public Student(String matri_Id, String firstName, String lastName, String corporation, JavaSkillRating javaSkill, String courseName) {
+    public Student(final Integer id, String matri_Id, String firstName, String lastName, String corporation, JavaSkillRating javaSkill, String courseName) {
+        this.Id = id;
         this.matri_Id = matri_Id;
         this.firstName = firstName;
         this.lastName = lastName;
@@ -50,11 +51,11 @@ public class Student implements Model {
 
     @Override
     public Integer getId() {
-        return null;
+        return Id;
     }
 
     @Override
     public void setId(Integer id) {
-
+        this.Id=id;
     }
 }

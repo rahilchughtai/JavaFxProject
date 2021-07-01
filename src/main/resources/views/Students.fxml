@@ -85,7 +85,7 @@
             </graphic>
         </Button>
 
-        <Button style="-fx-font-size: 24.0; -fx-max-width: 200.0; -fx-background-color: -fx-red; " styleClass="btn-add" text="Löschen">
+        <Button onAction="#deleteSelectedStudent" style="-fx-font-size: 24.0; -fx-max-width: 200.0; -fx-background-color: -fx-red; " styleClass="btn-add" text="Löschen">
             <graphic>
                 <FontIcon iconLiteral="fa-remove" styleClass="icon" />
             </graphic>
