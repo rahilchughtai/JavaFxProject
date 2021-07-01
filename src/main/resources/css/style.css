@@ -80,3 +80,15 @@
     -fx-pref-height: 500;
 }
 
+.table-column{
+    -fx-font-size: 16;
+}
+
+.text-field{
+    -fx-font-size: 13;
+}
+
+.combo-box{
+    -fx-font-size: 13;
+}
+
