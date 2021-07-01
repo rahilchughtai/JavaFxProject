@@ -26,7 +26,9 @@ public class CoursesController extends SceneController {
 
     private Collection<database.models.Room> possibleRooms;
 
-    private Alert courseErrorAlert;
+
+    private ObservableList<Course> data_courses;
+    private ObservableList<String> data_roomNames;
 
     @FXML
     private ComboBox<String> combo_room;
@@ -63,9 +65,8 @@ public class CoursesController extends SceneController {
 
             data_courses.add(newCourse);
         } catch (JdbcSQLIntegrityConstraintViolationException jdbcSQLIntegrityConstraintViolationException) {
-            courseErrorAlert.setHeaderText("Es kann wegen Duplikaten nicht eingefügt werden!");
+            showError("Dieser Eintrag kann wegen Duplikaten nicht eingefügt werden!");
 
-            courseErrorAlert.show();
         } catch (SQLException sqlException) {
             sqlException.printStackTrace();
         }
@@ -83,9 +84,7 @@ public class CoursesController extends SceneController {
 
             data_courses.remove(selectedCourse);
         } catch (JdbcSQLIntegrityConstraintViolationException jdbcSQLIntegrityConstraintViolationException) {
-            courseErrorAlert.setHeaderText("Dieser Kurs wird verwendet!");
-
-            courseErrorAlert.show();
+            showError("Dieser Kurs wird verwendet und kann daher nicht gelöscht werden!");
         }catch (SQLException sqlException) {
             sqlException.printStackTrace();
         }
@@ -101,28 +100,20 @@ public class CoursesController extends SceneController {
 
             courseService.save(changedCourses);
         } catch (JdbcSQLIntegrityConstraintViolationException jdbcSQLIntegrityConstraintViolationException) {
-            courseErrorAlert.setHeaderText("Es kann wegen Duplikaten nicht gespeichert werden!");
-
-            courseErrorAlert.show();
+            showError("Einträge können wegen Duplikaten nicht gespeichert werden!");
         } catch (SQLException sqlException) {
             sqlException.printStackTrace();
         }
     }
 
-    private ObservableList<Course> data_courses;
-    private ObservableList<String> data_roomNames;
-
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
+        super.initialize(url, resourceBundle);
+
         courseService = CourseService.getService();
         roomService = RoomService.getService();
         loadData();
         initializeColumns();
-        initializeUIControls();
-    }
-
-    private void initializeUIControls() {
-        courseErrorAlert = new Alert(Alert.AlertType.ERROR);
     }
 
     void editRow(TableColumn.CellEditEvent<Course, String > cellEditEvent, boolean roomChanged) {

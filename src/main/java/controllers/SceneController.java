@@ -8,6 +8,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
@@ -32,9 +33,20 @@ public class SceneController implements Initializable {
         }
     }
 
+    private Alert errorAlert;
+
     @Override
     public void initialize(URL location, ResourceBundle resources) {
+        initializeUIControls();
+    }
 
+    private void initializeUIControls() {
+        errorAlert = new Alert(Alert.AlertType.ERROR);
+    }
+
+    protected void showError(String errorMessage) {
+        errorAlert.setHeaderText(errorMessage);
+        errorAlert.show();
     }
 
     /**
@@ -43,7 +55,7 @@ public class SceneController implements Initializable {
      *
      * @param textField
      */
-    void textFieldToNumberField(TextField textField) {
+    protected void textFieldToNumberField(TextField textField) {
         textField.textProperty().addListener(new ChangeListener<String>() {
             @Override
             public void changed(ObservableValue<? extends String> observable, String oldValue,

@@ -17,19 +17,16 @@ import java.util.ResourceBundle;
 
 public class RoomsController extends SceneController {
 
-    public static ObservableList<Room> data_table;
+    public static ObservableList<Room> data_rooms;
     public TextField text_roomName;
     private ModelService<database.models.Room> roomService;
-    private RoomService roomDbService;
-
 
     @FXML
     private TableView<Room> table_rooms;
 
     @FXML
     private void addNewRoom(ActionEvent actionEvent) throws SQLException {
-        roomService.save(new ArrayList<database.models.Room>() {{ add(new database.models.Room(null, text_roomName.getText())); }});
-        loadData();
+        roomService.save(new database.models.Room(null, text_roomName.getText()));
     }
 
     @Override
@@ -39,18 +36,18 @@ public class RoomsController extends SceneController {
     }
 
     private void loadData() {
-        data_table = FXCollections.observableArrayList();
+        data_rooms = FXCollections.observableArrayList();
         try {
             final var rooms = roomService
                     .get()
                     .stream()
                     .map(room -> new Room(room.getId(), room.getName()))
                     .toList();
-            data_table.addAll(rooms);
+            data_rooms.addAll(rooms);
         } catch (SQLException sqlException) {
             sqlException.printStackTrace();
         }
-        table_rooms.setItems(data_table);
+        table_rooms.setItems(data_rooms);
     }
 
     @FXML

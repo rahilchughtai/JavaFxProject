@@ -18,7 +18,7 @@
 
     <TableView editable="true" fx:id="table_rooms" maxHeight="700" maxWidth="300.0" prefHeight="463.0" prefWidth="300.0" GridPane.columnIndex="1" GridPane.columnSpan="6" GridPane.rowIndex="1" GridPane.rowSpan="6">
         <columns>
-            <TableColumn fx:id="columnRoomName"  text="Raum-Name" maxWidth="300.0" prefWidth="300.0">
+            <TableColumn fx:id="columnRoomName"  text="Raumname" maxWidth="300.0" prefWidth="300.0">
             <cellValueFactory>
                 <PropertyValueFactory property="name" />
             </cellValueFactory>
