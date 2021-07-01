@@ -13,6 +13,7 @@ import javafx.scene.control.ComboBox;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import models.Student;
+import org.h2.jdbc.JdbcSQLIntegrityConstraintViolationException;
 
 import java.net.URL;
 import java.sql.SQLException;
@@ -74,6 +75,7 @@ public class StudentsController extends SceneController {
             data_table.addAll(
                     studentService.get().stream().map(
                             s -> new Student(
+                                    s.getId(),
                                     s.getMatriculationNumber(),
                                     s.getFirstName(),
                                     s.getLastName(),
@@ -97,6 +99,22 @@ public class StudentsController extends SceneController {
         return foundCourse.orElse(null);
 
     }
+
+    @FXML
+    private void deleteSelectedStudent(final ActionEvent actionEvent) {
+        final var selectedStudent = table_Students.getSelectionModel().getSelectedItem();
+        if (selectedStudent == null)
+            return;
+        try {
+            studentService.delete(selectedStudent.getId());
+            data_table.remove(selectedStudent);
+        } catch (JdbcSQLIntegrityConstraintViolationException jdbcSQLIntegrityConstraintViolationException) {
+            showError("Der Student konnte nicht gelöscht werden");
+        }catch (SQLException sqlException) {
+            sqlException.printStackTrace();
+        }
+    }
+
 
     @FXML
     private void addNewStudent(ActionEvent actionEvent) throws SQLException {

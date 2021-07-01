@@ -84,6 +84,16 @@
                 <FontIcon iconLiteral="fa-save" styleClass="icon"/>
             </graphic>
         </Button>
+
+        <Button onAction="#deleteSelectedStudent" style="-fx-font-size: 24.0; -fx-max-width: 200.0; -fx-background-color: -fx-red; " styleClass="btn-add" text="Löschen">
+            <graphic>
+                <FontIcon iconLiteral="fa-remove" styleClass="icon" />
+            </graphic>
+            <VBox.margin>
+                <Insets top="10.0" />
+            </VBox.margin>
+        </Button>
+
     </VBox>
 
     <HBox alignment="center" spacing="10" GridPane.columnIndex="1" GridPane.columnSpan="6" GridPane.rowIndex="7">

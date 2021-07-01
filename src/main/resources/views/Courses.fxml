@@ -1,22 +1,21 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.geometry.Insets?>
+<?import javafx.geometry.*?>
 <?import javafx.scene.control.*?>
-<?import javafx.scene.control.cell.PropertyValueFactory?>
-<?import javafx.scene.control.cell.TextFieldTableCell?>
+<?import javafx.scene.control.cell.*?>
 <?import javafx.scene.layout.*?>
-<?import org.kordamp.ikonli.javafx.FontIcon?>
+<?import org.kordamp.ikonli.javafx.*?>
 
-<GridPane alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="720.0" prefWidth="1080.0" styleClass="bg-dark" stylesheets="@../css/style.css" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.CoursesController">
+<GridPane alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="720.0" prefWidth="1080.0" styleClass="bg-dark" stylesheets="@../css/style.css" xmlns="http://javafx.com/javafx/11.0.2" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.CoursesController">
 
-   <HBox alignment="BASELINE_CENTER" GridPane.columnIndex="1" GridPane.rowIndex="0" GridPane.columnSpan="6">
+   <HBox alignment="BASELINE_CENTER" GridPane.columnIndex="1" GridPane.columnSpan="6" GridPane.rowIndex="0">
          <Label styleClass="h1" text="Courses Manager" textFill="WHITE" />
       </HBox>
 
-   <fx:include source="Sidebar.fxml" GridPane.rowIndex="1" GridPane.columnIndex="0" GridPane.rowSpan="5">
+   <fx:include source="Sidebar.fxml" GridPane.columnIndex="0" GridPane.rowIndex="1" GridPane.rowSpan="5">
       </fx:include>
 
-      <TableView editable="true" fx:id="table_courses" maxHeight="700" maxWidth="800" prefHeight="463.0" prefWidth="1077.0" GridPane.columnIndex="1" GridPane.rowIndex="1" GridPane.rowSpan="6" GridPane.columnSpan="6">
+      <TableView fx:id="table_courses" editable="true" maxHeight="700" maxWidth="800" prefHeight="463.0" prefWidth="1077.0" GridPane.columnIndex="1" GridPane.columnSpan="6" GridPane.rowIndex="1" GridPane.rowSpan="6">
          <columns>
             <TableColumn fx:id="col_courseName" prefWidth="400.0" text="Kursname">
                <cellValueFactory>
@@ -33,34 +32,56 @@
             </TableColumn>
          </columns>
          <GridPane.margin>
-            <Insets left="10.0"/>
+            <Insets left="10.0" />
          </GridPane.margin>
       </TableView>
 
-      <VBox GridPane.columnIndex="0" GridPane.rowIndex="6" alignment="CENTER_LEFT">
+      <VBox alignment="CENTER_LEFT" GridPane.columnIndex="0" GridPane.rowIndex="6">
          <Button onAction="#saveCourses" style="-fx-font-size: 24.0; -fx-max-width: 200.0 " styleClass="btn-add" text="Speichern">
             <graphic>
                <FontIcon iconLiteral="fa-save" styleClass="icon" />
             </graphic>
          </Button>
-         <Button onAction="#deleteSelectedCourse" style="-fx-font-size: 24.0; -fx-max-width: 200.0 " styleClass="btn-add" text="Löschen">
+         <Button onAction="#deleteSelectedCourse" style="-fx-font-size: 24.0; -fx-max-width: 200.0; -fx-background-color: -fx-red; " styleClass="btn-add" text="Löschen">
             <graphic>
-               <FontIcon iconLiteral="fa-save" styleClass="icon" />
+               <FontIcon iconLiteral="fa-remove" styleClass="icon" />
             </graphic>
+         <VBox.margin>
+            <Insets top="10.0" />
+         </VBox.margin>
          </Button>
       </VBox>
 
-      <HBox alignment="center" spacing="10" GridPane.columnIndex="1" GridPane.rowIndex="7" GridPane.columnSpan="6">
+      <HBox alignment="center" spacing="10" GridPane.columnIndex="1" GridPane.columnSpan="6" GridPane.rowIndex="7">
          <TextField id="text_newCourseName" fx:id="text_newCourseName" prefWidth="140" promptText="Kursname" />
          <ComboBox fx:id="combo_room" promptText="Raum">
          </ComboBox>
          <Button onAction="#addNewCourse" styleClass="btn-add" text="Hinzufügen">
             <graphic>
-               <FontIcon styleClass="icon" iconLiteral="fa-plus-circle" />
+               <FontIcon iconLiteral="fa-plus-circle" styleClass="icon" />
             </graphic>
          </Button>
          <GridPane.margin>
             <Insets bottom="20.0" top="10.0" />
          </GridPane.margin>
       </HBox>
+   <columnConstraints>
+      <ColumnConstraints />
+      <ColumnConstraints />
+      <ColumnConstraints />
+      <ColumnConstraints />
+      <ColumnConstraints />
+      <ColumnConstraints />
+      <ColumnConstraints />
+   </columnConstraints>
+   <rowConstraints>
+      <RowConstraints />
+      <RowConstraints />
+      <RowConstraints />
+      <RowConstraints />
+      <RowConstraints />
+      <RowConstraints />
+      <RowConstraints />
+      <RowConstraints />
+   </rowConstraints>
 </GridPane>
