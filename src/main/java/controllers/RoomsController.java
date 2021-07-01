@@ -18,9 +18,11 @@ import java.util.ResourceBundle;
 
 public class RoomsController extends SceneController {
 
-    public static ObservableList<Room> data_rooms;
-    public TextField text_newRoomName;
+    private ObservableList<Room> data_rooms;
     private ModelService<database.models.Room> roomService;
+
+    @FXML
+    private TextField text_newRoomName;
 
     @FXML
     private TableView<Room> table_rooms;

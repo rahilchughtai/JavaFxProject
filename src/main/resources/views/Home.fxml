@@ -1,57 +1,62 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.geometry.Insets?>
-<?import javafx.scene.control.Button?>
-<?import javafx.scene.control.Label?>
-<?import javafx.scene.image.Image?>
-<?import javafx.scene.image.ImageView?>
-<?import javafx.scene.layout.BorderPane?>
-<?import javafx.scene.layout.HBox?>
-<?import org.kordamp.ikonli.javafx.FontIcon?>
-<BorderPane styleClass="bg-dark" stylesheets="@../css/style.css" prefHeight="720.0" prefWidth="1080.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.HomeController">
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.layout.*?>
+<?import org.kordamp.ikonli.javafx.*?>
+
+<BorderPane prefHeight="720.0" prefWidth="1080.0" styleClass="bg-dark" stylesheets="@../css/style.css" xmlns="http://javafx.com/javafx/11.0.2" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.HomeController">
     <top>
-        <HBox style="-fx-background-color: black" alignment="CENTER" maxHeight="148.0" prefHeight="148.0" prefWidth="600.0" BorderPane.alignment="CENTER">
+        <HBox alignment="CENTER" maxHeight="148.0" prefHeight="148.0" prefWidth="600.0" style="-fx-background-color: black" BorderPane.alignment="CENTER">
             <children>
-            <ImageView fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true">
-               <image>
-                  <Image url="@../images/dhbwlogo.png" />
-               </image>
-            </ImageView>
+                <ImageView fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true">
+                    <image>
+                        <Image url="@../images/dhbwlogo.png" />
+                    </image>
+                </ImageView>
                 <Label style="-fx-start-margin: 10;" styleClass="homeHeadline" text="Studenten Management System">
                 </Label>
             </children>
         </HBox>
     </top>
     <center>
-        <HBox alignment="CENTER" prefHeight="100.0" prefWidth="0.0"  BorderPane.alignment="CENTER">
-            <children>
-
-                <Button styleClass="btn-primary" fx:id="btnRoom" maxHeight="100.0" maxWidth="250.0" minHeight="0.0" minWidth="100.0" mnemonicParsing="false" onAction="#btnSwitchSceneClick" prefHeight="100.0" prefWidth="300.0" text="Rooms">
-                    <HBox.margin>
-                        <Insets left="15.0" right="15.0" />
-                    </HBox.margin>
-                    <graphic>
-                        <FontIcon styleClass="icon" iconLiteral="fa-building-o" />
-                    </graphic>
-                </Button>
-
-                <Button styleClass="btn-primary" fx:id="btnStudents" maxHeight="100.0" maxWidth="250.0" minHeight="0.0" minWidth="100.0" mnemonicParsing="false" onAction="#btnSwitchSceneClick" prefHeight="100.0" prefWidth="300.0" text="Students" textOverrun="CLIP">
-                    <HBox.margin>
-                        <Insets left="15.0" right="15.0" />
-                    </HBox.margin>
-                    <graphic>
-                        <FontIcon styleClass="icon" iconLiteral="fa-graduation-cap"  />
-                    </graphic>
-                </Button>
-                <Button styleClass="btn-primary" fx:id="btnCourses" maxHeight="100.0" maxWidth="250.0" minHeight="0.0" minWidth="100.0" mnemonicParsing="false" onAction="#btnSwitchSceneClick" prefHeight="100.0" prefWidth="300.0" text="Courses">
-                    <HBox.margin>
-                        <Insets left="15.0" right="15.0" />
-                    </HBox.margin>
-                    <graphic>
-                        <FontIcon styleClass="icon" iconLiteral="mdi-table" />
-                    </graphic>
-                </Button>
-            </children>
-        </HBox>
+        <VBox alignment="CENTER">
+            <HBox alignment="CENTER">
+                <Label styleClass="greetingLabel" fx:id="label_homeText" text="Test test test" >
+               <HBox.margin>
+                  <Insets bottom="50.0" />
+               </HBox.margin>
+                </Label>
+            </HBox>
+            <HBox alignment="CENTER" prefHeight="100.0" prefWidth="0.0" BorderPane.alignment="CENTER">
+                <children>
+                    <Button fx:id="btnRoom" maxHeight="100.0" maxWidth="250.0" minHeight="0.0" minWidth="100.0" mnemonicParsing="false" onAction="#btnSwitchSceneClick" prefHeight="100.0" prefWidth="300.0" styleClass="btn-primary" text="Rooms">
+                        <HBox.margin>
+                            <Insets left="15.0" right="15.0" />
+                        </HBox.margin>
+                        <graphic>
+                            <FontIcon iconLiteral="fa-building-o" styleClass="icon" />
+                        </graphic>
+                    </Button>
+                    <Button fx:id="btnStudents" maxHeight="100.0" maxWidth="250.0" minHeight="0.0" minWidth="100.0" mnemonicParsing="false" onAction="#btnSwitchSceneClick" prefHeight="100.0" prefWidth="300.0" styleClass="btn-primary" text="Students" textOverrun="CLIP">
+                        <HBox.margin>
+                            <Insets left="15.0" right="15.0" />
+                        </HBox.margin>
+                        <graphic>
+                            <FontIcon iconLiteral="fa-graduation-cap" styleClass="icon" />
+                        </graphic>
+                    </Button>
+                    <Button fx:id="btnCourses" maxHeight="100.0" maxWidth="250.0" minHeight="0.0" minWidth="100.0" mnemonicParsing="false" onAction="#btnSwitchSceneClick" prefHeight="100.0" prefWidth="300.0" styleClass="btn-primary" text="Courses">
+                        <HBox.margin>
+                            <Insets left="15.0" right="15.0" />
+                        </HBox.margin>
+                        <graphic>
+                            <FontIcon iconLiteral="mdi-table" styleClass="icon" />
+                        </graphic>
+                    </Button>
+                </children>
+            </HBox>
+        </VBox>
     </center>
 </BorderPane>

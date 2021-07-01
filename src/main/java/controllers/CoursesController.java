@@ -23,27 +23,21 @@ public class CoursesController extends SceneController {
 
     private ModelService<database.models.Course> courseService;
     private ModelService<database.models.Room> roomService;
-
     private Collection<database.models.Room> possibleRooms;
-
-
     private ObservableList<Course> data_courses;
     private ObservableList<String> data_roomNames;
 
     @FXML
     private ComboBox<String> combo_room;
-
     @FXML
     private TableView<Course> table_courses;
-
     @FXML
     private TextField text_newCourseName;
-
     @FXML
     private TableColumn<Course, String> col_room;
-
     @FXML
     private TableColumn<Course, String> col_courseName;
+
 
     @FXML
     private void addNewCourse(ActionEvent actionEvent) {
@@ -114,9 +108,7 @@ public class CoursesController extends SceneController {
     public void initialize(URL url, ResourceBundle resourceBundle) {
         courseService = CourseService.getService();
         roomService = RoomService.getService();
-
         super.initialize(url, resourceBundle);
-
         initializeColumns();
     }
 
