@@ -13,7 +13,7 @@
           fx:controller="controllers.StudentsController">
 
     <HBox alignment="BASELINE_CENTER" GridPane.columnIndex="1" GridPane.columnSpan="6" GridPane.rowIndex="0">
-        <Label styleClass="h1" text="Students Manager" textFill="WHITE"/>
+        <Label styleClass="h1" text="Studenten Management" textFill="WHITE"/>
     </HBox>
 
 
