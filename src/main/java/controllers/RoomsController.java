@@ -31,7 +31,6 @@ public class RoomsController extends SceneController {
 
         if (newRoomName.isEmpty()) {
             showError("Raumname fehlt!");
-
             return;
         }
 
@@ -55,9 +54,7 @@ public class RoomsController extends SceneController {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-
         roomService = RoomService.getService();
-
         super.initialize(url, resourceBundle);
     }
 
@@ -81,6 +78,18 @@ public class RoomsController extends SceneController {
 
     @FXML
     private void saveRooms(ActionEvent actionEvent) {
+        try {
+            final var changedRooms = data_rooms
+                    .stream()
+                    .map(x -> new database.models.Room(x.getId(), x.getName()))
+                    .toList();
 
+            roomService.save(changedRooms);
+        } catch (JdbcSQLIntegrityConstraintViolationException jdbcSQLIntegrityConstraintViolationException) {
+            showError("Einträge können wegen Duplikaten nicht gespeichert werden!");
+        } catch (SQLException sqlException) {
+            sqlException.printStackTrace();
+        }
     }
+
 }

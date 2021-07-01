@@ -2,6 +2,7 @@ package models;
 
 import database.models.JavaSkillRating;
 import database.models.Model;
+import  database.models.Course;
 
 public class Student implements Model {
     private Integer Id;
@@ -10,19 +11,22 @@ public class Student implements Model {
     private String lastName;
     private String corporation;
     private JavaSkillRating javaSkill;
+    private database.models.Course course;
     private String courseName;
 
     public Student(){
     }
 
-    public Student(final Integer id, String matri_Id, String firstName, String lastName, String corporation, JavaSkillRating javaSkill, String courseName) {
+
+    public Student(final Integer id, String matri_Id, String firstName, String lastName, String corporation, JavaSkillRating javaSkill, Course course ) {
         this.Id = id;
         this.matri_Id = matri_Id;
         this.firstName = firstName;
         this.lastName = lastName;
         this.corporation = corporation;
         this.javaSkill = javaSkill;
-        this.courseName = courseName;
+        this.course=course;
+        this.courseName=course.getName();
     }
 
     public String getMatri_Id() {
@@ -48,6 +52,11 @@ public class Student implements Model {
     public String getLastName() {
         return lastName;
     }
+
+    public Course getCourse() {
+        return course;
+    }
+
 
     @Override
     public Integer getId() {

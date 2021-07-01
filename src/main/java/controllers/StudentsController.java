@@ -10,6 +10,7 @@ import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.ComboBox;
+import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import models.Student;
@@ -44,11 +45,9 @@ public class StudentsController extends SceneController {
 
     @Override
     public void initialize(URL url, ResourceBundle resources) {
-
         courseService = CourseService.getService();
         studentService = StudentService.getService();
         textFieldToNumberField(text_newMatrikelNumber);
-
         super.initialize(url, resources);
     }
 
@@ -58,38 +57,45 @@ public class StudentsController extends SceneController {
         return JavaSkillRating.valueOf(skillRating.toUpperCase());
     }
 
+
+
+    private void insertCourses() throws SQLException {
+        ObservableList<String> data_courses = FXCollections.observableArrayList();
+        possibleCourses = courseService.get();
+        data_courses.addAll(possibleCourses
+                .stream()
+                .map(Course::getName)
+                .toList());
+        combo_course.setItems(data_courses);
+    }
+
+    private void insertStudents() throws SQLException {
+        data_table.addAll(
+                studentService.get().stream().map(
+                        s -> new Student(
+                                s.getId(),
+                                s.getMatriculationNumber(),
+                                s.getFirstName(),
+                                s.getLastName(),
+                                s.getCorporationName(),
+                                s.getJavaSkillRating(),
+                                s.getCourse()
+                        )
+                ).toList()
+        );
+        table_Students.setItems(data_table);
+    }
+
+
     @Override
     protected void loadData() {
         data_table = FXCollections.observableArrayList();
-        ObservableList<String> data_courses = FXCollections.observableArrayList();
-
-
         try {
-            possibleCourses = courseService.get();
-            data_courses.addAll(possibleCourses
-                    .stream()
-                    .map(Course::getName)
-                    .toList());
-            combo_course.setItems(data_courses);
-
-            data_table.addAll(
-                    studentService.get().stream().map(
-                            s -> new Student(
-                                    s.getId(),
-                                    s.getMatriculationNumber(),
-                                    s.getFirstName(),
-                                    s.getLastName(),
-                                    s.getCorporationName(),
-                                    s.getJavaSkillRating(),
-                                    s.getCourse().getName()
-                            )
-                    ).toList()
-            );
-
+            insertCourses();
+            insertStudents();
         } catch (SQLException sqlException) {
             sqlException.printStackTrace();
         }
-        table_Students.setItems(data_table);
     }
 
     Course findCourse(String courseName) throws SQLException {
@@ -97,7 +103,6 @@ public class StudentsController extends SceneController {
         Optional<Course> foundCourse = possibleCourses.stream().filter(course -> course.getName().
                 equals(courseName)).findFirst();
         return foundCourse.orElse(null);
-
     }
 
     @FXML
@@ -110,11 +115,34 @@ public class StudentsController extends SceneController {
             data_table.remove(selectedStudent);
         } catch (JdbcSQLIntegrityConstraintViolationException jdbcSQLIntegrityConstraintViolationException) {
             showError("Der Student konnte nicht gelöscht werden");
-        }catch (SQLException sqlException) {
+        } catch (SQLException sqlException) {
             sqlException.printStackTrace();
         }
     }
 
+    void editRow(TableColumn.CellEditEvent<models.Student, String > cellEditEvent, boolean roomChanged) {
+        final var rowValue = cellEditEvent.getRowValue();
+        final var indexOfRowValue = data_table.indexOf(rowValue);
+        if (indexOfRowValue == -1)
+            return;
+        models.Student updatedStudent;
+    }
+
+
+    @FXML
+    private void saveStudents(ActionEvent actionEvent) {
+        try {
+            final var changeStudents = data_table
+                    .stream()
+                    .map(x -> new database.models.Student(x.getId(), x.getMatri_Id(), x.getFirstName(), x.getLastName(), x.getJavaSkill(), x.getCorporation(), x.getCourse())).toList();
+
+            studentService.save(changeStudents);
+        } catch (JdbcSQLIntegrityConstraintViolationException jdbcSQLIntegrityConstraintViolationException) {
+            showError("Einträge können wegen Duplikaten nicht gespeichert werden!");
+        } catch (SQLException sqlException) {
+            sqlException.printStackTrace();
+        }
+    }
 
     @FXML
     private void addNewStudent(ActionEvent actionEvent) throws SQLException {
@@ -140,8 +168,4 @@ public class StudentsController extends SceneController {
         loadData();
     }
 
-    @FXML
-    private void saveStudents(ActionEvent actionEvent) {
-
-    }
 }
