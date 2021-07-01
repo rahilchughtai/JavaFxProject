@@ -10,6 +10,7 @@ import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.ComboBox;
+import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import models.Student;
@@ -81,7 +82,7 @@ public class StudentsController extends SceneController {
                                     s.getLastName(),
                                     s.getCorporationName(),
                                     s.getJavaSkillRating(),
-                                    s.getCourse().getName()
+                                    s.getCourse()
                             )
                     ).toList()
             );
@@ -110,11 +111,34 @@ public class StudentsController extends SceneController {
             data_table.remove(selectedStudent);
         } catch (JdbcSQLIntegrityConstraintViolationException jdbcSQLIntegrityConstraintViolationException) {
             showError("Der Student konnte nicht gelöscht werden");
-        }catch (SQLException sqlException) {
+        } catch (SQLException sqlException) {
             sqlException.printStackTrace();
         }
     }
 
+    void editRow(TableColumn.CellEditEvent<models.Student, String > cellEditEvent, boolean roomChanged) {
+        final var rowValue = cellEditEvent.getRowValue();
+        final var indexOfRowValue = data_table.indexOf(rowValue);
+        if (indexOfRowValue == -1)
+            return;
+        models.Student updatedStudent;
+    }
+
+
+    @FXML
+    private void saveStudent(ActionEvent actionEvent) {
+        try {
+            final var changeStudents = data_table
+                    .stream()
+                    .map(x -> new database.models.Student(x.getId(), x.getMatri_Id(), x.getFirstName(), x.getLastName(), x.getJavaSkill(), x.getCorporation(), x.getCourse())).toList();
+
+            studentService.save(changeStudents);
+        } catch (JdbcSQLIntegrityConstraintViolationException jdbcSQLIntegrityConstraintViolationException) {
+            showError("Einträge können wegen Duplikaten nicht gespeichert werden!");
+        } catch (SQLException sqlException) {
+            sqlException.printStackTrace();
+        }
+    }
 
     @FXML
     private void addNewStudent(ActionEvent actionEvent) throws SQLException {
