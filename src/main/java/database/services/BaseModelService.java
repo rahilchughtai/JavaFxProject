@@ -34,21 +34,30 @@ public abstract class BaseModelService<ModelType extends Model> implements Model
 
         final var databaseConnection = DatabaseConnectionManager.getDatabaseConnection();
 
-        databaseConnection.setAutoCommit(false);
+        try {
 
-        final var preparedDeleteStatement = databaseConnection.createPreparedStatement("DELETE FROM " + tableName + " WHERE " + idColumnName + " = ?");
+            databaseConnection.setAutoCommit(false);
 
-        try (preparedDeleteStatement) {
-            for (final var id : existingIds) {
-                preparedDeleteStatement.setInt(1, id);
+            final var preparedDeleteStatement = databaseConnection.createPreparedStatement("DELETE FROM " + tableName + " WHERE " + idColumnName + " = ?");
 
-                preparedDeleteStatement.executeUpdate();
+            try (preparedDeleteStatement) {
+                for (final var id : existingIds) {
+                    preparedDeleteStatement.setInt(1, id);
+
+                    preparedDeleteStatement.executeUpdate();
+                }
+
+                databaseConnection.commit();
             }
 
-            databaseConnection.commit();
-        }
+            databaseConnection.setAutoCommit(true);
+        } catch (SQLException sqlException) {
+            databaseConnection.rollback();
 
-        databaseConnection.setAutoCommit(true);
+            databaseConnection.setAutoCommit(true);
+
+            throw sqlException;
+        }
     }
 
     protected PreparedStatement getEntriesFromDatabase(List<Integer> ids, String selectAndJoinSql, String orderByColumnName, String tableName) throws SQLException {
@@ -121,14 +130,24 @@ public abstract class BaseModelService<ModelType extends Model> implements Model
     public void save(final Collection<ModelType> models) throws SQLException {
         final var databaseConnection = DatabaseConnectionManager.getDatabaseConnection();
 
-        databaseConnection.setAutoCommit(false);
+        try {
+            databaseConnection.setAutoCommit(false);
 
-        insertModels(models.stream().filter(x -> x.getId() == null).toList());
-        updateModels(models.stream().filter(x -> x.getId() != null).toList());
+            insertModels(models.stream().filter(x -> x.getId() == null).toList());
+            updateModels(models.stream().filter(x -> x.getId() != null).toList());
 
-        databaseConnection.commit();
+            databaseConnection.commit();
 
-        databaseConnection.setAutoCommit(true);
+            databaseConnection.setAutoCommit(true);
+
+        } catch (SQLException sqlException) {
+            databaseConnection.rollback();
+
+            databaseConnection.setAutoCommit(true);
+
+            throw sqlException;
+        }
+
     }
 
     @Override
