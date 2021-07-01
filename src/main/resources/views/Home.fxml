@@ -6,7 +6,7 @@
 <?import javafx.scene.layout.*?>
 <?import org.kordamp.ikonli.javafx.*?>
 
-<BorderPane prefHeight="720.0" prefWidth="1080.0" styleClass="bg-dark" stylesheets="@../css/style.css" xmlns="http://javafx.com/javafx/11.0.2" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.HomeController">
+<BorderPane prefHeight="720.0" prefWidth="1100.0" styleClass="bg-dark" stylesheets="@../css/style.css" xmlns="http://javafx.com/javafx/11.0.2" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.HomeController">
     <top>
         <HBox alignment="CENTER" maxHeight="148.0" prefHeight="148.0" prefWidth="600.0" style="-fx-background-color: black" BorderPane.alignment="CENTER">
             <children>
@@ -23,7 +23,7 @@
     <center>
         <VBox alignment="CENTER">
             <HBox alignment="CENTER">
-                <Label styleClass="greetingLabel" fx:id="label_homeText" text="Test test test" >
+                <Label styleClass="greetingLabel" fx:id="label_homeText" >
                <HBox.margin>
                   <Insets bottom="50.0" />
                </HBox.margin>
@@ -31,7 +31,7 @@
             </HBox>
             <HBox alignment="CENTER" prefHeight="100.0" prefWidth="0.0" BorderPane.alignment="CENTER">
                 <children>
-                    <Button fx:id="btnRoom" maxHeight="100.0" maxWidth="250.0" minHeight="0.0" minWidth="100.0" mnemonicParsing="false" onAction="#btnSwitchSceneClick" prefHeight="100.0" prefWidth="300.0" styleClass="btn-primary" text="Rooms">
+                    <Button userData="ROOMS" fx:id="btnRoom" maxHeight="100.0" maxWidth="250.0" minHeight="0.0" minWidth="100.0" mnemonicParsing="false" onAction="#btnSwitchSceneClick" prefHeight="100.0" prefWidth="300.0" styleClass="btn-primary" text="Räume">
                         <HBox.margin>
                             <Insets left="15.0" right="15.0" />
                         </HBox.margin>
@@ -39,7 +39,7 @@
                             <FontIcon iconLiteral="fa-building-o" styleClass="icon" />
                         </graphic>
                     </Button>
-                    <Button fx:id="btnStudents" maxHeight="100.0" maxWidth="250.0" minHeight="0.0" minWidth="100.0" mnemonicParsing="false" onAction="#btnSwitchSceneClick" prefHeight="100.0" prefWidth="300.0" styleClass="btn-primary" text="Students" textOverrun="CLIP">
+                    <Button  userData="STUDENTS"  fx:id="btnStudents" maxHeight="100.0" maxWidth="250.0" minHeight="0.0" minWidth="100.0" mnemonicParsing="false" onAction="#btnSwitchSceneClick" prefHeight="100.0" prefWidth="300.0" styleClass="btn-primary" text="Studenten" textOverrun="CLIP">
                         <HBox.margin>
                             <Insets left="15.0" right="15.0" />
                         </HBox.margin>
@@ -47,7 +47,7 @@
                             <FontIcon iconLiteral="fa-graduation-cap" styleClass="icon" />
                         </graphic>
                     </Button>
-                    <Button fx:id="btnCourses" maxHeight="100.0" maxWidth="250.0" minHeight="0.0" minWidth="100.0" mnemonicParsing="false" onAction="#btnSwitchSceneClick" prefHeight="100.0" prefWidth="300.0" styleClass="btn-primary" text="Courses">
+                    <Button userData="COURSES" fx:id="btnCourses" maxHeight="100.0" maxWidth="250.0" minHeight="0.0" minWidth="100.0" mnemonicParsing="false" onAction="#btnSwitchSceneClick" prefHeight="100.0" prefWidth="300.0" styleClass="btn-primary" text="Kurse">
                         <HBox.margin>
                             <Insets left="15.0" right="15.0" />
                         </HBox.margin>

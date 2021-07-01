@@ -26,6 +26,7 @@
     -fx-background-color: -fx-success;
     -fx-text-fill: white;
     -fx-cursor: HAND;
+    -fx-font-size: 16;
     -fx-padding: 10 10 10 10;
 }
 .btn-add:hover{
@@ -70,8 +71,25 @@
 
 .greetingLabel {
     -fx-text-fill: -fx-grey;
-    -fx-font-size: 20px;
+    -fx-font-size: 15px;
     -fx-wrap-text: true;
     -fx-max-width: 500;
+}
+
+.data-table{
+    -fx-pref-width: 800;
+    -fx-pref-height: 500;
+}
+
+.table-column{
+    -fx-font-size: 16;
+}
+
+.text-field{
+    -fx-font-size: 13;
+}
+
+.combo-box{
+    -fx-font-size: 13;
 }
 

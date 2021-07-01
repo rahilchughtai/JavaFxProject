@@ -13,24 +13,34 @@
           fx:controller="controllers.StudentsController">
 
     <HBox alignment="BASELINE_CENTER" GridPane.columnIndex="1" GridPane.columnSpan="6" GridPane.rowIndex="0">
-        <Label styleClass="h1" text="Students Manager" textFill="WHITE"/>
+        <Label styleClass="h1" text="Studenten Management" textFill="WHITE"/>
     </HBox>
 
-    <fx:include source="Sidebar.fxml" GridPane.columnIndex="0" GridPane.rowIndex="1" GridPane.rowSpan="5">
-    </fx:include>
 
-    <TableView editable="true" fx:id="table_Students" maxHeight="700" maxWidth="800" prefHeight="463.0" prefWidth="1077.0"
+    <VBox GridPane.columnIndex="0" GridPane.rowIndex="6" alignment="CENTER_LEFT" spacing="30">
+        <fx:include source="Sidebar.fxml" GridPane.columnIndex="0" GridPane.rowIndex="1" GridPane.rowSpan="5">
+        </fx:include>
+        <Button onAction="#saveStudents" style="-fx-font-size: 24.0; -fx-max-width: 200.0 " styleClass="btn-add"
+                text="Speichern">
+            <graphic>
+                <FontIcon iconLiteral="fa-save" styleClass="icon"/>
+            </graphic>
+        </Button>
+
+        <Button onAction="#deleteSelectedStudent" style="-fx-font-size: 24.0; -fx-max-width: 200.0; -fx-background-color: -fx-red; " styleClass="btn-add" text="Löschen">
+            <graphic>
+                <FontIcon iconLiteral="fa-remove" styleClass="icon" />
+            </graphic>
+        </Button>
+    </VBox>
+
+    <TableView styleClass="data-table" editable="true" fx:id="table_Students" maxHeight="700" maxWidth="800" prefHeight="463.0" prefWidth="1077.0"
                GridPane.columnIndex="1" GridPane.columnSpan="6" GridPane.rowIndex="1" GridPane.rowSpan="6">
         <columns>
             <TableColumn fx:id="col_matriculationNumber" minWidth="-1.0" prefWidth="133.0" text="Matrikel-Nr">
                 <cellValueFactory>
                     <PropertyValueFactory property="matriculationNumber"/>
                 </cellValueFactory>
-
-                <cellFactory>
-                    <TextFieldTableCell fx:factory="forTableColumn" />
-                </cellFactory>
-
             </TableColumn>
             <TableColumn fx:id="col_courseName" minWidth="-1.0" prefWidth="133.0" text="Kurs">
                 <cellValueFactory>
@@ -89,24 +99,7 @@
         </GridPane.margin>
     </TableView>
 
-    <VBox GridPane.columnIndex="0" GridPane.rowIndex="6" alignment="CENTER_LEFT">
-        <Button onAction="#saveStudents" style="-fx-font-size: 24.0; -fx-max-width: 200.0 " styleClass="btn-add"
-                text="Speichern">
-            <graphic>
-                <FontIcon iconLiteral="fa-save" styleClass="icon"/>
-            </graphic>
-        </Button>
 
-        <Button onAction="#deleteSelectedStudent" style="-fx-font-size: 24.0; -fx-max-width: 200.0; -fx-background-color: -fx-red; " styleClass="btn-add" text="Löschen">
-            <graphic>
-                <FontIcon iconLiteral="fa-remove" styleClass="icon" />
-            </graphic>
-            <VBox.margin>
-                <Insets top="10.0" />
-            </VBox.margin>
-        </Button>
-
-    </VBox>
 
     <HBox alignment="center" spacing="10" GridPane.columnIndex="1" GridPane.columnSpan="6" GridPane.rowIndex="7">
         <TextField id="newMatriculationNumberField" fx:id="text_newMatriculationNumber" prefWidth="90" promptText="Matrikel-Nr."/>
@@ -131,13 +124,15 @@
         </ComboBox>
 
         <TextField fx:id="text_corporationName" prefWidth="140" promptText="Firma"/>
+        <GridPane.margin>
+            <Insets bottom="20.0" top="10.0"/>
+        </GridPane.margin>
+    </HBox>
+    <VBox GridPane.rowIndex="8" GridPane.columnIndex="6" alignment="CENTER">
         <Button onAction="#addNewStudent" styleClass="btn-add" text="Hinzufügen">
             <graphic>
                 <FontIcon iconLiteral="fa-plus-circle" styleClass="icon"/>
             </graphic>
         </Button>
-        <GridPane.margin>
-            <Insets bottom="20.0" top="10.0"/>
-        </GridPane.margin>
-    </HBox>
+    </VBox>
 </GridPane>
