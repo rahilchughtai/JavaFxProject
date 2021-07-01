@@ -16,6 +16,7 @@ import javafx.stage.Window;
 
 import java.io.IOException;
 import java.net.URL;
+import java.sql.SQLOutput;
 import java.util.Objects;
 import java.util.ResourceBundle;
 
@@ -89,8 +90,11 @@ public class SceneController implements Initializable {
         Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getClassLoader().getResource(fxml)));
         Scene scene = new Scene(root);
         Stage appStage = (Stage) clickedWindow;
+
         appStage.setScene(scene);
         appStage.show();
+        appStage.setHeight(appStage.getHeight());
+        appStage.setWidth(appStage.getWidth());
     }
 
     private String buttonTextToPath(String buttonText) {
@@ -102,28 +106,5 @@ public class SceneController implements Initializable {
         String ButtonText = ((Button) mouseEvent.getSource()).getText();
         FxmlPathToScene(buttonTextToPath(ButtonText), eventToWindow(mouseEvent));
     }
-
-
-    /*
-    @FXML
-    private void btnSwitchToCourses(javafx.event.ActionEvent mouseEvent) throws IOException {
-        FxmlPathToScene(MyScene.COURSES.path, eventToWindow(mouseEvent));
-    }
-
-    @FXML
-    private void btnSwitchToRooms(javafx.event.ActionEvent mouseEvent) throws IOException {
-        FxmlPathToScene(MyScene.ROOMS.path, eventToWindow(mouseEvent));
-    }
-
-    @FXML
-    private void btnSwitchToHome(javafx.event.ActionEvent mouseEvent) throws IOException {
-        FxmlPathToScene(MyScene.HOME.path, eventToWindow(mouseEvent));
-    }
-
-    @FXML
-    private void btnSwitchToStudents(javafx.event.ActionEvent mouseEvent) throws IOException {
-        FxmlPathToScene(MyScene.STUDENTS.path, eventToWindow(mouseEvent));
-    }
-    */
 
 }
