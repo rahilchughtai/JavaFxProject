@@ -16,7 +16,6 @@ import org.h2.jdbc.JdbcSQLIntegrityConstraintViolationException;
 
 import java.net.URL;
 import java.sql.SQLException;
-import java.util.ArrayList;
 import java.util.Collection;
 import java.util.ResourceBundle;
 
@@ -49,7 +48,7 @@ public class CoursesController extends SceneController {
         final var selectedRoomName = combo_room.getSelectionModel().getSelectedItem();
         final var newCourseName = text_newCourseName.getText();
 
-        if (selectedRoomName == null || newCourseName.equals(""))
+        if (selectedRoomName == null || newCourseName.isEmpty())
             return;
 
         final var selectedRoom = possibleRooms.stream().filter(x -> x.getName().equals(selectedRoomName)).findFirst().get();
@@ -59,8 +58,6 @@ public class CoursesController extends SceneController {
             final var newDatabaseCourse = new database.models.Course(null, newCourse.getName(), new Room(newCourse.getRoomId(), newCourse.getRoomName()));
 
             courseService.save(newDatabaseCourse);
-
-            System.out.println(newDatabaseCourse.getId());
 
             newCourse.setId(newDatabaseCourse.getId());
 
