@@ -77,9 +77,6 @@ public class RoomsController extends SceneController {
 
     @FXML
     private void saveRooms(ActionEvent actionEvent) {
-        System.out.println(
-                "sussy"
-        );
         try {
             final var changedRooms = data_rooms
                     .stream()
