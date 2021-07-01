@@ -64,6 +64,7 @@ public class RoomsController extends SceneController {
     @Override
     protected void loadData() {
         data_rooms = FXCollections.observableArrayList();
+
         try {
             final var rooms = roomService
                     .get()
@@ -74,6 +75,7 @@ public class RoomsController extends SceneController {
         } catch (SQLException sqlException) {
             sqlException.printStackTrace();
         }
+
         table_rooms.setItems(data_rooms);
     }
 
