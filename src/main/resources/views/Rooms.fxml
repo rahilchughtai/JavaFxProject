@@ -16,9 +16,9 @@
     <fx:include source="Sidebar.fxml" GridPane.columnIndex="0" GridPane.rowIndex="1" GridPane.rowSpan="5">
     </fx:include>
 
-    <TableView editable="true" fx:id="table_rooms" maxHeight="700" maxWidth="300.0" prefHeight="463.0" prefWidth="300.0" GridPane.columnIndex="1" GridPane.columnSpan="6" GridPane.rowIndex="1" GridPane.rowSpan="6">
+    <TableView styleClass="data-table" editable="true" fx:id="table_rooms" GridPane.columnIndex="1" GridPane.columnSpan="6" GridPane.rowIndex="1" GridPane.rowSpan="6">
         <columns>
-            <TableColumn fx:id="col_roomName"  text="Raumname" maxWidth="300.0" prefWidth="300.0">
+            <TableColumn fx:id="col_roomName"  text="Raumname" prefWidth="800" >
                 <cellValueFactory>
                     <PropertyValueFactory property="name" />
                 </cellValueFactory>
