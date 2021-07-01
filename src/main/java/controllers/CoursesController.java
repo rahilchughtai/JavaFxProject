@@ -44,15 +44,23 @@ public class CoursesController extends SceneController {
     @FXML
     private TableColumn<Course, String> col_courseName;
 
+
+    @Override
+    public void initialize(URL url, ResourceBundle resourceBundle) {
+        courseService = CourseService.getService();
+        roomService = RoomService.getService();
+        super.initialize(url, resourceBundle);
+        initializeColumns();
+    }
+
+
     @FXML
     private void addNewCourse(ActionEvent actionEvent) {
         final var selectedRoomName = combo_room.getSelectionModel().getSelectedItem();
         final var newCourseName = text_newCourseName.getText();
 
         if (selectedRoomName == null || newCourseName.isEmpty()) {
-
             showError("Raumname oder Kursename fehlt!");
-
             return;
         }
 
@@ -109,42 +117,24 @@ public class CoursesController extends SceneController {
         }
     }
 
-    @Override
-    public void initialize(URL url, ResourceBundle resourceBundle) {
-        courseService = CourseService.getService();
-        roomService = RoomService.getService();
-
-        super.initialize(url, resourceBundle);
-
-        initializeColumns();
-    }
-
     private void editRow(TableColumn.CellEditEvent<Course, String > cellEditEvent, boolean roomChanged) {
         final var rowValue = cellEditEvent.getRowValue();
-
         final var indexOfRowValue = data_courses.indexOf(rowValue);
-
         if (indexOfRowValue == -1)
             return;
-
         Course updatedCourse;
-
         if (roomChanged) {
             final var selectedRoom = possibleRooms.stream().filter(x -> x.getName().equals(cellEditEvent.getNewValue())).findFirst().get();
-
             updatedCourse = new Course(rowValue.getId(), rowValue.getName(), selectedRoom.getId(), selectedRoom.getName());
         } else {
             updatedCourse = new Course(rowValue.getId(), cellEditEvent.getNewValue(), rowValue.getRoomId(), rowValue.getRoomName());
         }
-
         data_courses.set(indexOfRowValue, updatedCourse);
     }
 
     private void initializeColumns() {
         col_room.setCellFactory(ComboBoxTableCell.forTableColumn(new DefaultStringConverter(), data_roomNames));
-
         col_room.setOnEditCommit(cellEditEvent -> editRow(cellEditEvent, true));
-
         col_courseName.setOnEditCommit(cellEditEvent -> editRow(cellEditEvent, false));
     }
 
@@ -152,7 +142,6 @@ public class CoursesController extends SceneController {
     protected void loadData() {
         data_courses = FXCollections.observableArrayList();
         data_roomNames = FXCollections.observableArrayList();
-
         try {
             possibleRooms = roomService.get();
             data_roomNames.addAll(possibleRooms
@@ -160,7 +149,6 @@ public class CoursesController extends SceneController {
                 .map(Room::getName)
                 .toList());
             combo_room.setItems(data_roomNames);
-
             data_courses.addAll(courseService
                     .get()
                     .stream()
