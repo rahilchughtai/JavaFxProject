@@ -13,6 +13,8 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.ComboBoxTableCell;
+import javafx.scene.control.cell.TextFieldTableCell;
+import javafx.scene.control.cell.TextFieldTreeCell;
 import javafx.util.converter.DefaultStringConverter;
 import models.JavaSkillRating;
 import models.Student;
@@ -166,8 +168,6 @@ public class StudentsController extends SceneController {
             }
         };
 
-        System.out.println(updatedStudent);
-
         data_students.set(indexOfRowValue, updatedStudent);
 
     }
@@ -190,8 +190,6 @@ public class StudentsController extends SceneController {
                 cellEditEvent.getNewValue()
         );
 
-        System.out.println(updatedStudent);
-
         data_students.set(indexOfRowValue, updatedStudent);
 
     }
@@ -200,6 +198,7 @@ public class StudentsController extends SceneController {
 
         col_javaSkill.setCellFactory(ComboBoxTableCell.forTableColumn(new JavaSkillRatingConverter(), data_javaSkills));
         col_courseName.setCellFactory(ComboBoxTableCell.forTableColumn(new DefaultStringConverter(), data_courses));
+        col_matriculationNumber.setCellFactory(TextFieldTableCell.forTableColumn(new RestrictToOnlyNumbersStringConverter()));
 
         col_matriculationNumber.setOnEditCommit(cellEditEvent -> editRow(cellEditEvent, ChangedProperty.MATRICULATION_NUMBER));
         col_courseName.setOnEditCommit(cellEditEvent -> editRow(cellEditEvent, ChangedProperty.COURSE));
@@ -207,6 +206,7 @@ public class StudentsController extends SceneController {
         col_firstName.setOnEditCommit(cellEditEvent -> editRow(cellEditEvent, ChangedProperty.FIRST_NAME));
         col_lastName.setOnEditCommit(cellEditEvent -> editRow(cellEditEvent, ChangedProperty.LAST_NAME));
         col_javaSkill.setOnEditCommit(cellEditEvent -> editRow(cellEditEvent));
+
     }
 
     private JavaSkillRating javaSkillStringToEnum(String skillRating) {
