@@ -6,8 +6,11 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
+import javafx.scene.control.cell.ComboBoxTableCell;
+import javafx.util.converter.DefaultStringConverter;
 import models.Course;
 import models.Room;
 import org.h2.jdbc.JdbcSQLIntegrityConstraintViolationException;
@@ -18,9 +21,15 @@ import java.util.ResourceBundle;
 
 public class RoomsController extends SceneController {
 
-    public static ObservableList<Room> data_rooms;
-    public TextField text_newRoomName;
     private ModelService<database.models.Room> roomService;
+
+    private ObservableList<Room> data_rooms;
+
+    @FXML
+    private TableColumn<Room, String> col_roomName;
+
+    @FXML
+    private TextField text_newRoomName;
 
     @FXML
     private TableView<Room> table_rooms;
@@ -55,7 +64,27 @@ public class RoomsController extends SceneController {
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         roomService = RoomService.getService();
+
         super.initialize(url, resourceBundle);
+
+        initializeColumns();
+    }
+
+    private void editRow(TableColumn.CellEditEvent<Room, String > cellEditEvent) {
+        final var rowValue = cellEditEvent.getRowValue();
+
+        final var indexOfRowValue = data_rooms.indexOf(rowValue);
+
+        if (indexOfRowValue == -1)
+            return;
+
+        final var updatedRoom = new Room(rowValue.getId(), cellEditEvent.getNewValue());
+
+        data_rooms.set(indexOfRowValue, updatedRoom);
+    }
+
+    private void initializeColumns() {
+        col_roomName.setOnEditCommit(cellEditEvent -> editRow(cellEditEvent));
     }
 
     @Override
@@ -91,5 +120,4 @@ public class RoomsController extends SceneController {
             sqlException.printStackTrace();
         }
     }
-
 }

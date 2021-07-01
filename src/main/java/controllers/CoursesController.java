@@ -26,7 +26,6 @@ public class CoursesController extends SceneController {
 
     private Collection<database.models.Room> possibleRooms;
 
-
     private ObservableList<Course> data_courses;
     private ObservableList<String> data_roomNames;
 
@@ -120,7 +119,7 @@ public class CoursesController extends SceneController {
         initializeColumns();
     }
 
-    void editRow(TableColumn.CellEditEvent<Course, String > cellEditEvent, boolean roomChanged) {
+    private void editRow(TableColumn.CellEditEvent<Course, String > cellEditEvent, boolean roomChanged) {
         final var rowValue = cellEditEvent.getRowValue();
 
         final var indexOfRowValue = data_courses.indexOf(rowValue);
@@ -148,7 +147,6 @@ public class CoursesController extends SceneController {
 
         col_courseName.setOnEditCommit(cellEditEvent -> editRow(cellEditEvent, false));
     }
-
 
     @Override
     protected void loadData() {

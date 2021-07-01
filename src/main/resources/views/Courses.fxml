@@ -65,23 +65,4 @@
             <Insets bottom="20.0" top="10.0" />
          </GridPane.margin>
       </HBox>
-   <columnConstraints>
-      <ColumnConstraints />
-      <ColumnConstraints />
-      <ColumnConstraints />
-      <ColumnConstraints />
-      <ColumnConstraints />
-      <ColumnConstraints />
-      <ColumnConstraints />
-   </columnConstraints>
-   <rowConstraints>
-      <RowConstraints />
-      <RowConstraints />
-      <RowConstraints />
-      <RowConstraints />
-      <RowConstraints />
-      <RowConstraints />
-      <RowConstraints />
-      <RowConstraints />
-   </rowConstraints>
 </GridPane>
