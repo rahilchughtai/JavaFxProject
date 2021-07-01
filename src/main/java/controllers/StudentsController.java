@@ -12,6 +12,8 @@ import javafx.scene.control.ComboBox;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
+import javafx.scene.control.cell.ComboBoxTableCell;
+import javafx.util.converter.DefaultStringConverter;
 import models.JavaSkillRating;
 import models.Student;
 import org.h2.jdbc.JdbcSQLIntegrityConstraintViolationException;
@@ -25,6 +27,7 @@ import java.util.ResourceBundle;
 public class StudentsController extends SceneController {
 
     private ObservableList<Student> data_students;
+    private ObservableList<JavaSkillRating> data_javaSkills;
 
     @FXML
     private TableColumn<Student,String> col_corporationName;
@@ -42,7 +45,7 @@ public class StudentsController extends SceneController {
     private Collection<database.models.Course> possibleCourses;
 
     @FXML
-    public TableColumn<Student,String> col_javaSkills;
+    public TableColumn<Student,JavaSkillRating> col_javaSkills;
 
     @FXML
     private TableView<Student> table_Students;
@@ -65,17 +68,32 @@ public class StudentsController extends SceneController {
     public void initialize(URL url, ResourceBundle resources) {
         courseService = CourseService.getService();
         studentService = StudentService.getService();
-        textFieldToNumberField(text_newMatriculationNumber);
-        super.initialize(url, resources);
-        initializeColumns();
 
+        textFieldToNumberField(text_newMatriculationNumber);
+
+        super.initialize(url, resources);
+
+        initializeJavaSkills();
+        initializeColumns();
+    }
+
+    private void initializeJavaSkills() {
+        data_javaSkills = FXCollections.observableArrayList();
+
+        data_javaSkills.add(JavaSkillRating.NONE);
+        data_javaSkills.add(JavaSkillRating.BEGINNER);
+        data_javaSkills.add(JavaSkillRating.INTERMEDIATE);
+        data_javaSkills.add(JavaSkillRating.ADVANCED);
+        data_javaSkills.add(JavaSkillRating.SEBASTIAN);
     }
 
     private void initializeColumns() {
-     //  col_javaSkills.setCellFactory(ComboBoxTableCell.forTableColumn(new DefaultStringConverter(), "NONE"));
-      // col_room.setCellFactory(ComboBoxTableCell.forTableColumn(new DefaultStringConverter(), data_roomNames));
-      //  col_room.setOnEditCommit(cellEditEvent -> editRow(cellEditEvent, true));
-       // col_courseName.setOnEditCommit(cellEditEvent -> editRow(cellEditEvent, false));
+
+        col_javaSkills.setCellFactory(ComboBoxTableCell.forTableColumn(new JavaSkillRatingConverter(), data_javaSkills));
+
+          // col_room.setCellFactory(ComboBoxTableCell.forTableColumn(new DefaultStringConverter(), data_roomNames));
+          //  col_room.setOnEditCommit(cellEditEvent -> editRow(cellEditEvent, true));
+           // col_courseName.setOnEditCommit(cellEditEvent -> editRow(cellEditEvent, false));
     }
 
     private JavaSkillRating javaSkillStringToEnum(String skillRating) {
@@ -128,7 +146,7 @@ public class StudentsController extends SceneController {
         }
     }
 
-    Course findCourse(String courseName) throws SQLException {
+    private Course findCourse(String courseName) throws SQLException {
         possibleCourses = courseService.get();
         Optional<Course> foundCourse = possibleCourses.stream().filter(course -> course.getName().
                 equals(courseName)).findFirst();
@@ -157,7 +175,6 @@ public class StudentsController extends SceneController {
             return;
         models.Student updatedStudent;
     }
-
 
     @FXML
     private void saveStudents(ActionEvent actionEvent) {
