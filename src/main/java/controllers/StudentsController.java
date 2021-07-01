@@ -45,11 +45,9 @@ public class StudentsController extends SceneController {
 
     @Override
     public void initialize(URL url, ResourceBundle resources) {
-
         courseService = CourseService.getService();
         studentService = StudentService.getService();
         textFieldToNumberField(text_newMatrikelNumber);
-
         super.initialize(url, resources);
     }
 
@@ -59,38 +57,45 @@ public class StudentsController extends SceneController {
         return JavaSkillRating.valueOf(skillRating.toUpperCase());
     }
 
+
+
+    private void insertCourses() throws SQLException {
+        ObservableList<String> data_courses = FXCollections.observableArrayList();
+        possibleCourses = courseService.get();
+        data_courses.addAll(possibleCourses
+                .stream()
+                .map(Course::getName)
+                .toList());
+        combo_course.setItems(data_courses);
+    }
+
+    private void insertStudents() throws SQLException {
+        data_table.addAll(
+                studentService.get().stream().map(
+                        s -> new Student(
+                                s.getId(),
+                                s.getMatriculationNumber(),
+                                s.getFirstName(),
+                                s.getLastName(),
+                                s.getCorporationName(),
+                                s.getJavaSkillRating(),
+                                s.getCourse()
+                        )
+                ).toList()
+        );
+        table_Students.setItems(data_table);
+    }
+
+
     @Override
     protected void loadData() {
         data_table = FXCollections.observableArrayList();
-        ObservableList<String> data_courses = FXCollections.observableArrayList();
-
-
         try {
-            possibleCourses = courseService.get();
-            data_courses.addAll(possibleCourses
-                    .stream()
-                    .map(Course::getName)
-                    .toList());
-            combo_course.setItems(data_courses);
-
-            data_table.addAll(
-                    studentService.get().stream().map(
-                            s -> new Student(
-                                    s.getId(),
-                                    s.getMatriculationNumber(),
-                                    s.getFirstName(),
-                                    s.getLastName(),
-                                    s.getCorporationName(),
-                                    s.getJavaSkillRating(),
-                                    s.getCourse()
-                            )
-                    ).toList()
-            );
-
+            insertCourses();
+            insertStudents();
         } catch (SQLException sqlException) {
             sqlException.printStackTrace();
         }
-        table_Students.setItems(data_table);
     }
 
     Course findCourse(String courseName) throws SQLException {
@@ -98,7 +103,6 @@ public class StudentsController extends SceneController {
         Optional<Course> foundCourse = possibleCourses.stream().filter(course -> course.getName().
                 equals(courseName)).findFirst();
         return foundCourse.orElse(null);
-
     }
 
     @FXML

@@ -31,7 +31,6 @@ public class RoomsController extends SceneController {
 
         if (newRoomName.isEmpty()) {
             showError("Raumname fehlt!");
-
             return;
         }
 
