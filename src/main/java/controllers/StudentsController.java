@@ -13,6 +13,8 @@ import javafx.scene.control.ComboBox;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
+import javafx.scene.control.cell.ComboBoxTableCell;
+import javafx.util.converter.DefaultStringConverter;
 import models.Student;
 import org.h2.jdbc.JdbcSQLIntegrityConstraintViolationException;
 
@@ -27,11 +29,30 @@ import java.util.ResourceBundle;
 public class StudentsController extends SceneController {
 
     public static ObservableList<Student> data_table;
-    public TableView<Student> table_Students;
-    public ComboBox<String> combo_course;
+
+    @FXML
+    private TableColumn<Student,String> col_corporation;
+    @FXML
+    private TableColumn<Student,String> col_lastName;
+    @FXML
+    private TableColumn<Student,String> col_newName;
+    @FXML
+    private TableColumn<Student,String> col_course;
+    @FXML
+    private TableColumn<Student,String> col_mid;
+
     private ModelService<database.models.Course> courseService;
     private ModelService<database.models.Student> studentService;
     private Collection<database.models.Course> possibleCourses;
+
+    public TableColumn<Student,String> col_javaSkills;
+
+    @FXML
+    private TableView<Student> table_Students;
+
+    @FXML
+    private ComboBox<String> combo_course;
+
     @FXML
     private TextField text_newMatrikelNumber;
     @FXML
@@ -49,6 +70,15 @@ public class StudentsController extends SceneController {
         studentService = StudentService.getService();
         textFieldToNumberField(text_newMatrikelNumber);
         super.initialize(url, resources);
+        initializeColumns();
+
+    }
+
+    private void initializeColumns() {
+     //  col_javaSkills.setCellFactory(ComboBoxTableCell.forTableColumn(new DefaultStringConverter(), "NONE"));
+      // col_room.setCellFactory(ComboBoxTableCell.forTableColumn(new DefaultStringConverter(), data_roomNames));
+      //  col_room.setOnEditCommit(cellEditEvent -> editRow(cellEditEvent, true));
+       // col_courseName.setOnEditCommit(cellEditEvent -> editRow(cellEditEvent, false));
     }
 
     private JavaSkillRating javaSkillStringToEnum(String skillRating) {
@@ -58,11 +88,10 @@ public class StudentsController extends SceneController {
     }
 
 
-
     private void insertCourses() throws SQLException {
         ObservableList<String> data_courses = FXCollections.observableArrayList();
-        possibleCourses = courseService.get();
-        data_courses.addAll(possibleCourses
+
+        data_courses.addAll(courseService.get()
                 .stream()
                 .map(Course::getName)
                 .toList());

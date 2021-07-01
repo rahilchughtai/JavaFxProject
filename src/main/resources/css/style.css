@@ -68,3 +68,10 @@
 }
 
 
+.greetingLabel {
+    -fx-text-fill: -fx-grey;
+    -fx-font-size: 20px;
+    -fx-wrap-text: true;
+    -fx-max-width: 500;
+}
+

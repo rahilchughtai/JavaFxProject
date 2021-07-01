@@ -12,11 +12,9 @@
           xmlns="http://javafx.com/javafx/11.0.2" xmlns:fx="http://javafx.com/fxml/1"
           fx:controller="controllers.StudentsController">
 
-
     <HBox alignment="BASELINE_CENTER" GridPane.columnIndex="1" GridPane.columnSpan="6" GridPane.rowIndex="0">
         <Label styleClass="h1" text="Students Manager" textFill="WHITE"/>
     </HBox>
-
 
     <fx:include source="Sidebar.fxml" GridPane.columnIndex="0" GridPane.rowIndex="1" GridPane.rowSpan="5">
     </fx:include>
@@ -28,45 +26,62 @@
                 <cellValueFactory>
                     <PropertyValueFactory property="matri_Id"/>
                 </cellValueFactory>
+
                 <cellFactory>
+                    <TextFieldTableCell fx:factory="forTableColumn" />
                 </cellFactory>
+
             </TableColumn>
             <TableColumn fx:id="col_course" minWidth="-1.0" prefWidth="133.0" text="Kurs">
                 <cellValueFactory>
                     <PropertyValueFactory property="courseName"/>
                 </cellValueFactory>
+
                 <cellFactory>
+                    <TextFieldTableCell fx:factory="forTableColumn" />
                 </cellFactory>
+
             </TableColumn>
 
             <TableColumn fx:id="col_newName" minWidth="-1.0" prefWidth="133.0" text="Vorname">
                 <cellValueFactory>
                     <PropertyValueFactory property="firstName"/>
                 </cellValueFactory>
+
+                <cellFactory>
+                    <TextFieldTableCell fx:factory="forTableColumn" />
+                </cellFactory>
+
             </TableColumn>
 
             <TableColumn fx:id="col_lastName" minWidth="-1.0" prefWidth="133.0" text="Nachname">
                 <cellValueFactory>
                     <PropertyValueFactory property="lastName"/>
                 </cellValueFactory>
+
                 <cellFactory>
+                    <TextFieldTableCell fx:factory="forTableColumn" />
                 </cellFactory>
+
             </TableColumn>
 
             <TableColumn fx:id="col_corporation" minWidth="-1.0" prefWidth="133.0" text="Firma">
                 <cellValueFactory>
                     <PropertyValueFactory property="corporation"/>
                 </cellValueFactory>
+
                 <cellFactory>
+                    <TextFieldTableCell fx:factory="forTableColumn" />
                 </cellFactory>
+
             </TableColumn>
 
             <TableColumn fx:id="col_javaSkills" minWidth="-1.0" prefWidth="133.0" text="Java-Kenntnisse">
                 <cellValueFactory>
                     <PropertyValueFactory property="javaSkill"/>
                 </cellValueFactory>
-                <cellFactory>
-                </cellFactory>
+
+
 
             </TableColumn>
 
