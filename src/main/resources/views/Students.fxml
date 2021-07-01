@@ -22,9 +22,9 @@
     <TableView editable="true" fx:id="table_Students" maxHeight="700" maxWidth="800" prefHeight="463.0" prefWidth="1077.0"
                GridPane.columnIndex="1" GridPane.columnSpan="6" GridPane.rowIndex="1" GridPane.rowSpan="6">
         <columns>
-            <TableColumn fx:id="col_mid" minWidth="-1.0" prefWidth="133.0" text="Matrikel-Nr">
+            <TableColumn fx:id="col_matriculationNumber" minWidth="-1.0" prefWidth="133.0" text="Matrikel-Nr">
                 <cellValueFactory>
-                    <PropertyValueFactory property="matri_Id"/>
+                    <PropertyValueFactory property="matriculationNumber"/>
                 </cellValueFactory>
 
                 <cellFactory>
@@ -43,7 +43,7 @@
 
             </TableColumn>
 
-            <TableColumn fx:id="col_newName" minWidth="-1.0" prefWidth="133.0" text="Vorname">
+            <TableColumn fx:id="col_firstName" minWidth="-1.0" prefWidth="133.0" text="Vorname">
                 <cellValueFactory>
                     <PropertyValueFactory property="firstName"/>
                 </cellValueFactory>
@@ -65,9 +65,9 @@
 
             </TableColumn>
 
-            <TableColumn fx:id="col_corporation" minWidth="-1.0" prefWidth="133.0" text="Firma">
+            <TableColumn fx:id="col_corporationName" minWidth="-1.0" prefWidth="133.0" text="Firma">
                 <cellValueFactory>
-                    <PropertyValueFactory property="corporation"/>
+                    <PropertyValueFactory property="corporationName"/>
                 </cellValueFactory>
 
                 <cellFactory>
@@ -80,9 +80,6 @@
                 <cellValueFactory>
                     <PropertyValueFactory property="javaSkill"/>
                 </cellValueFactory>
-
-
-
             </TableColumn>
 
         </columns>
@@ -112,9 +109,9 @@
     </VBox>
 
     <HBox alignment="center" spacing="10" GridPane.columnIndex="1" GridPane.columnSpan="6" GridPane.rowIndex="7">
-        <TextField id="matrikelNumberField" fx:id="text_newMatrikelNumber" prefWidth="90" promptText="Matrikel-Nr."/>
-        <TextField id="firstNameField" fx:id="text_newFirstName" prefWidth="140" promptText="Vorname"/>
-        <TextField id="lastNameField" fx:id="text_newLastName" prefWidth="140" promptText="Nachname"/>
+        <TextField id="newMatriculationNumberField" fx:id="text_newMatriculationNumber" prefWidth="90" promptText="Matrikel-Nr."/>
+        <TextField id="firstNameField" fx:id="text_firstName" prefWidth="140" promptText="Vorname"/>
+        <TextField id="lastNameField" fx:id="text_lastName" prefWidth="140" promptText="Nachname"/>
         <ComboBox fx:id="combo_javaSkills" promptText="Java-Kenntnisse">
             <items>
                 <FXCollections fx:factory="observableArrayList">
@@ -133,7 +130,7 @@
             </items>
         </ComboBox>
 
-        <TextField fx:id="text_newCorporation" prefWidth="140" promptText="Firma"/>
+        <TextField fx:id="text_corporationName" prefWidth="140" promptText="Firma"/>
         <Button onAction="#addNewStudent" styleClass="btn-add" text="Hinzufügen">
             <graphic>
                 <FontIcon iconLiteral="fa-plus-circle" styleClass="icon"/>

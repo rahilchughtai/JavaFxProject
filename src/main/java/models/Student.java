@@ -1,70 +1,99 @@
 package models;
 
-import database.models.JavaSkillRating;
-import database.models.Model;
-import  database.models.Course;
-
-public class Student implements Model {
+public class Student {
     private Integer Id;
-    private String matri_Id;
+    private String matriculationNumber;
     private String firstName;
     private String lastName;
-    private String corporation;
+    private String corporationName;
     private JavaSkillRating javaSkill;
-    private database.models.Course course;
+    private Integer courseId;
     private String courseName;
 
     public Student(){
     }
 
+    public Student(
+            final Integer id,
+            final String matriculationNumber,
+            final String firstName,
+            final String lastName,
+            final String corporationName,
+            final Integer courseId,
+            final String courseName,
+            final JavaSkillRating javaSkill) {
 
-    public Student(final Integer id, String matri_Id, String firstName, String lastName, String corporation, JavaSkillRating javaSkill, Course course ) {
-        this.Id = id;
-        this.matri_Id = matri_Id;
-        this.firstName = firstName;
-        this.lastName = lastName;
-        this.corporation = corporation;
-        this.javaSkill = javaSkill;
-        this.course=course;
-        this.courseName=course.getName();
+        this.setId(id);
+        this.setMatriculationNumber(matriculationNumber);
+        this.setFirstName(firstName);
+        this.setLastName(lastName);
+        this.setCorporationName(corporationName);
+        this.setJavaSkill(javaSkill);
+        this.setCourseId(courseId);
+        this.setCourseName(courseName);
     }
 
-    public String getMatri_Id() {
-        return matri_Id;
+    public Integer getId() {
+        return Id;
     }
 
-    public String getCourseName() {
-        return courseName;
+    public void setId(Integer id) {
+        Id = id;
     }
 
-    public JavaSkillRating getJavaSkill() {
-        return javaSkill;
+    public String getMatriculationNumber() {
+        return matriculationNumber;
     }
 
-    public String getCorporation() {
-        return corporation;
+    public void setMatriculationNumber(String matriculationNumber) {
+        this.matriculationNumber = matriculationNumber;
     }
 
     public String getFirstName() {
         return firstName;
     }
 
+    public void setFirstName(String firstName) {
+        this.firstName = firstName;
+    }
+
     public String getLastName() {
         return lastName;
     }
 
-    public Course getCourse() {
-        return course;
+    public void setLastName(String lastName) {
+        this.lastName = lastName;
     }
 
-
-    @Override
-    public Integer getId() {
-        return Id;
+    public String getCorporationName() {
+        return corporationName;
     }
 
-    @Override
-    public void setId(Integer id) {
-        this.Id=id;
+    public void setCorporationName(String corporationName) {
+        this.corporationName = corporationName;
+    }
+
+    public JavaSkillRating getJavaSkill() {
+        return javaSkill;
+    }
+
+    public void setJavaSkill(JavaSkillRating javaSkill) {
+        this.javaSkill = javaSkill;
+    }
+
+    public Integer getCourseId() {
+        return courseId;
+    }
+
+    public void setCourseId(Integer courseId) {
+        this.courseId = courseId;
+    }
+
+    public String getCourseName() {
+        return courseName;
+    }
+
+    public void setCourseName(String courseName) {
+        this.courseName = courseName;
     }
 }
