@@ -91,7 +91,7 @@ public class DummyDataService {
             }});
 
             add(new Student() {{
-                setMatriculationNumber("-10");
+                setMatriculationNumber("00000");
                 setFirstName("Eckard");
                 setLastName("Kruse");
                 setJavaSkillRating(JavaSkillRating.NONE);

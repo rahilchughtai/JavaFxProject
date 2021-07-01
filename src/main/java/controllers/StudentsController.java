@@ -26,7 +26,16 @@ import java.util.ResourceBundle;
 
 public class StudentsController extends SceneController {
 
+    private enum ChangedProperty {
+        MATRICULATION_NUMBER,
+        FIRST_NAME,
+        LAST_NAME,
+        CORPORATION_NAME,
+        COURSE,
+    }
+
     private ObservableList<Student> data_students;
+    private ObservableList<String> data_courses;
     private ObservableList<JavaSkillRating> data_javaSkills;
 
     @FXML
@@ -36,7 +45,7 @@ public class StudentsController extends SceneController {
     @FXML
     private TableColumn<Student,String> col_firstName;
     @FXML
-    private TableColumn<Student,String> col_course;
+    private TableColumn<Student,String> col_courseName;
     @FXML
     private TableColumn<Student,String> col_matriculationNumber;
 
@@ -45,7 +54,7 @@ public class StudentsController extends SceneController {
     private Collection<database.models.Course> possibleCourses;
 
     @FXML
-    public TableColumn<Student,JavaSkillRating> col_javaSkills;
+    public TableColumn<Student,JavaSkillRating> col_javaSkill;
 
     @FXML
     private TableView<Student> table_Students;
@@ -87,13 +96,117 @@ public class StudentsController extends SceneController {
         data_javaSkills.add(JavaSkillRating.SEBASTIAN);
     }
 
+    private void editRow(TableColumn.CellEditEvent<models.Student, String> cellEditEvent, ChangedProperty changedProperty) {
+        final var rowValue = cellEditEvent.getRowValue();
+        final var indexOfRowValue = data_students.indexOf(rowValue);
+
+        if (indexOfRowValue == -1)
+            return;
+
+        final var updatedStudent = switch (changedProperty) {
+
+            case MATRICULATION_NUMBER -> new Student(
+                    rowValue.getId(),
+                    cellEditEvent.getNewValue(),
+                    rowValue.getFirstName(),
+                    rowValue.getLastName(),
+                    rowValue.getCorporationName(),
+                    rowValue.getCourseId(),
+                    rowValue.getCourseName(),
+                    rowValue.getJavaSkill()
+            );
+            case FIRST_NAME -> new Student(
+                    rowValue.getId(),
+                    rowValue.getMatriculationNumber(),
+                    cellEditEvent.getNewValue(),
+                    rowValue.getLastName(),
+                    rowValue.getCorporationName(),
+                    rowValue.getCourseId(),
+                    rowValue.getCourseName(),
+                    rowValue.getJavaSkill()
+            );
+            case LAST_NAME -> new Student(
+                    rowValue.getId(),
+                    rowValue.getMatriculationNumber(),
+                    rowValue.getFirstName(),
+                    cellEditEvent.getNewValue(),
+                    rowValue.getCorporationName(),
+                    rowValue.getCourseId(),
+                    rowValue.getCourseName(),
+                    rowValue.getJavaSkill()
+            );
+            case CORPORATION_NAME -> new Student(
+                    rowValue.getId(),
+                    rowValue.getMatriculationNumber(),
+                    rowValue.getFirstName(),
+                    rowValue.getLastName(),
+                    cellEditEvent.getNewValue(),
+                    rowValue.getCourseId(),
+                    rowValue.getCourseName(),
+                    rowValue.getJavaSkill()
+            );
+            case COURSE -> {
+
+                final var selectedCourse = possibleCourses
+                        .stream()
+                        .filter(x -> x.getName().equals(cellEditEvent.getNewValue()))
+                        .findFirst()
+                        .get();
+
+                yield new Student(
+                        rowValue.getId(),
+                        rowValue.getMatriculationNumber(),
+                        rowValue.getFirstName(),
+                        rowValue.getLastName(),
+                        rowValue.getCorporationName(),
+                        selectedCourse.getId(),
+                        selectedCourse.getName(),
+                        rowValue.getJavaSkill()
+                );
+            }
+        };
+
+        System.out.println(updatedStudent);
+
+        data_students.set(indexOfRowValue, updatedStudent);
+
+    }
+
+    private void editRow(TableColumn.CellEditEvent<models.Student, JavaSkillRating> cellEditEvent) {
+        final var rowValue = cellEditEvent.getRowValue();
+        final var indexOfRowValue = data_students.indexOf(rowValue);
+
+        if (indexOfRowValue == -1)
+            return;
+
+        final var updatedStudent = new Student(
+                rowValue.getId(),
+                rowValue.getMatriculationNumber(),
+                rowValue.getFirstName(),
+                rowValue.getLastName(),
+                rowValue.getCorporationName(),
+                rowValue.getCourseId(),
+                rowValue.getCourseName(),
+                cellEditEvent.getNewValue()
+        );
+
+        System.out.println(updatedStudent);
+
+        data_students.set(indexOfRowValue, updatedStudent);
+
+    }
+
     private void initializeColumns() {
 
-        col_javaSkills.setCellFactory(ComboBoxTableCell.forTableColumn(new JavaSkillRatingConverter(), data_javaSkills));
+        col_javaSkill.setCellFactory(ComboBoxTableCell.forTableColumn(new JavaSkillRatingConverter(), data_javaSkills));
+        col_courseName.setCellFactory(ComboBoxTableCell.forTableColumn(new DefaultStringConverter(), data_courses));
 
-          // col_room.setCellFactory(ComboBoxTableCell.forTableColumn(new DefaultStringConverter(), data_roomNames));
-          //  col_room.setOnEditCommit(cellEditEvent -> editRow(cellEditEvent, true));
-           // col_courseName.setOnEditCommit(cellEditEvent -> editRow(cellEditEvent, false));
+        col_matriculationNumber.setOnEditCommit(cellEditEvent -> editRow(cellEditEvent, ChangedProperty.MATRICULATION_NUMBER));
+        col_courseName.setOnEditCommit(cellEditEvent -> editRow(cellEditEvent, ChangedProperty.COURSE));
+        col_corporationName.setOnEditCommit(cellEditEvent -> editRow(cellEditEvent, ChangedProperty.CORPORATION_NAME));
+        col_firstName.setOnEditCommit(cellEditEvent -> editRow(cellEditEvent, ChangedProperty.FIRST_NAME));
+        col_lastName.setOnEditCommit(cellEditEvent -> editRow(cellEditEvent, ChangedProperty.LAST_NAME));
+        col_javaSkill.setOnEditCommit(cellEditEvent -> editRow(cellEditEvent));
     }
 
     private JavaSkillRating javaSkillStringToEnum(String skillRating) {
@@ -105,12 +218,15 @@ public class StudentsController extends SceneController {
 
 
     private void loadCourses() throws SQLException {
-        ObservableList<String> data_courses = FXCollections.observableArrayList();
+        data_courses = FXCollections.observableArrayList();
 
-        data_courses.addAll(courseService.get()
+        possibleCourses = courseService.get();
+
+        data_courses.addAll(possibleCourses
                 .stream()
                 .map(Course::getName)
                 .toList());
+
         combo_course.setItems(data_courses);
     }
 
@@ -147,10 +263,11 @@ public class StudentsController extends SceneController {
     }
 
     private Course findCourse(String courseName) throws SQLException {
-        possibleCourses = courseService.get();
-        Optional<Course> foundCourse = possibleCourses.stream().filter(course -> course.getName().
-                equals(courseName)).findFirst();
-        return foundCourse.orElse(null);
+        return possibleCourses
+                .stream()
+                .filter(course -> course.getName().equals(courseName))
+                .findFirst()
+                .orElse(null);
     }
 
     @FXML
@@ -166,14 +283,6 @@ public class StudentsController extends SceneController {
         } catch (SQLException sqlException) {
             sqlException.printStackTrace();
         }
-    }
-
-    void editRow(TableColumn.CellEditEvent<models.Student, String > cellEditEvent, boolean roomChanged) {
-        final var rowValue = cellEditEvent.getRowValue();
-        final var indexOfRowValue = data_students.indexOf(rowValue);
-        if (indexOfRowValue == -1)
-            return;
-        models.Student updatedStudent;
     }
 
     @FXML

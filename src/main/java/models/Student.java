@@ -1,5 +1,7 @@
 package models;
 
+import java.util.Objects;
+
 public class Student {
     private Integer Id;
     private String matriculationNumber;
@@ -95,5 +97,32 @@ public class Student {
 
     public void setCourseName(String courseName) {
         this.courseName = courseName;
+    }
+
+    @Override
+    public String toString() {
+        return "Student{" +
+                "Id=" + Id +
+                ", matriculationNumber='" + matriculationNumber + '\'' +
+                ", firstName='" + firstName + '\'' +
+                ", lastName='" + lastName + '\'' +
+                ", corporationName='" + corporationName + '\'' +
+                ", javaSkill=" + javaSkill +
+                ", courseId=" + courseId +
+                ", courseName='" + courseName + '\'' +
+                '}';
+    }
+
+    @Override
+    public boolean equals(final Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Student student = (Student) o;
+        return Objects.equals(Id, student.Id) && Objects.equals(matriculationNumber, student.matriculationNumber) && Objects.equals(firstName, student.firstName) && Objects.equals(lastName, student.lastName) && Objects.equals(corporationName, student.corporationName) && javaSkill == student.javaSkill && Objects.equals(courseId, student.courseId) && Objects.equals(courseName, student.courseName);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(Id, matriculationNumber, firstName, lastName, corporationName, javaSkill, courseId, courseName);
     }
 }

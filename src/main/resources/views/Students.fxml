@@ -32,7 +32,7 @@
                 </cellFactory>
 
             </TableColumn>
-            <TableColumn fx:id="col_course" minWidth="-1.0" prefWidth="133.0" text="Kurs">
+            <TableColumn fx:id="col_courseName" minWidth="-1.0" prefWidth="133.0" text="Kurs">
                 <cellValueFactory>
                     <PropertyValueFactory property="courseName"/>
                 </cellValueFactory>
@@ -76,7 +76,7 @@
 
             </TableColumn>
 
-            <TableColumn fx:id="col_javaSkills" minWidth="-1.0" prefWidth="133.0" text="Java-Kenntnisse">
+            <TableColumn fx:id="col_javaSkill" minWidth="-1.0" prefWidth="133.0" text="Java-Kenntnisse">
                 <cellValueFactory>
                     <PropertyValueFactory property="javaSkill"/>
                 </cellValueFactory>

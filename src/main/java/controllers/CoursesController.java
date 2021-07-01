@@ -116,15 +116,27 @@ public class CoursesController extends SceneController {
     private void editRow(TableColumn.CellEditEvent<Course, String> cellEditEvent, boolean roomChanged) {
         final var rowValue = cellEditEvent.getRowValue();
         final var indexOfRowValue = data_courses.indexOf(rowValue);
+
         if (indexOfRowValue == -1)
             return;
+
         Course updatedCourse;
+
         if (roomChanged) {
-            final var selectedRoom = possibleRooms.stream().filter(x -> x.getName().equals(cellEditEvent.getNewValue())).findFirst().get();
+            final var selectedRoom = possibleRooms
+                    .stream()
+                    .filter(x -> x.getName().equals(cellEditEvent.getNewValue()))
+                    .findFirst()
+                    .get();
+
             updatedCourse = new Course(rowValue.getId(), rowValue.getName(), selectedRoom.getId(), selectedRoom.getName());
+
         } else {
+
             updatedCourse = new Course(rowValue.getId(), cellEditEvent.getNewValue(), rowValue.getRoomId(), rowValue.getRoomName());
+
         }
+
         data_courses.set(indexOfRowValue, updatedCourse);
     }
 
