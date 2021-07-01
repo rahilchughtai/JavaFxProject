@@ -10,7 +10,7 @@
 <GridPane alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="720.0" prefWidth="1080.0" styleClass="bg-dark" stylesheets="@../css/style.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.RoomsController">
 
     <HBox alignment="BASELINE_CENTER" GridPane.columnIndex="1" GridPane.columnSpan="6" GridPane.rowIndex="0">
-            <Label styleClass="h1" text="Rooms Manager" textFill="WHITE" />
+            <Label styleClass="h1" text="Raum Management" textFill="WHITE" />
     </HBox>
 
     <VBox GridPane.columnIndex="0" GridPane.rowIndex="6" alignment="CENTER_LEFT" spacing="30">
@@ -49,13 +49,15 @@
 
     <HBox alignment="center" spacing="10" GridPane.columnIndex="1" GridPane.columnSpan="6" GridPane.rowIndex="7">
         <TextField id="roomField" fx:id="text_newRoomName" prefWidth="90" promptText="Raumname" />
+        <GridPane.margin>
+            <Insets bottom="20.0" top="10.0" />
+        </GridPane.margin>
+    </HBox>
+    <VBox GridPane.rowIndex="8" GridPane.columnIndex="6" alignment="CENTER">
         <Button onAction="#addNewRoom" styleClass="btn-add" text="Hinzufügen">
             <graphic>
                 <FontIcon iconLiteral="fa-plus-circle" styleClass="icon" />
             </graphic>
         </Button>
-        <GridPane.margin>
-            <Insets bottom="20.0" top="10.0" />
-        </GridPane.margin>
-    </HBox>
+    </VBox>
 </GridPane>
