@@ -120,4 +120,19 @@ public class RoomsController extends SceneController {
             sqlException.printStackTrace();
         }
     }
+
+    @FXML
+    private void deleteSelectedRoom(ActionEvent event) {
+        final var selectedRoom = table_rooms.getSelectionModel().getSelectedItem();
+        if(selectedRoom==null){return;}
+        try {
+            roomService.delete(selectedRoom.getId());
+            data_rooms.remove(selectedRoom);
+        } catch (JdbcSQLIntegrityConstraintViolationException jdbcSQLIntegrityConstraintViolationException) {
+            showError("Der Raum konnte nicht gelöscht werden, da er noch verwendet wird");
+        } catch (SQLException sqlException) {
+            sqlException.printStackTrace();
+        }
+    }
+
 }
