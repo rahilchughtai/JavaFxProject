@@ -16,9 +16,6 @@
     <VBox GridPane.columnIndex="0" GridPane.rowIndex="6" alignment="CENTER_LEFT" spacing="30">
         <fx:include source="Sidebar.fxml" GridPane.columnIndex="0" GridPane.rowIndex="1" GridPane.rowSpan="5">
         </fx:include>
-        <VBox.margin>
-            <Insets top="10.0" />
-        </VBox.margin>
         <Button onAction="#saveRooms" style="-fx-font-size: 24.0; -fx-max-width: 200.0 " styleClass="btn-add" text="Speichern">
             <graphic>
                 <FontIcon iconLiteral="fa-save" styleClass="icon" />
