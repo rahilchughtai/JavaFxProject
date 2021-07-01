@@ -31,7 +31,7 @@
             </HBox>
             <HBox alignment="CENTER" prefHeight="100.0" prefWidth="0.0" BorderPane.alignment="CENTER">
                 <children>
-                    <Button fx:id="btnRoom" maxHeight="100.0" maxWidth="250.0" minHeight="0.0" minWidth="100.0" mnemonicParsing="false" onAction="#btnSwitchSceneClick" prefHeight="100.0" prefWidth="300.0" styleClass="btn-primary" text="Räume">
+                    <Button userData="HOME" fx:id="btnRoom" maxHeight="100.0" maxWidth="250.0" minHeight="0.0" minWidth="100.0" mnemonicParsing="false" onAction="#btnSwitchSceneClick" prefHeight="100.0" prefWidth="300.0" styleClass="btn-primary" text="Räume">
                         <HBox.margin>
                             <Insets left="15.0" right="15.0" />
                         </HBox.margin>
@@ -39,7 +39,7 @@
                             <FontIcon iconLiteral="fa-building-o" styleClass="icon" />
                         </graphic>
                     </Button>
-                    <Button fx:id="btnStudents" maxHeight="100.0" maxWidth="250.0" minHeight="0.0" minWidth="100.0" mnemonicParsing="false" onAction="#btnSwitchSceneClick" prefHeight="100.0" prefWidth="300.0" styleClass="btn-primary" text="Studenten" textOverrun="CLIP">
+                    <Button  userData="STUDENTS"  fx:id="btnStudents" maxHeight="100.0" maxWidth="250.0" minHeight="0.0" minWidth="100.0" mnemonicParsing="false" onAction="#btnSwitchSceneClick" prefHeight="100.0" prefWidth="300.0" styleClass="btn-primary" text="Studenten" textOverrun="CLIP">
                         <HBox.margin>
                             <Insets left="15.0" right="15.0" />
                         </HBox.margin>
@@ -47,7 +47,7 @@
                             <FontIcon iconLiteral="fa-graduation-cap" styleClass="icon" />
                         </graphic>
                     </Button>
-                    <Button fx:id="btnCourses" maxHeight="100.0" maxWidth="250.0" minHeight="0.0" minWidth="100.0" mnemonicParsing="false" onAction="#btnSwitchSceneClick" prefHeight="100.0" prefWidth="300.0" styleClass="btn-primary" text="Kurse">
+                    <Button userData="COURSES" fx:id="btnCourses" maxHeight="100.0" maxWidth="250.0" minHeight="0.0" minWidth="100.0" mnemonicParsing="false" onAction="#btnSwitchSceneClick" prefHeight="100.0" prefWidth="300.0" styleClass="btn-primary" text="Kurse">
                         <HBox.margin>
                             <Insets left="15.0" right="15.0" />
                         </HBox.margin>
