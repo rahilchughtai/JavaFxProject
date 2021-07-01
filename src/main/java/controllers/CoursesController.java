@@ -12,6 +12,7 @@ import javafx.scene.control.*;
 import javafx.scene.control.cell.ComboBoxTableCell;
 import javafx.util.converter.DefaultStringConverter;
 import models.Course;
+import org.h2.jdbc.JdbcSQLIntegrityConstraintViolationException;
 
 import java.net.URL;
 import java.sql.SQLException;
@@ -25,6 +26,8 @@ public class CoursesController extends SceneController {
     private ModelService<database.models.Room> roomService;
 
     private Collection<database.models.Room> possibleRooms;
+
+    private Alert courseErrorAlert;
 
     @FXML
     private ComboBox<String> combo_room;
@@ -70,38 +73,40 @@ public class CoursesController extends SceneController {
         roomService = RoomService.getService();
         loadData();
         initializeColumns();
+        initializeUIControls();
+    }
+
+    private void initializeUIControls() {
+        courseErrorAlert = new Alert(Alert.AlertType.ERROR);
+    }
+
+    void editRow(TableColumn.CellEditEvent<Course, String > cellEditEvent, boolean roomChanged) {
+        final var rowValue = cellEditEvent.getRowValue();
+
+        final var indexOfRowValue = data_courses.indexOf(rowValue);
+
+        if (indexOfRowValue == -1)
+            return;
+
+        Course updatedCourse;
+
+        if (roomChanged) {
+            final var selectedRoom = possibleRooms.stream().filter(x -> x.getName().equals(cellEditEvent.getNewValue())).findFirst().get();
+
+            updatedCourse = new Course(rowValue.getId(), rowValue.getName(), selectedRoom.getId(), selectedRoom.getName());
+        } else {
+            updatedCourse = new Course(rowValue.getId(), cellEditEvent.getNewValue(), rowValue.getRoomId(), rowValue.getRoomName());
+        }
+
+        data_courses.set(indexOfRowValue, updatedCourse);
     }
 
     private void initializeColumns() {
         col_room.setCellFactory(ComboBoxTableCell.forTableColumn(new DefaultStringConverter(), data_roomNames));
-        col_room.setOnEditCommit(cellEditEvent -> {
 
-            final var rowValue = cellEditEvent.getRowValue();
+        col_room.setOnEditCommit(cellEditEvent -> editRow(cellEditEvent, true));
 
-            final var indexOfRowValue = data_courses.indexOf(rowValue);
-
-            if (indexOfRowValue == -1)
-                return;
-
-            final var selectedRoom = possibleRooms.stream().filter(x -> x.getName().equals(cellEditEvent.getNewValue())).findFirst().get();
-
-            final var updatedCourse = new Course(rowValue.getId(), rowValue.getName(), selectedRoom.getId(), selectedRoom.getName());
-
-            data_courses.set(indexOfRowValue, updatedCourse);
-        });
-
-        col_courseName.setOnEditCommit(cellEditEvent -> {
-            final var rowValue = cellEditEvent.getRowValue();
-
-            final var indexOfRowValue = data_courses.indexOf(rowValue);
-
-            if (indexOfRowValue == -1)
-                return;
-
-            final var updatedCourse = new Course(rowValue.getId(), cellEditEvent.getNewValue(), rowValue.getId(), rowValue.getName());
-
-            data_courses.set(indexOfRowValue, updatedCourse);
-        });
+        col_courseName.setOnEditCommit(cellEditEvent -> editRow(cellEditEvent, false));
     }
 
 
@@ -137,6 +142,10 @@ public class CoursesController extends SceneController {
                     .toList();
 
             courseService.save(changedCourses);
+        } catch (JdbcSQLIntegrityConstraintViolationException jdbcSQLIntegrityConstraintViolationException) {
+            courseErrorAlert.setHeaderText("Es kann wegen Duplikaten nicht gespeichert werden!");
+
+            courseErrorAlert.show();
         } catch (SQLException sqlException) {
             sqlException.printStackTrace();
         }
