@@ -11,7 +11,8 @@ public class HomeController extends SceneController {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        label_homeText.setText("Wilkommen zum DHBW Studenten Management System. Das Tool dient zur leichten Verwaltung der DHBW Datenbank. Um Einträge zu löschen können sie die Zeile auswählen und den Löschen Button drücken. Zum Bearbeiten über Doppelclick das Feld auswählen, den Inhalt anpassen und den Speichern Button clicken.");
+        label_homeText.setText("Wilkommen zum DHBW Studenten Management System. Das Tool dient zur leichten Verwaltung der DHBW Datenbank. \r\n\r\n Um Einträge zu löschen können Sie die Zeile auswählen und den Löschen Button drücken. \r\n\r\n Zum Bearbeiten über Doppelclick das Feld auswählen, den Inhalt anpassen und ENTER drücken. Damit die Änderungen übernommen werden, anschließend den 'Speichern' Button drücken.");
         super.initialize(location, resources);
     }
+
 }
