@@ -75,3 +75,8 @@
     -fx-max-width: 500;
 }
 
+.data-table{
+    -fx-pref-width: 800;
+    -fx-pref-height: 500;
+}
+
