@@ -26,11 +26,6 @@
                 <cellValueFactory>
                     <PropertyValueFactory property="matriculationNumber"/>
                 </cellValueFactory>
-
-                <cellFactory>
-                    <TextFieldTableCell fx:factory="forTableColumn" />
-                </cellFactory>
-
             </TableColumn>
             <TableColumn fx:id="col_courseName" minWidth="-1.0" prefWidth="133.0" text="Kurs">
                 <cellValueFactory>
