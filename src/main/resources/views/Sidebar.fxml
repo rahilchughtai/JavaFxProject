@@ -12,17 +12,17 @@
             <FontIcon styleClass="icon" iconLiteral="mdi-home" />
         </graphic>
     </Button>
-    <Button fx:id="sideBarBtnRooms" id="sideBarBtn"  onAction="#btnSwitchSceneClick"  mnemonicParsing="false" styleClass="btn-primary" text="Rooms">
+    <Button fx:id="sideBarBtnRooms" id="sideBarBtn"  onAction="#btnSwitchSceneClick"  mnemonicParsing="false" styleClass="btn-primary" text="Räume">
         <graphic>
             <FontIcon styleClass="icon" iconLiteral="fa-building-o" />
         </graphic>
     </Button>
-    <Button fx:id="sideBarBtnStudents"  id="sideBarBtn"  onAction="#btnSwitchSceneClick" mnemonicParsing="false" styleClass="btn-primary" text="Students">
+    <Button fx:id="sideBarBtnStudents"  id="sideBarBtn"  onAction="#btnSwitchSceneClick" mnemonicParsing="false" styleClass="btn-primary" text="Studenten">
         <graphic>
             <FontIcon styleClass="icon" iconLiteral="fa-graduation-cap" />
         </graphic>
     </Button>
-    <Button fx:id="sideBarBtnCourses"   id="sideBarBtn"  onAction="#btnSwitchSceneClick" mnemonicParsing="false" styleClass="btn-primary" text="Courses">
+    <Button fx:id="sideBarBtnCourses"   id="sideBarBtn"  onAction="#btnSwitchSceneClick" mnemonicParsing="false" styleClass="btn-primary" text="Kurse">
         <graphic>
             <FontIcon styleClass="icon" iconLiteral="mdi-table" />
         </graphic>
