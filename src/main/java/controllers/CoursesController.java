@@ -56,9 +56,37 @@ public class CoursesController extends SceneController {
         final var newCourse = new Course(null, newCourseName, selectedRoom.getId(), selectedRoom.getName());
 
         try {
-            courseService.save(new ArrayList<>() {{ add(new database.models.Course(null, newCourse.getName(), new Room(newCourse.getRoomId(), newCourse.getRoomName()))); }});
+            final var newDatabaseCourse = new database.models.Course(null, newCourse.getName(), new Room(newCourse.getRoomId(), newCourse.getRoomName()));
+
+            courseService.save(newDatabaseCourse);
+
+            System.out.println(newDatabaseCourse.getId());
+
+            newCourse.setId(newDatabaseCourse.getId());
 
             data_courses.add(newCourse);
+        } catch (JdbcSQLIntegrityConstraintViolationException jdbcSQLIntegrityConstraintViolationException) {
+            courseErrorAlert.setHeaderText("Es kann wegen Duplikaten nicht eingefügt werden!");
+
+            courseErrorAlert.show();
+        } catch (SQLException sqlException) {
+            sqlException.printStackTrace();
+        }
+    }
+
+    @FXML
+    private void saveCourses(ActionEvent actionEvent){
+        try {
+            final var changedCourses = data_courses
+                    .stream()
+                    .map(x -> new database.models.Course(x.getId(), x.getName(), new Room(x.getRoomId(), x.getRoomName())))
+                    .toList();
+
+            courseService.save(changedCourses);
+        } catch (JdbcSQLIntegrityConstraintViolationException jdbcSQLIntegrityConstraintViolationException) {
+            courseErrorAlert.setHeaderText("Es kann wegen Duplikaten nicht gespeichert werden!");
+
+            courseErrorAlert.show();
         } catch (SQLException sqlException) {
             sqlException.printStackTrace();
         }
@@ -131,23 +159,5 @@ public class CoursesController extends SceneController {
             sqlException.printStackTrace();
         }
         table_info.setItems(data_courses);
-    }
-
-    @FXML
-    private void saveCourses(ActionEvent actionEvent){
-        try {
-            final var changedCourses = data_courses
-                    .stream()
-                    .map(x -> new database.models.Course(x.getId(), x.getName(), new Room(x.getRoomId(), x.getRoomName())))
-                    .toList();
-
-            courseService.save(changedCourses);
-        } catch (JdbcSQLIntegrityConstraintViolationException jdbcSQLIntegrityConstraintViolationException) {
-            courseErrorAlert.setHeaderText("Es kann wegen Duplikaten nicht gespeichert werden!");
-
-            courseErrorAlert.show();
-        } catch (SQLException sqlException) {
-            sqlException.printStackTrace();
-        }
     }
 }

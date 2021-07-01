@@ -113,6 +113,11 @@ public abstract class BaseModelService<ModelType extends Model> implements Model
     }
 
     @Override
+    public void save(final ModelType model) throws SQLException {
+        save(new ArrayList<>() {{ add(model); }});
+    }
+
+    @Override
     public void save(final Collection<ModelType> models) throws SQLException {
         final var databaseConnection = DatabaseConnectionManager.getDatabaseConnection();
 
