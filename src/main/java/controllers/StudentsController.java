@@ -130,7 +130,7 @@ public class StudentsController extends SceneController {
 
 
     @FXML
-    private void saveStudent(ActionEvent actionEvent) {
+    private void saveStudents(ActionEvent actionEvent) {
         try {
             final var changeStudents = data_table
                     .stream()
@@ -168,8 +168,4 @@ public class StudentsController extends SceneController {
         loadData();
     }
 
-    @FXML
-    private void saveStudents(ActionEvent actionEvent) {
-
-    }
 }

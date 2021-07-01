@@ -25,7 +25,8 @@ public class Student implements Model {
         this.lastName = lastName;
         this.corporation = corporation;
         this.javaSkill = javaSkill;
-        this.courseName = course.getName();
+        this.course=course;
+        this.courseName=course.getName();
     }
 
     public String getMatri_Id() {
