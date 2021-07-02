@@ -9,7 +9,7 @@
       fx:controller="controllers.SceneController">
     <Button userData="HOME" id="sideBarBtn" onAction="#btnSwitchSceneClick"  mnemonicParsing="false" styleClass="btn-primary" text="Home">
         <graphic>
-            <FontIcon styleClass="icon" iconLiteral="mdi-home" />
+            <FontIcon styleClass="icon" iconLiteral="fa-home" />
         </graphic>
     </Button>
     <Button userData="ROOMS" fx:id="sideBarBtnRooms" id="sideBarBtn"  onAction="#btnSwitchSceneClick"  mnemonicParsing="false" styleClass="btn-primary" text="Räume">
@@ -24,7 +24,7 @@
     </Button>
     <Button userData="COURSES" fx:id="sideBarBtnCourses"   id="sideBarBtn"  onAction="#btnSwitchSceneClick" mnemonicParsing="false" styleClass="btn-primary" text="Kurse">
         <graphic>
-            <FontIcon styleClass="icon" iconLiteral="mdi-table" />
+            <FontIcon styleClass="icon" iconLiteral="fa-table" />
         </graphic>
     </Button>
 </VBox>

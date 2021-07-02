@@ -52,7 +52,7 @@
                             <Insets left="15.0" right="15.0" />
                         </HBox.margin>
                         <graphic>
-                            <FontIcon iconLiteral="mdi-table" styleClass="icon" />
+                            <FontIcon iconLiteral="fa-table" styleClass="icon" />
                         </graphic>
                     </Button>
                 </children>
